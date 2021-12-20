@@ -1,5 +1,6 @@
 const PATHS = {
-    ROOT: 'root'
+  HOME: "home",
+  PLAYLIST: "playlist",
 };
 
-export default PATHS
+export default PATHS;
