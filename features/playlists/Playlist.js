@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { View, ScrollView, FlatList } from "react-native";
+import { View, ScrollView, FlatList, TouchableHighlight } from "react-native";
 import { useCities } from "../cities/CityProvider";
 import { listShows } from "../../api/shows";
 import { colors } from "../../ui/theme";
 import { H2, H3, Text } from "../../ui/Text";
 import AlbumArt from "./AlbumArt";
 import { formatDateWithoutYear } from "../../utils/dates";
+import { usePlayer } from "../player/PlayerState";
 
 const PlaylistContainer = styled(View)`
   flex: 1;
@@ -43,6 +44,7 @@ const TrackSubText = styled(Text)`
 const Playlist = ({ route }) => {
   const [shows, setShows] = useState(null);
   const { selectedCity } = useCities();
+  const { playTrack } = usePlayer();
   const { displayName, startDate, endDate } = route.params;
 
   useEffect(() => {
@@ -65,31 +67,43 @@ const Playlist = ({ route }) => {
 
   return (
     <PlaylistContainer>
-      <PlaylistHeader>
-        <H2>{displayName}</H2>
-        <Text>
-          {startDate === endDate
-            ? formatDateWithoutYear(startDate)
-            : `${formatDateWithoutYear(startDate)} - ${formatDateWithoutYear(
-                endDate
-              )}`}
-        </Text>
-      </PlaylistHeader>
-      <FlatList
-        data={shows}
-        renderItem={({ item: { performer, venue } }) => (
-          <View>
-            <Track>
-              <AlbumArt track={performer.top_track} />
-              <TrackText>
-                <H3>{performer.top_track.name}</H3>
-                <TrackSubText>{performer.name}</TrackSubText>
-                <TrackSubText>{venue.name}</TrackSubText>
-              </TrackText>
-            </Track>
-          </View>
-        )}
-      />
+      <ScrollView>
+        <PlaylistHeader>
+          <H2>{displayName}</H2>
+          <Text>
+            {startDate === endDate
+              ? formatDateWithoutYear(startDate)
+              : `${formatDateWithoutYear(startDate)} - ${formatDateWithoutYear(
+                  endDate
+                )}`}
+          </Text>
+        </PlaylistHeader>
+        {shows &&
+          shows.map(
+            ({ performer, venue, key }) =>
+              performer.top_track && (
+                <TouchableHighlight
+                  key={key}
+                  onPress={async () =>
+                    performer.top_track.preview_url &&
+                    playTrack({
+                      ...performer.top_track,
+                      artistName: performer.name,
+                    })
+                  }
+                >
+                  <Track>
+                    <AlbumArt track={performer.top_track} />
+                    <TrackText>
+                      <H3>{performer.top_track.name}</H3>
+                      <TrackSubText>{performer.name}</TrackSubText>
+                      <TrackSubText>{venue.name}</TrackSubText>
+                    </TrackText>
+                  </Track>
+                </TouchableHighlight>
+              )
+          )}
+      </ScrollView>
     </PlaylistContainer>
   );
 };

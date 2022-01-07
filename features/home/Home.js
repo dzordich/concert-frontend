@@ -6,6 +6,7 @@ import { useCities } from "../cities/CityProvider";
 import { playlistDateRanges } from "../../contants/playlistDateRanges";
 import PlaylistLink from "./PlaylistLink";
 import { colors } from "../../ui/theme";
+import ActivityIndicator from "../../ui/ActivityIndicator";
 
 const Container = styled(View)`
   height: 100%;
@@ -23,21 +24,27 @@ const Playlists = styled(View)`
 `;
 
 const Home = ({ navigation }) => {
-  const { selectedCity } = useCities();
+  const { selectedCityLoaded, selectedCity } = useCities();
 
   return (
     <Container>
-      <CitySelect />
-      {selectedCity && (
-        <Playlists>
-          {playlistDateRanges.map((playlist, idx) => (
-            <PlaylistLink
-              key={idx}
-              playlist={playlist}
-              navigation={navigation}
-            />
-          ))}
-        </Playlists>
+      {selectedCityLoaded ? (
+        <>
+          <CitySelect />
+          {selectedCity && (
+            <Playlists>
+              {playlistDateRanges.map((playlist, idx) => (
+                <PlaylistLink
+                  key={idx}
+                  playlist={playlist}
+                  navigation={navigation}
+                />
+              ))}
+            </Playlists>
+          )}
+        </>
+      ) : (
+        <ActivityIndicator />
       )}
     </Container>
   );

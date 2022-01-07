@@ -1,5 +1,5 @@
 const API_URL =
-  "http://c1ff-2603-8080-1f01-45c3-1412-407f-b574-22e6.ngrok.io/api";
+  "http://c22f-2600-1700-f90-3260-7963-a9bb-1918-bd5.ngrok.io/api";
 
 export const get = (path) =>
   fetch(`${API_URL}${path}`).then((res) => res.json());

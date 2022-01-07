@@ -8,9 +8,14 @@ const CitySelect = () => {
     () => cities.map((city) => ({ label: city.display_name, value: city })),
     [cities]
   );
+  const savedCity = useMemo(
+    () => cityOptions.find((city) => city?.value?.id === selectedCity?.id),
+    []
+  );
+  console.log(savedCity);
   return (
     <DropDown
-      initialValue={selectedCity}
+      initialValue={savedCity}
       items={cityOptions}
       onValueChange={selectCity}
     />
