@@ -13,7 +13,6 @@ const PlaylistContainer = styled(View)`
   flex: 1;
   flex-direction: column;
   width: 100%;
-  height: 100%;
   background-color: ${colors.neutral10};
   padding: 8px 8px 0;
 `;
@@ -33,6 +32,10 @@ const Track = styled(View)`
   margin-vertical: 8px;
 `;
 
+const TrackTitle = styled(H3)`
+  ${(props) => (props.currentTrack ? `color: ${colors.teal60};` : "")}
+`;
+
 const TrackText = styled(View)`
   margin-left: 16px;
 `;
@@ -41,28 +44,19 @@ const TrackSubText = styled(Text)`
   color: ${colors.neutral80};
 `;
 
+const performerTopTrack = (performer) => ({
+  ...performer.top_track,
+  artistName: performer.name,
+});
+
 const Playlist = ({ route }) => {
-  const [shows, setShows] = useState(null);
+  const [performers, setPerformers] = useState(null);
   const { selectedCity } = useCities();
-  const { playTrack } = usePlayer();
+  const { playTrack, updateQueue, track } = usePlayer();
   const { displayName, startDate, endDate } = route.params;
 
   useEffect(() => {
-    listShows({ city: selectedCity, startDate, endDate }).then((shows) =>
-      setShows(
-        shows.reduce(
-          (acc, show, showIdx) => [
-            ...acc,
-            ...show.performers.map((performer, performerIdx) => ({
-              performer,
-              venue: show.venue,
-              key: `${showIdx}.${performerIdx}`,
-            })),
-          ],
-          []
-        )
-      )
-    );
+    listShows({ city: selectedCity, startDate, endDate }).then(setPerformers);
   }, [selectedCity, startDate, endDate]);
 
   return (
@@ -78,26 +72,42 @@ const Playlist = ({ route }) => {
                 )}`}
           </Text>
         </PlaylistHeader>
-        {shows &&
-          shows.map(
-            ({ performer, venue, key }) =>
+        {performers &&
+          performers.map(
+            (performer, idx) =>
               performer.top_track && (
                 <TouchableHighlight
-                  key={key}
-                  onPress={async () =>
-                    performer.top_track.preview_url &&
-                    playTrack({
-                      ...performer.top_track,
-                      artistName: performer.name,
-                    })
-                  }
+                  key={idx}
+                  onPress={async () => {
+                    if (performer.top_track.preview_url) {
+                      await playTrack(performerTopTrack(performer));
+                      if (idx < performers.length) {
+                        console.log("updating queue");
+                        updateQueue(
+                          performers
+                            .slice(idx + 1, performers.length)
+                            .map(performerTopTrack)
+                        );
+                      }
+                    }
+                  }}
                 >
                   <Track>
                     <AlbumArt track={performer.top_track} />
                     <TrackText>
-                      <H3>{performer.top_track.name}</H3>
+                      <TrackTitle
+                        currentTrack={
+                          track && performer.top_track.id === track.id
+                        }
+                      >
+                        {performer.top_track.name}
+                      </TrackTitle>
                       <TrackSubText>{performer.name}</TrackSubText>
-                      <TrackSubText>{venue.name}</TrackSubText>
+                      <TrackSubText>
+                        {performer.shows.length > 0
+                          ? performer.shows[0].venue.name
+                          : ""}
+                      </TrackSubText>
                     </TrackText>
                   </Track>
                 </TouchableHighlight>

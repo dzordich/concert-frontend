@@ -21,6 +21,11 @@ const PlayerContainer = styled(View)`
   background-color: ${colors.neutral5};
 `;
 
+const StyledAlbumArt = styled(AlbumArt)`
+  width: 64px;
+  height: 64px;
+`;
+
 const PlayerTextContainer = styled(View)`
   margin-left: 16px;
 `;
@@ -37,7 +42,7 @@ const Player = () => {
   return (
     track && (
       <PlayerContainer style={{ height: 60 + bottom, paddingBottom: bottom }}>
-        <AlbumArt track={track} />
+        <StyledAlbumArt track={track} />
         <PlayerTextContainer>
           <H3>{track.name}</H3>
           <Text>{track.artistName}</Text>
