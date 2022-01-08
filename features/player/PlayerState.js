@@ -24,7 +24,7 @@ class PlayerState extends React.Component {
 
   playTrack = async (track) => {
     const currentSound = this.state.sound;
-    currentSound && currentSound.unloadAsync();
+    currentSound && (await currentSound.unloadAsync());
     const { sound } = await Audio.Sound.createAsync(
       { uri: track.preview_url },
       {},

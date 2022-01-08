@@ -3,7 +3,7 @@ import { Pressable } from "react-native";
 
 const IconButton = ({ Icon, onPress }) => (
   <Pressable onPress={onPress}>
-    {(isPressed) => <Icon fillOpacity={isPressed ? 0.7 : 1} />}
+    {({ pressed }) => <Icon fillOpacity={pressed ? 0.5 : 1} />}
   </Pressable>
 );
 

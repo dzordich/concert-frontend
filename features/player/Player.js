@@ -7,6 +7,7 @@ import { colors } from "../../ui/theme";
 import { usePlayer } from "./PlayerState";
 import AlbumArt from "../playlists/AlbumArt";
 import PlayPauseButton from "./PlayPauseButton";
+import ShiftRight from "../../ui/layout/ShiftRight";
 
 const PlayerContainer = styled(View)`
   width: 100%;
@@ -30,14 +31,9 @@ const PlayerTextContainer = styled(View)`
   margin-left: 16px;
 `;
 
-const PlayButtonContainer = styled(View)`
-  margin-left: auto;
-  margin-right: 16px;
-`;
-
 const Player = () => {
   const { bottom } = useSafeAreaInsets();
-  const { track, sound, isPlaying, togglePaused } = usePlayer();
+  const { track, isPlaying, togglePaused } = usePlayer();
 
   return (
     track && (
@@ -47,12 +43,20 @@ const Player = () => {
           <H3>{track.name}</H3>
           <Text>{track.artistName}</Text>
         </PlayerTextContainer>
-        <PlayButtonContainer>
+        <ShiftRight>
           <PlayPauseButton isPlaying={isPlaying} onPress={togglePaused} />
-        </PlayButtonContainer>
+        </ShiftRight>
       </PlayerContainer>
     )
   );
 };
 
 export default Player;
+
+export const PlayerSafeArea = ({ children }) => {
+  const { bottom } = useSafeAreaInsets();
+  const { track } = usePlayer();
+  return (
+    <View style={{ marginBottom: track ? 60 + bottom : 0 }}>{children}</View>
+  );
+};

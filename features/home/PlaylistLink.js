@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { TouchableHighlight, View, Text } from "react-native";
 import PATHS from "../../contants/paths";
+import { colors } from "../../ui/theme";
 
 const PlaylistLinkContainer = styled(View)`
   margin-vertical: 8px;
@@ -13,7 +14,7 @@ const PlaylistLinkInner = styled(View)`
   padding: 16px;
   border-radius: 10px;
   flex-direction: column-reverse;
-  background-color: aquamarine;
+  background-color: ${colors.secondary80};
 `;
 
 const StyledHighlight = styled(TouchableHighlight)`
