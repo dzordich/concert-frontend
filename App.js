@@ -9,10 +9,11 @@ import { colors } from "./ui/theme";
 import PlayerState from "./features/player/PlayerState";
 import Player from "./features/player/Player";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import {navigationRef} from "./utils/navigation";
 
 export default function App() {
   return (
-    <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
       <SafeAreaProvider>
         <Layout>
           <ViewPort>

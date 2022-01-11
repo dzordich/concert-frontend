@@ -7,6 +7,8 @@ import AlbumArt from "./AlbumArt";
 import ShiftRight from "../../ui/layout/ShiftRight";
 import IconButton from "../../ui/inputs/IconButton";
 import InfoIcon from "../../ui/icons/InfoIcon";
+import { navigate } from "../../utils/navigation";
+import PATHS from "../../contants/paths";
 
 const TrackContainer = styled(View)`
   flex: 1;
@@ -50,7 +52,10 @@ const Track = ({ performer, onPress, currentTrack, trackIndex }) => {
           </TrackSubText>
         </TrackText>
         <ShiftRight>
-          <IconButton Icon={InfoIcon} onPress={() => {}} />
+          <IconButton
+            Icon={InfoIcon}
+            onPress={() => navigate(PATHS.SHOW_DETAILS, performer)}
+          />
         </ShiftRight>
       </TrackContainer>
     </TouchableHighlight>

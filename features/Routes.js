@@ -5,6 +5,7 @@ import Home from "./home/Home";
 import Playlist from "./playlists/Playlist";
 import { useCities } from "./cities/CityProvider";
 import { colors } from "../ui/theme";
+import ShowDetails from "./shows/ShowDetail";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,7 @@ const Routes = () => {
     >
       <Stack.Screen name={PATHS.HOME} component={Home} />
       <Stack.Screen name={PATHS.PLAYLIST} component={Playlist} />
+      <Stack.Screen name={PATHS.SHOW_DETAILS} component={ShowDetails} />
     </Stack.Navigator>
   );
 };
