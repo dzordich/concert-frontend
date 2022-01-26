@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { View, ScrollView } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import { prop } from "ramda";
 import { useCities } from "../cities/CityProvider";
 import { listShows } from "../../api/shows";
@@ -16,10 +17,9 @@ const PlaylistContainer = styled(View)`
   width: 100%;
   max-height: 100%;
   background-color: ${colors.neutral10};
-  padding-top: 8px;
 `;
 
-const PlaylistHeader = styled(View)`
+const PlaylistHeader = styled(LinearGradient)`
   border-bottom-color: ${colors.primary80};
   border-bottom-width: 1px;
   padding: 16px;
@@ -60,7 +60,7 @@ const Playlist = ({ route }) => {
   return (
     <PlaylistContainer>
       <ScrollView>
-        <PlaylistHeader>
+        <PlaylistHeader colors={[colors.primary70, colors.neutral10]}>
           <H2>{displayName}</H2>
           <Text>
             {startDate === endDate

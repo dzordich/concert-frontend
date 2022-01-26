@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { View } from "react-native";
+import { View, Pressable } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { H3, Text } from "../../ui/Text";
 import { colors } from "../../ui/theme";
@@ -8,6 +9,8 @@ import { usePlayer } from "./PlayerState";
 import AlbumArt from "../playlists/AlbumArt";
 import PlayPauseButton from "./PlayPauseButton";
 import ShiftRight from "../../ui/layout/ShiftRight";
+import { navigate } from "../../utils/navigation";
+import PATHS from "../../contants/paths";
 
 const PlayerContainer = styled(View)`
   width: 100%;
@@ -37,16 +40,18 @@ const Player = () => {
 
   return (
     track && (
-      <PlayerContainer style={{ height: 60 + bottom, paddingBottom: bottom }}>
-        <StyledAlbumArt track={track} />
-        <PlayerTextContainer>
-          <H3>{track.name}</H3>
-          <Text>{track.artistName}</Text>
-        </PlayerTextContainer>
-        <ShiftRight>
-          <PlayPauseButton isPlaying={isPlaying} onPress={togglePaused} />
-        </ShiftRight>
-      </PlayerContainer>
+      <Pressable onPress={() => navigate(PATHS.PLAYER_EXPANDED)}>
+        <PlayerContainer style={{ height: 60 + bottom, paddingBottom: bottom }}>
+          <StyledAlbumArt track={track} />
+          <PlayerTextContainer>
+            <H3>{track.name}</H3>
+            <Text>{track.artistName}</Text>
+          </PlayerTextContainer>
+          <ShiftRight>
+            <PlayPauseButton isPlaying={isPlaying} onPress={togglePaused} />
+          </ShiftRight>
+        </PlayerContainer>
+      </Pressable>
     )
   );
 };

@@ -6,6 +6,7 @@ import Playlist from "./playlists/Playlist";
 import { useCities } from "./cities/CityProvider";
 import { colors } from "../ui/theme";
 import ShowDetails from "./shows/ShowDetail";
+import ExpandedPlayer from "./player/ExpandedPlayer";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,11 @@ const Routes = () => {
       <Stack.Screen name={PATHS.HOME} component={Home} />
       <Stack.Screen name={PATHS.PLAYLIST} component={Playlist} />
       <Stack.Screen name={PATHS.SHOW_DETAILS} component={ShowDetails} />
+      <Stack.Group
+        screenOptions={{ presentation: "modal", headerShown: false }}
+      >
+        <Stack.Screen name={PATHS.PLAYER_EXPANDED} component={ExpandedPlayer} />
+      </Stack.Group>
     </Stack.Navigator>
   );
 };
