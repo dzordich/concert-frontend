@@ -65,7 +65,11 @@ class PlayerState extends React.Component {
   };
 
   componentDidMount = () => {
-    Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
+    Audio.setAudioModeAsync({
+      playsInSilentModeIOS: true,
+      staysActiveInBackground: true,
+      interruptionModeIOS: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+    });
   };
 
   render() {
