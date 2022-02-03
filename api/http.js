@@ -1,4 +1,6 @@
+import axios from "axios";
+
 const API_URL = `${process.env.API_URL}/api`;
 
 export const get = (path) =>
-  fetch(`${API_URL}${path}`).then((res) => res.json());
+  axios.get(`${API_URL}${path}`).then((res) => res.data);
