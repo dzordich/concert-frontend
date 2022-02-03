@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
 import { Audio } from "expo-av";
+import TrackPlayer, { State as PlayerStates } from "react-native-track-player";
 import { isNotEmpty } from "../../utils/arrays";
+import Track from "../playlists/Track";
 
 const PlayerContext = React.createContext({
   track: null,
   sound: null,
   isPlaying: false,
-  playTrack: () => {},
+  play: () => {},
   togglePaused: () => {},
   updateQueue: () => {},
 });
@@ -22,54 +24,26 @@ class PlayerState extends React.Component {
     };
   }
 
-  playTrack = async (track) => {
-    const currentSound = this.state.sound;
-    currentSound && (await currentSound.unloadAsync());
-    const { sound } = await Audio.Sound.createAsync(
-      { uri: track.preview_url },
-      {},
-      this._onPlaybackStatusUpdate
-    );
-    await sound.playAsync();
-    this.setState({ sound, track, isPlaying: true });
+  play = async () => {
+    await TrackPlayer.play();
   };
 
   togglePaused = async () => {
-    const { sound, isPlaying } = this.state;
-    if (sound) {
-      const shouldPlay = !isPlaying;
-      await sound.setStatusAsync({ shouldPlay });
-      this.setState({ isPlaying: shouldPlay });
+    const playerState = await TrackPlayer.getState();
+    if (playerState === PlayerStates.Playing) {
+      await TrackPlayer.pause();
+    } else {
+      await TrackPlayer.play();
     }
   };
 
-  updateQueue = (newQueue) => this.setState({ queue: newQueue });
-
-  _onPlaybackStatusUpdate = async ({ didJustFinish }) => {
-    const { sound, queue } = this.state;
-    if (didJustFinish) {
-      if (isNotEmpty(queue)) {
-        console.log("playing next song in queue");
-        await this.playTrack(queue[0]);
-        this.updateQueue(queue.slice(1, queue.length));
-      } else {
-        console.log("Unloading sound");
-        await sound.unloadAsync();
-        this.setState({
-          // track: null,
-          sound: null,
-          isPlaying: false,
-        });
-      }
-    }
+  updateQueue = async (newQueue) => {
+    await TrackPlayer.reset();
+    await TrackPlayer.add(newQueue);
   };
 
-  componentDidMount = () => {
-    Audio.setAudioModeAsync({
-      playsInSilentModeIOS: true,
-      staysActiveInBackground: true,
-      interruptionModeIOS: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-    });
+  componentDidMount = async () => {
+    await TrackPlayer.setupPlayer({});
   };
 
   render() {
@@ -77,7 +51,7 @@ class PlayerState extends React.Component {
       <PlayerContext.Provider
         value={{
           ...this.state,
-          playTrack: this.playTrack,
+          play: this.play,
           togglePaused: this.togglePaused,
           updateQueue: this.updateQueue,
         }}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { View, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { prop } from "ramda";
+import { compose, prop } from "ramda";
 import { useCities } from "../cities/CityProvider";
 import { listShows } from "../../api/shows";
 import { colors } from "../../ui/theme";
@@ -34,10 +34,22 @@ const addPerformerToTopTrack = (performer) => ({
   },
 });
 
+const songToTrackObject = ({
+  preview_url,
+  name,
+  artistName,
+  album_art_url,
+}) => ({
+  url: preview_url,
+  title: name,
+  artist: artistName,
+  artwork: album_art_url,
+});
+
 const Playlist = ({ route }) => {
   const [performers, setPerformers] = useState([]);
   const { selectedCity } = useCities();
-  const { playTrack, updateQueue, track } = usePlayer();
+  const { play, updateQueue, track } = usePlayer();
   const { displayName, startDate, endDate } = route.params;
 
   useEffect(() => {
@@ -48,12 +60,12 @@ const Playlist = ({ route }) => {
 
   const onSongPress = async (song, index) => {
     if (song.preview_url) {
-      await playTrack(song);
-      if (index < performers.length) {
-        updateQueue(
-          performers.slice(index + 1, performers.length).map(prop("top_track"))
-        );
-      }
+      await updateQueue(
+        performers
+          .slice(index + 1, performers.length)
+          .map(compose(songToTrackObject, prop("top_track")))
+      );
+      await play();
     }
   };
 
