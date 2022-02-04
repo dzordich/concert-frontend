@@ -41,7 +41,7 @@ const Track = ({ performer, onPress, currentTrack, trackIndex }) => {
       underlayColor={colors.neutral5}
     >
       <TrackContainer>
-        <AlbumArt track={track} />
+        <AlbumArt url={track?.album_art_url} />
         <TrackText>
           <TrackTitle currentTrack={track && track.id === currentTrack?.id}>
             {track.name}

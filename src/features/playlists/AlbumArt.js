@@ -17,9 +17,9 @@ const EmptyAlbumArt = styled(View)`
   ${layout}
 `;
 
-const AlbumArt = ({ track }) =>
-  track?.album_art_url ? (
-    <AlbumArtImage source={{ uri: track.album_art_url }} />
+const AlbumArt = ({ url }) =>
+  url ? (
+    <AlbumArtImage source={{ uri: url }} />
   ) : (
     <EmptyAlbumArt />
   );

@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { View, Pressable } from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { H3, Text } from "../../ui/Text";
 import { colors } from "../../ui/theme";
@@ -36,23 +35,24 @@ const PlayerTextContainer = styled(View)`
 
 const Player = () => {
   const { bottom } = useSafeAreaInsets();
-  const { track, isPlaying, togglePaused } = usePlayer();
+  const { currentTrack: {title, artist, artwork, url}, playing, togglePaused } = usePlayer();
 
   return (
-    track && (
+    url ? (
       <Pressable onPress={() => navigate(PATHS.PLAYER_EXPANDED)}>
         <PlayerContainer style={{ height: 60 + bottom, paddingBottom: bottom }}>
-          <StyledAlbumArt track={track} />
+          <StyledAlbumArt url={artwork} />
           <PlayerTextContainer>
-            <H3>{track.name}</H3>
-            <Text>{track.artistName}</Text>
+            <H3>{title}</H3>
+            <Text>{artist}</Text>
           </PlayerTextContainer>
           <ShiftRight>
-            <PlayPauseButton isPlaying={isPlaying} onPress={togglePaused} />
+            <PlayPauseButton isPlaying={playing} onPress={togglePaused} />
           </ShiftRight>
         </PlayerContainer>
       </Pressable>
-    )
+    ) : null
+
   );
 };
 
