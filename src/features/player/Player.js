@@ -10,6 +10,7 @@ import PlayPauseButton from "./PlayPauseButton";
 import ShiftRight from "../../ui/layout/ShiftRight";
 import { navigate } from "../../utils/navigation";
 import PATHS from "../../contants/paths";
+import TrackPositionBar from "./TrackPositionBar";
 
 const PlayerContainer = styled(View)`
   width: 100%;
@@ -17,16 +18,21 @@ const PlayerContainer = styled(View)`
   bottom: 0;
   left: 0;
   z-index: 99;
+  flex: 0;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: ${colors.neutral5};
+`;
+
+const PlayerInnerContainer = styled(View)`
+  width: 100%;
   flex: 1;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  background-color: ${colors.neutral5};
-`;
-
-const StyledAlbumArt = styled(AlbumArt)`
-  width: 64px;
-  height: 64px;
+  margin: 0;
+  padding: 0;
+  height: 60px;
 `;
 
 const PlayerTextContainer = styled(View)`
@@ -35,13 +41,22 @@ const PlayerTextContainer = styled(View)`
 
 const Player = () => {
   const { bottom } = useSafeAreaInsets();
-  const { currentTrack: {title, artist, artwork, url}, playing, togglePaused } = usePlayer();
+  const {
+    currentTrack: { title, artist, artwork, url },
+    playing,
+    togglePaused,
+  } = usePlayer();
 
-  return (
-    url ? (
-      <Pressable onPress={() => navigate(PATHS.PLAYER_EXPANDED)}>
-        <PlayerContainer style={{ height: 60 + bottom, paddingBottom: bottom }}>
-          <StyledAlbumArt url={artwork} />
+  return url ? (
+    <Pressable onPress={() => navigate(PATHS.PLAYER_EXPANDED)}>
+      <PlayerContainer
+        style={{
+          paddingBottom: bottom,
+        }}
+      >
+        <TrackPositionBar disabled={true} containerStyle={{ height: 4 }} />
+        <PlayerInnerContainer>
+          <AlbumArt url={artwork} size="medium" />
           <PlayerTextContainer>
             <H3>{title}</H3>
             <Text>{artist}</Text>
@@ -49,11 +64,10 @@ const Player = () => {
           <ShiftRight>
             <PlayPauseButton isPlaying={playing} onPress={togglePaused} />
           </ShiftRight>
-        </PlayerContainer>
-      </Pressable>
-    ) : null
-
-  );
+        </PlayerInnerContainer>
+      </PlayerContainer>
+    </Pressable>
+  ) : null;
 };
 
 export default Player;

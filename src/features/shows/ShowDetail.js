@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { View } from "react-native";
 import { H2, H3, Text } from "../../ui/Text";
 import { colors } from "../../ui/theme";
-import { FullWidthAlbumArt } from "../playlists/AlbumArt";
+import AlbumArt from "../playlists/AlbumArt";
 import { LinearGradient } from "expo-linear-gradient";
 
 const ShowDetailsContainer = styled(View)`
@@ -29,7 +29,7 @@ const ShowDetails = ({ route }) => {
   return (
     <ShowDetailsContainer>
       <ShowHeader>
-        <FullWidthAlbumArt track={top_track} />
+        <AlbumArt size="full" track={top_track} />
         <Gradient colors={["transparent", colors.neutral5]} />
 
         <H2>{name}</H2>

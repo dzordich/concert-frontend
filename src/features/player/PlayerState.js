@@ -1,7 +1,11 @@
-import React, {useContext, useEffect, useState} from "react";
-import TrackPlayer, {Event, State, useTrackPlayerEvents} from "react-native-track-player";
+import React, { useContext, useEffect, useState } from "react";
+import TrackPlayer, {
+  Event,
+  State,
+  useTrackPlayerEvents,
+} from "react-native-track-player";
 
-const notPlayingStatuses = [State.None, State.Paused, State.Stopped]
+const notPlayingStatuses = [State.None, State.Paused, State.Stopped];
 
 const PlayerContext = React.createContext({
   currentTrack: null,
@@ -9,6 +13,8 @@ const PlayerContext = React.createContext({
   play: () => {},
   togglePaused: () => {},
   updateQueue: () => {},
+  skip: () => {},
+  rewind: () => {},
 });
 
 const PlayerState = ({ children }) => {
@@ -33,43 +39,55 @@ const PlayerState = ({ children }) => {
     await TrackPlayer.add(newQueue);
   };
 
+  const skip = async () => await TrackPlayer.skipToNext();
+
+  const rewind = async () => {
+    const position = await TrackPlayer.getPosition();
+    if (position < 4) {
+      return await TrackPlayer.skipToPrevious();
+    }
+    return await TrackPlayer.seekTo(0);
+  };
+
   useEffect(async () => {
     await TrackPlayer.setupPlayer({});
+    return () => TrackPlayer.destroy();
   }, []);
 
-  useTrackPlayerEvents([Event.PlaybackState], async event => {
+  useTrackPlayerEvents([Event.PlaybackState], async (event) => {
     if (event.type === Event.PlaybackState) {
-    if (notPlayingStatuses.includes(event.state)) {
-      setPlaying(false)
-    } else {
-      setPlaying(true)
+      if (notPlayingStatuses.includes(event.state)) {
+        setPlaying(false);
+      } else {
+        setPlaying(true);
+      }
     }
-    }
-  })
+  });
 
-  useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
+  useTrackPlayerEvents([Event.PlaybackTrackChanged], async (event) => {
     if (event.type === Event.PlaybackTrackChanged && event.nextTrack != null) {
-      console.log("track changed")
+      console.log("track changed");
       const track = await TrackPlayer.getTrack(event.nextTrack);
       setCurrentTrack(track);
     }
-  })
+  });
 
-    return (
-      <PlayerContext.Provider
-        value={{
-          currentTrack,
-          playing,
-          play,
-          togglePaused,
-          updateQueue,
-        }}
-      >
-        {children}
-      </PlayerContext.Provider>
-    );
-
-}
+  return (
+    <PlayerContext.Provider
+      value={{
+        currentTrack,
+        playing,
+        play,
+        togglePaused,
+        updateQueue,
+        skip,
+        rewind,
+      }}
+    >
+      {children}
+    </PlayerContext.Provider>
+  );
+};
 
 export default PlayerState;
 

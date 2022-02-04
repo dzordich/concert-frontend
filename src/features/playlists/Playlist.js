@@ -39,7 +39,7 @@ const songToTrackObject = ({
   name,
   artistName,
   album_art_url,
-    id
+  id,
 }) => ({
   id,
   url: preview_url,
@@ -65,7 +65,7 @@ const Playlist = ({ route }) => {
       await updateQueue(
         performers
           .slice(index, performers.length)
-            .filter(performer => !!performer.top_track?.preview_url)
+          .filter((performer) => !!performer.top_track?.preview_url)
           .map(compose(songToTrackObject, prop("top_track")))
       );
       await play();

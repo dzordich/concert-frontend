@@ -4,28 +4,33 @@ import { View } from "react-native";
 import { H3, Text } from "../../ui/Text";
 import { colors } from "../../ui/theme";
 import { usePlayer } from "./PlayerState";
-import AlbumArt, { FullWidthAlbumArt } from "../playlists/AlbumArt";
+import AlbumArt from "../playlists/AlbumArt";
 import PlayPauseButton from "./PlayPauseButton";
 import TrackPositionBar from "./TrackPositionBar";
+import IconButton from "../../ui/inputs/IconButton";
+import FastForwardIcon from "../../ui/icons/FastForwardIcon";
+import RewindIcon from "../../ui/icons/RewindIcon";
 
 const PlayerContainer = styled(View)`
   width: 100%;
   flex: 1;
   flex-direction: column;
+  justify-content: space-between;
   background-color: ${colors.neutral5};
   z-index: 100;
   padding-bottom: 60px;
-`;
-
-const StyledAlbumArt = styled(AlbumArt)`
-  width: 64px;
-  height: 64px;
 `;
 
 const PlayerTextContainer = styled(View)`
   flex: 1;
   justify-content: center;
   align-items: center;
+`;
+
+const SongTitle = styled(H3)`
+  font-size: 18px;
+  margin-bottom: 4px;
+  font-weight: 600;
 `;
 
 const PlayerControls = styled(View)`
@@ -36,20 +41,39 @@ const PlayerControls = styled(View)`
 `;
 
 const ExpandedPlayer = () => {
-  const { track, isPlaying, togglePaused } = usePlayer();
+  const {
+    currentTrack: { url, title, artist, artwork },
+    playing,
+    togglePaused,
+    skip,
+    rewind,
+  } = usePlayer();
 
   return (
-    track && (
+    url && (
       <PlayerContainer>
-        <FullWidthAlbumArt track={track} />
+        <AlbumArt size="full" url={artwork} />
         <PlayerTextContainer>
-          <H3>{track.name}</H3>
-          <Text>{track.artistName}</Text>
+          <SongTitle>{title}</SongTitle>
+          <Text>{artist}</Text>
         </PlayerTextContainer>
         <PlayerControls>
-          <PlayPauseButton isPlaying={isPlaying} onPress={togglePaused} />
+          <IconButton Icon={RewindIcon} onPress={rewind} />
+
+          <PlayPauseButton
+            isPlaying={playing}
+            onPress={togglePaused}
+            width="52px"
+            height="52px"
+          />
+          <IconButton
+            Icon={FastForwardIcon}
+            onPress={skip}
+            width="36px"
+            height="36px"
+          />
         </PlayerControls>
-        {/*<TrackPositionBar />*/}
+        <TrackPositionBar />
       </PlayerContainer>
     )
   );
