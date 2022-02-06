@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import { Slider } from "@miblanchard/react-native-slider";
 import TrackPlayer, { useProgress } from "react-native-track-player";
 import { roundTo2Decimals } from "../../utils/numbers";
@@ -21,7 +20,10 @@ const TrackPositionBar = (props) => {
       value={position / duration}
       onSlidingStart={onSlidingStart}
       onSlidingComplete={onSlidingComplete}
-      thumbStyle={{ display: "none" }}
+      thumbStyle={
+        props.disabled ? { display: "none" } : { height: 16, width: 16 }
+      }
+      thumbTintColor={colors.secondary60}
       minimumTrackTintColor={colors.secondary60}
       maximumTrackTintColor={colors.neutral80}
       {...props}

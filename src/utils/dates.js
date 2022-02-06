@@ -1,17 +1,20 @@
 import {
-  format,
+  format as _format,
   add,
   getDay,
   nextSunday,
   nextFriday,
   nextMonday,
+  parseISO,
 } from "date-fns";
 import { compose, map, replace } from "ramda";
 import { takeAfter } from "./strings";
 
 const WEEKEND_DAYS_WITH_FRIDAY = [5, 6, 0];
 
-export const formatDate = (date) => format(date, "yyyy-MM-dd");
+const format = (formatStr) => (date) => _format(date, formatStr);
+
+export const formatDate = format("yyyy-MM-dd");
 
 export const addDaysToCurrentDate = (days) => add(new Date(), { days });
 
@@ -53,3 +56,5 @@ export const addDaysToCurrentDateFormatted = compose(
 );
 
 export const formatDateWithoutYear = compose(replace("-", "/"), takeAfter("-"));
+
+export const displayDate = compose(format("EEEE, MMMM do"), parseISO);

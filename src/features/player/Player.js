@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { View, Pressable } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -37,6 +37,12 @@ const PlayerInnerContainer = styled(View)`
 
 const PlayerTextContainer = styled(View)`
   margin-left: 16px;
+  overflow: hidden;
+  max-width: 100%;
+`;
+
+const ArtistName = styled(Text)`
+  color: ${colors.neutral80};
 `;
 
 const Player = () => {
@@ -59,7 +65,7 @@ const Player = () => {
           <AlbumArt url={artwork} size="medium" />
           <PlayerTextContainer>
             <H3>{title}</H3>
-            <Text>{artist}</Text>
+            <ArtistName>{artist}</ArtistName>
           </PlayerTextContainer>
           <ShiftRight>
             <PlayPauseButton isPlaying={playing} onPress={togglePaused} />
@@ -74,8 +80,13 @@ export default Player;
 
 export const PlayerSafeArea = ({ children }) => {
   const { bottom } = useSafeAreaInsets();
-  const { track } = usePlayer();
+  const { currentTrack } = usePlayer();
+  const playerHeight = useMemo(() => (currentTrack?.url ? 64 + bottom : 0), [
+    currentTrack,
+  ]);
   return (
-    <View style={{ marginBottom: track ? 60 + bottom : 0 }}>{children}</View>
+    <View style={{ paddingBottom: playerHeight, height: "100%" }}>
+      {children}
+    </View>
   );
 };

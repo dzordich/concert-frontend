@@ -21,6 +21,12 @@ const PlayerContainer = styled(View)`
   padding-bottom: 60px;
 `;
 
+const PlayerBody = styled(View)`
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-around;
+`;
+
 const PlayerTextContainer = styled(View)`
   flex: 1;
   justify-content: center;
@@ -42,7 +48,7 @@ const PlayerControls = styled(View)`
 
 const ExpandedPlayer = () => {
   const {
-    currentTrack: { url, title, artist, artwork },
+    currentTrack: { title, artist, artwork },
     playing,
     togglePaused,
     skip,
@@ -50,16 +56,15 @@ const ExpandedPlayer = () => {
   } = usePlayer();
 
   return (
-    url && (
-      <PlayerContainer>
-        <AlbumArt size="full" url={artwork} />
+    <PlayerContainer>
+      <AlbumArt size="full" url={artwork} />
+      <PlayerBody>
         <PlayerTextContainer>
           <SongTitle>{title}</SongTitle>
           <Text>{artist}</Text>
         </PlayerTextContainer>
         <PlayerControls>
           <IconButton Icon={RewindIcon} onPress={rewind} />
-
           <PlayPauseButton
             isPlaying={playing}
             onPress={togglePaused}
@@ -74,8 +79,8 @@ const ExpandedPlayer = () => {
           />
         </PlayerControls>
         <TrackPositionBar />
-      </PlayerContainer>
-    )
+      </PlayerBody>
+    </PlayerContainer>
   );
 };
 

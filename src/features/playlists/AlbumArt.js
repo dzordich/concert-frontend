@@ -1,11 +1,12 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { Image, View, Dimensions } from "react-native";
+import { Image, View, ImageBackground } from "react-native";
+import { getWindowWidth } from "../../utils/dimensions";
 
 const sizes = {
   small: 52,
   medium: 60,
-  full: Dimensions.get("window").width,
+  full: getWindowWidth(),
 };
 
 const getSizeFromProps = (props) => sizes[props.size];
@@ -17,6 +18,10 @@ const layout = css`
 `;
 
 const AlbumArtImage = styled(Image)`
+  ${layout}
+`;
+
+const AlbumArtBackgroundImage = styled(ImageBackground)`
   ${layout}
 `;
 
@@ -33,3 +38,12 @@ const AlbumArt = ({ url, size = "small" }) =>
   );
 
 export default AlbumArt;
+
+export const AlbumArtBackground = ({ children, url, size = "full" }) =>
+  url ? (
+    <AlbumArtBackgroundImage source={{ uri: url }} size={size}>
+      {children}
+    </AlbumArtBackgroundImage>
+  ) : (
+    <EmptyAlbumArt size={size}>{children}</EmptyAlbumArt>
+  );
