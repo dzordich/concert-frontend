@@ -51,7 +51,7 @@ const songToTrackObject = ({
 const Playlist = ({ route }) => {
   const [performers, setPerformers] = useState([]);
   const { selectedCity } = useCities();
-  const { play, updateQueue, track } = usePlayer();
+  const { play, updateQueue, currentTrack } = usePlayer();
   const { displayName, startDate, endDate } = route.params;
 
   useEffect(() => {
@@ -93,7 +93,7 @@ const Playlist = ({ route }) => {
                   performer={performer}
                   onPress={onSongPress}
                   trackIndex={idx}
-                  currentTrack={track}
+                  currentTrack={currentTrack}
                   key={idx}
                 />
               )
