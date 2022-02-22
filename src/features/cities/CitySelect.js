@@ -3,23 +3,18 @@ import { useCities } from "./CityProvider";
 import DropDown from "../../ui/inputs/DropDown";
 
 const CitySelect = () => {
-  const { cities, selectedCity, selectCity } = useCities();
+  const { cities, selectedCity, selectCity, selectedCityLoaded } = useCities();
   const cityOptions = useMemo(
-    () => cities.map((city) => ({ label: city.display_name, value: city })),
+    () => cities.map((city, index) => ({ label: city.display_name, value: city.id})),
     [cities]
   );
-  const savedCity = useMemo(
-    () => cityOptions.find((city) => city?.value?.id === selectedCity?.id),
-    []
-  );
-  console.log(savedCity);
-  return (
+  return selectedCityLoaded ? (
     <DropDown
-      initialValue={savedCity}
+      initialValue={selectedCity?.id}
       items={cityOptions}
-      onValueChange={selectCity}
+      onValueChange={value => selectCity(cities.find(city => city.id === value))}
     />
-  );
+  ) : null;
 };
 
 export default CitySelect;

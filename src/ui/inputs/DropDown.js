@@ -5,7 +5,7 @@ import { colors } from "../theme";
 
 const DropDown = ({ items, initialValue, onValueChange }) => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState(initialValue);
 
   return (
     <DropDownPicker

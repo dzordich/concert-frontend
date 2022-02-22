@@ -32,7 +32,7 @@ const Routes = () => {
     >
       <Stack.Screen name={PATHS.HOME} component={Home} />
       <Stack.Screen name={PATHS.PLAYLIST} component={Playlist} />
-      <Stack.Screen name={PATHS.SHOW_DETAILS} component={ShowDetails} />
+      <Stack.Screen name={PATHS.SHOW_DETAILS} component={ShowDetails} options={{headerShown: false}} />
       <Stack.Group
         screenOptions={{ presentation: "modal", headerShown: false }}
       >

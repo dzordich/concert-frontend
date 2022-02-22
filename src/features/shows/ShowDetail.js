@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
+import MapView, { Marker } from "react-native-maps";
 import { Display, H2, H3, Text } from "../../ui/Text";
 import { colors } from "../../ui/theme";
 import { AlbumArtBackground } from "../playlists/AlbumArt";
@@ -33,7 +34,12 @@ const ShowContainer = styled(View)`
 
 const VenueLink = styled(Button)`
   background-color: ${colors.primary60};
-  margin-top: 24px;
+  margin: 24px 0;
+`;
+
+const StyledMap = styled(MapView)`
+  width: 100%;
+  height: 200px;
 `;
 
 const Show = ({ venue, start_date, start_time }) => (
@@ -46,6 +52,23 @@ const Show = ({ venue, start_date, start_time }) => (
     <VenueLink onPress={() => {}} activeOpacity={0.6}>
       <Text>Venue Website</Text>
     </VenueLink>
+
+      <StyledMap
+          initialRegion={{
+              latitude: Number(venue.lat),
+              longitude: Number(venue.lng),
+              latitudeDelta: 0.01,
+              longitudeDelta: 0.01,
+          }}
+      >
+          <Marker
+              coordinate={{
+                  latitude: Number(venue.lat),
+                  longitude: Number(venue.lng),
+              }}
+              title={venue.name}
+          />
+      </StyledMap>
   </ShowContainer>
 );
 
@@ -54,6 +77,7 @@ const ShowDetails = ({ route }) => {
 
   return (
     <ShowDetailsContainer>
+        {/*<ScrollView>*/}
       <ShowHeader>
         <AlbumArtBackground url={top_track.album_art_url}>
           <Gradient colors={["transparent", colors.neutral5]}>
@@ -65,22 +89,7 @@ const ShowDetails = ({ route }) => {
         data={shows}
         renderItem={({ item }) => <Show {...item} />}
       />
-      {/*<StyledMap*/}
-      {/*  initialRegion={{*/}
-      {/*    latitude: Number(venue.lat),*/}
-      {/*    longitude: Number(venue.lng),*/}
-      {/*    latitudeDelta: 0.01,*/}
-      {/*    longitudeDelta: 0.01,*/}
-      {/*  }}*/}
-      {/*>*/}
-      {/*  <Marker*/}
-      {/*    coordinate={{*/}
-      {/*      latitude: Number(venue.lat),*/}
-      {/*      longitude: Number(venue.lng),*/}
-      {/*    }}*/}
-      {/*    title={venue.name}*/}
-      {/*  />*/}
-      {/*</StyledMap>*/}
+        {/*</ScrollView>*/}
     </ShowDetailsContainer>
   );
 };
