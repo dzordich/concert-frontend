@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import TrackPlayer, {
+  Capability,
   Event,
   State,
   useTrackPlayerEvents,
@@ -50,6 +51,16 @@ const PlayerState = ({ children }) => {
   };
 
   useEffect(async () => {
+    await TrackPlayer.updateOptions({stopWithApp: false, // false=> music continues in background even when app is closed
+      // Media controls capabilities
+      capabilities: [
+        Capability.Play,
+        Capability.Pause,
+        Capability.Stop,
+        Capability.SeekTo,
+        Capability.SkipToNext,
+        Capability.SkipToPrevious,
+      ],})
     await TrackPlayer.setupPlayer({});
     return () => TrackPlayer.destroy();
   }, []);
