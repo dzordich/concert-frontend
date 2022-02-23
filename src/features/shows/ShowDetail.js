@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Linking } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { Display, H2, Text } from "../../ui/Text";
 import { colors } from "../../ui/theme";
@@ -50,7 +50,7 @@ const Show = ({ venue, start_date, start_time }) => (
       {displayDate(start_date)}
       {start_time ? `  •  ${start_time}` : ""}
     </Text>
-    <VenueLink onPress={() => {}} activeOpacity={0.6}>
+    <VenueLink onPress={() => venue.website && Linking.openURL(venue.website)} activeOpacity={0.6}>
       <Text>Venue Website</Text>
     </VenueLink>
 
