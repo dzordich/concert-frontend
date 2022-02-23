@@ -19,16 +19,18 @@ const TrackContainer = styled(View)`
 `;
 
 const TrackTitle = styled(H3)`
-  margin-bottom: 4px;
+  margin: 2px 0;
   ${(props) => (props.currentTrack ? `color: ${colors.secondary80};` : "")}
 `;
 
 const TrackText = styled(View)`
   margin-left: 16px;
+  flex: 1;
 `;
 
 const TrackSubText = styled(Text)`
   color: ${colors.neutral80};
+  font-size: 13px;
 `;
 
 const Track = ({ performer, onPress, currentTrack, trackIndex }) => {
@@ -43,11 +45,12 @@ const Track = ({ performer, onPress, currentTrack, trackIndex }) => {
       <TrackContainer>
         <AlbumArt url={track?.album_art_url} />
         <TrackText>
-          <TrackTitle currentTrack={track && track.id === currentTrack?.id}>
-            {track.name}
+          <TrackSubText numberOfLines={1}>{track.name}</TrackSubText>
+
+          <TrackTitle currentTrack={track && track.id === currentTrack?.id} numberOfLines={1}>
+            {name}
           </TrackTitle>
-          <TrackSubText>{name}</TrackSubText>
-          <TrackSubText>
+          <TrackSubText numberOfLines={1}>
             {shows.length > 0 ? shows[0].venue.name : ""}
           </TrackSubText>
         </TrackText>

@@ -77,19 +77,20 @@ const ShowDetails = ({ route }) => {
 
   return (
     <ShowDetailsContainer>
-        {/*<ScrollView>*/}
+        <ScrollView>
       <ShowHeader>
         <AlbumArtBackground url={top_track.album_art_url}>
-          <Gradient colors={["transparent", colors.neutral5]}>
+          <Gradient colors={[colors.neutral5, "transparent", colors.neutral5]}>
             <Display>{name}</Display>
           </Gradient>
         </AlbumArtBackground>
       </ShowHeader>
+            {shows.length > 1 ?
       <PaginatedCarousel
         data={shows}
         renderItem={({ item }) => <Show {...item} />}
-      />
-        {/*</ScrollView>*/}
+      /> : <Show {...shows[0]} />}
+        </ScrollView>
     </ShowDetailsContainer>
   );
 };
