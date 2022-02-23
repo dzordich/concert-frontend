@@ -2,13 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { View, ScrollView } from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import { Display, H2, H3, Text } from "../../ui/Text";
+import { Display, H2, Text } from "../../ui/Text";
 import { colors } from "../../ui/theme";
 import { AlbumArtBackground } from "../playlists/AlbumArt";
 import { LinearGradient } from "expo-linear-gradient";
 import PaginatedCarousel from "../../ui/layout/PaginatedCarousel";
 import Button from "../../ui/inputs/Button";
 import { displayDate } from "../../utils/dates";
+import BackButton from "../../ui/actions/BackButton";
 
 const ShowDetailsContainer = styled(View)`
   flex: 1;
@@ -72,11 +73,12 @@ const Show = ({ venue, start_date, start_time }) => (
   </ShowContainer>
 );
 
-const ShowDetails = ({ route }) => {
+const ShowDetails = ({ route, navigation }) => {
   const { name, shows, top_track } = route.params;
 
   return (
     <ShowDetailsContainer>
+        <BackButton navigation={navigation} />
         <ScrollView>
       <ShowHeader>
         <AlbumArtBackground url={top_track.album_art_url}>
