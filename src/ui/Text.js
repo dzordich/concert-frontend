@@ -9,7 +9,6 @@ export const Text = styled(NativeText)`
 export const H2 = styled(Text)`
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 8px;
 `;
 
 export const H3 = styled(Text)`

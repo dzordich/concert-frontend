@@ -43,9 +43,13 @@ const StyledMap = styled(MapView)`
   height: 200px;
 `;
 
+const VenueName = styled(H2)`
+  margin-bottom: 8px;
+`
+
 const Show = ({ venue, start_date, start_time }) => (
   <ShowContainer>
-    <H2>{venue.name}</H2>
+    <VenueName>{venue.name}</VenueName>
     <Text>
       {displayDate(start_date)}
       {start_time ? `  •  ${start_time}` : ""}

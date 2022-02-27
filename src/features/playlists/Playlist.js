@@ -26,6 +26,10 @@ const PlaylistHeader = styled(LinearGradient)`
   margin-bottom: 8px;
 `;
 
+const PlaylistHeaderText = styled(H2)`
+  margin-bottom: 8px;
+`
+
 const addPerformerToTopTrack = (performer) => ({
   ...performer,
   top_track: {
@@ -76,7 +80,7 @@ const Playlist = ({ route }) => {
     <PlaylistContainer>
       <ScrollView>
         <PlaylistHeader colors={[colors.primary70, colors.neutral10]}>
-          <H2>{displayName}</H2>
+          <PlaylistHeaderText>{displayName}</PlaylistHeaderText>
           <Text>
             {startDate === endDate
               ? formatDateWithoutYear(startDate)

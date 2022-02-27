@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { listCities } from "../../api/cities";
 import { getItem, setItem } from "../../utils/localStorage";
 import { CITY_STORAGE_KEY } from "../../contants/storageKeys";
-import { tap } from "ramda";
 
 const CityContext = React.createContext({
   cities: [],
