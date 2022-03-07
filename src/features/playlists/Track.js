@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "styled-components/native";
 import { TouchableHighlight, View } from "react-native";
 import { H3, Text } from "../../ui/Text";
 import { colors } from "../../ui/theme";
@@ -9,6 +9,8 @@ import IconButton from "../../ui/inputs/IconButton";
 import InfoIcon from "../../ui/icons/InfoIcon";
 import { navigate } from "../../utils/navigation";
 import PATHS from "../../contants/paths";
+import {any} from "ramda";
+import FreeMarker from "../../ui/FreeMarker";
 
 const TrackContainer = styled(View)`
   flex: 1;
@@ -33,6 +35,8 @@ const TrackSubText = styled(Text)`
   font-size: 13px;
 `;
 
+const hasFreeShow = any(show => !!show.free)
+
 const Track = ({ performer, onPress, currentTrack, trackIndex }) => {
   const { top_track: track, name, shows } = performer;
 
@@ -55,10 +59,13 @@ const Track = ({ performer, onPress, currentTrack, trackIndex }) => {
           </TrackSubText>
         </TrackText>
         <ShiftRight>
+          <View style={{flex: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "center"}}>
+          {hasFreeShow(shows) && <FreeMarker/>}
           <IconButton
             Icon={InfoIcon}
             onPress={() => navigate(PATHS.SHOW_DETAILS, performer)}
           />
+          </View>
         </ShiftRight>
       </TrackContainer>
     </TouchableHighlight>

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "concert-frontend",
-    "slug": "concert-frontend",
+    "name": "StageBite",
+    "slug": "StageBite",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

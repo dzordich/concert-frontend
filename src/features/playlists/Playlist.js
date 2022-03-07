@@ -10,13 +10,14 @@ import { H2, Text } from "../../ui/Text";
 import { formatDateWithoutYear } from "../../utils/dates";
 import { usePlayer } from "../player/PlayerState";
 import Track from "./Track";
+import {PlaylistCard} from "../home/PlaylistLink";
 
 const PlaylistContainer = styled(View)`
   flex: 1;
   flex-direction: column;
   width: 100%;
   max-height: 100%;
-  background-color: ${colors.neutral10};
+  background-color: ${colors.neutral5};
 `;
 
 const PlaylistHeader = styled(LinearGradient)`
@@ -24,10 +25,20 @@ const PlaylistHeader = styled(LinearGradient)`
   border-bottom-width: 1px;
   padding: 16px;
   margin-bottom: 8px;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
 `;
 
 const PlaylistHeaderText = styled(H2)`
   margin-bottom: 8px;
+`
+
+const PlaylistHeaderCard = styled(PlaylistCard)`
+  width: 140px;
+  height: 140px;
+  margin-right: 16px;
+  padding: 8px;
 `
 
 const addPerformerToTopTrack = (performer) => ({
@@ -79,7 +90,9 @@ const Playlist = ({ route }) => {
   return (
     <PlaylistContainer>
       <ScrollView>
-        <PlaylistHeader colors={[colors.primary70, colors.neutral10]}>
+        <PlaylistHeader colors={[colors.primary50, colors.neutral5]}>
+          <PlaylistHeaderCard {...route.params} />
+          <View>
           <PlaylistHeaderText>{displayName}</PlaylistHeaderText>
           <Text>
             {startDate === endDate
@@ -88,6 +101,7 @@ const Playlist = ({ route }) => {
                   endDate
                 )}`}
           </Text>
+          </View>
         </PlaylistHeader>
         {performers &&
           performers.map(

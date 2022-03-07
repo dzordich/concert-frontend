@@ -10,12 +10,14 @@ import PaginatedCarousel from "../../ui/layout/PaginatedCarousel";
 import Button from "../../ui/inputs/Button";
 import { displayDate } from "../../utils/dates";
 import BackButton from "../../ui/actions/BackButton";
+import FreeMarker from "../../ui/FreeMarker";
+import ShiftRight from "../../ui/layout/ShiftRight";
 
 const ShowDetailsContainer = styled(View)`
   flex: 1;
   width: 100%;
   height: 100%;
-  background-color: ${colors.neutral10};
+  background-color: ${colors.neutral5};
 `;
 
 const ShowHeader = styled(View)``;
@@ -41,21 +43,26 @@ const VenueLink = styled(Button)`
 const StyledMap = styled(MapView)`
   width: 100%;
   height: 200px;
+  border-radius: 4px;
+  overflow: hidden;
 `;
 
 const VenueName = styled(H2)`
   margin-bottom: 8px;
 `
 
-const Show = ({ venue, start_date, start_time }) => (
+const Show = ({ venue, start_date, start_time, free }) => (
   <ShowContainer>
+      <View style={{flex: 1, flexDirection: "row", alignItems: 'center'}}>
     <VenueName>{venue.name}</VenueName>
+          {!!free && <ShiftRight><FreeMarker /></ShiftRight>}
+      </View>
     <Text>
       {displayDate(start_date)}
       {start_time ? `  •  ${start_time}` : ""}
     </Text>
     <VenueLink onPress={() => venue.website && Linking.openURL(venue.website)} activeOpacity={0.6}>
-      <Text>Venue Website</Text>
+      <Text>Purchase Tickets</Text>
     </VenueLink>
 
       <StyledMap

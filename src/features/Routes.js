@@ -21,9 +21,9 @@ const Routes = () => {
           ? `${selectedCity.name}, ${selectedCity.state}`.toUpperCase()
           : "",
         headerStyle: {
-          backgroundColor: colors.neutral5,
+          backgroundColor: colors.neutral10,
         },
-        headerTintColor: colors.neutral98,
+            headerTintColor: colors.neutral98,
         headerTitleStyle: {
           fontWeight: "bold",
         },

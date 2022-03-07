@@ -11,12 +11,11 @@ import {Text} from "../../ui/Text";
 
 const Container = styled(View)`
   height: 100%;
-  background-color: ${colors.neutral10};
-  padding-vertical: 12px;
+  background-color: ${colors.neutral5};
 `;
 
-const Playlists = styled(View)`
-  margin-top: 12px;
+const Playlists = styled.ScrollView`
+  padding-vertical: 16px;
   z-index: -1;
 `;
 
@@ -30,19 +29,30 @@ const ListHeader = styled.View`
 `
 
 const ListHeaderText = styled(Text)`
-  font-size: 16px;
-  margin-right: 12px;
-  color: ${colors.neutral80};
+  font-size: 18px;
+  color: ${colors.neutral90};
 `
 
 const HorizontalLine = styled.View`
   height: 0;
-  width: 100%;
+  width: 50%;
+  margin-left: auto;
   border: 0.5px solid ${colors.neutral30};
 `
 
 const PlaylistRow = styled.ScrollView`
   margin-bottom: 12px;
+`
+
+const BannerImage = styled.View`
+  margin: 0 12px 12px;
+  border-radius: 4px;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: ${colors.neutral50};
+  height: 150px;
+  overflow: hidden;
 `
 
 const Home = ({ navigation }) => {
@@ -52,9 +62,13 @@ const Home = ({ navigation }) => {
     <Container>
       {selectedCityLoaded ? (
         <>
-          <CitySelect />
+          {/*<CitySelect />*/}
           {selectedCity && (
             <Playlists>
+              <View style={{paddingBottom: 36}}>
+              <BannerImage >
+                <Text>Banner image</Text>
+              </BannerImage>
               <ListHeader>
               <ListHeaderText>Upcoming Concerts</ListHeaderText>
                 <HorizontalLine />
@@ -86,6 +100,7 @@ const Home = ({ navigation }) => {
                 />
               ))}
               </PlaylistRow>
+              </View>
             </Playlists>
           )}
         </>

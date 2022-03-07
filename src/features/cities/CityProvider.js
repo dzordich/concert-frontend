@@ -12,25 +12,27 @@ const CityContext = React.createContext({
 
 const CityProvider = ({ children }) => {
   const [cities, setCities] = useState([]);
-  const [selectedCity, setSelectedCity] = useState(null);
-  const [selectedCityLoaded, setSelectedCityLoaded] = useState(false);
+  // const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedCity, setSelectedCity] = useState({name: "Austin", state: "TX", country: "US", id: 1});
+  // const [selectedCityLoaded, setSelectedCityLoaded] = useState(false);
+  const [selectedCityLoaded, setSelectedCityLoaded] = useState(true);
 
-  const selectCity = (city) => {
-    setSelectedCity(city);
-    setItem(CITY_STORAGE_KEY, city);
-  };
-
-  useEffect(() => {
-    listCities()
-      .then(setCities)
-      .then(() => getItem(CITY_STORAGE_KEY))
-      .then((item) => item && setSelectedCity(item))
-      .then(() => setSelectedCityLoaded(true));
-  }, []);
+  // const selectCity = (city) => {
+  //   setSelectedCity(city);
+  //   setItem(CITY_STORAGE_KEY, city);
+  // };
+  //
+  // useEffect(() => {
+  //   listCities()
+  //     .then(setCities)
+  //     .then(() => getItem(CITY_STORAGE_KEY))
+  //     .then((item) => item && setSelectedCity(item))
+  //     .then(() => setSelectedCityLoaded(true));
+  // }, []);
 
   return (
     <CityContext.Provider
-      value={{ cities, selectedCity, selectedCityLoaded, selectCity }}
+      value={{ cities, selectedCity, selectedCityLoaded }}
     >
       {children}
     </CityContext.Provider>
