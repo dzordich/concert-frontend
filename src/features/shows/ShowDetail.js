@@ -36,7 +36,7 @@ const ShowContainer = styled(View)`
 `;
 
 const VenueLink = styled(Button)`
-  background-color: ${colors.primary60};
+  background-color: ${colors.primary40};
   margin: 24px 0;
 `;
 
@@ -49,38 +49,45 @@ const StyledMap = styled(MapView)`
 
 const VenueName = styled(H2)`
   margin-bottom: 8px;
-`
+`;
 
 const Show = ({ venue, start_date, start_time, free }) => (
   <ShowContainer>
-      <View style={{flex: 1, flexDirection: "row", alignItems: 'center'}}>
-    <VenueName>{venue.name}</VenueName>
-          {!!free && <ShiftRight><FreeMarker /></ShiftRight>}
-      </View>
+    <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
+      <VenueName>{venue.name}</VenueName>
+      {!!free && (
+        <ShiftRight>
+          <FreeMarker />
+        </ShiftRight>
+      )}
+    </View>
     <Text>
       {displayDate(start_date)}
       {start_time ? `  •  ${start_time}` : ""}
     </Text>
-    <VenueLink onPress={() => venue.website && Linking.openURL(venue.website)} activeOpacity={0.6}>
+    <VenueLink
+      onPress={() => venue.website && Linking.openURL(venue.website)}
+      activeOpacity={0.6}
+    >
       <Text>Purchase Tickets</Text>
     </VenueLink>
 
-      <StyledMap
-          initialRegion={{
-              latitude: Number(venue.lat),
-              longitude: Number(venue.lng),
-              latitudeDelta: 0.01,
-              longitudeDelta: 0.01,
-          }}
-      >
-          <Marker
-              coordinate={{
-                  latitude: Number(venue.lat),
-                  longitude: Number(venue.lng),
-              }}
-              title={venue.name}
-          />
-      </StyledMap>
+    <StyledMap
+      initialRegion={{
+        latitude: Number(venue.lat),
+        longitude: Number(venue.lng),
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      }}
+    >
+      <Marker
+        coordinate={{
+          latitude: Number(venue.lat),
+          longitude: Number(venue.lng),
+        }}
+        title={venue.name}
+      />
+    </StyledMap>
   </ShowContainer>
 );
 
@@ -89,21 +96,26 @@ const ShowDetails = ({ route, navigation }) => {
 
   return (
     <ShowDetailsContainer>
-        <BackButton navigation={navigation} />
-        <ScrollView>
-      <ShowHeader>
-        <AlbumArtBackground url={top_track.album_art_url}>
-          <Gradient colors={[colors.neutral5, "transparent", colors.neutral5]}>
-            <Display>{name}</Display>
-          </Gradient>
-        </AlbumArtBackground>
-      </ShowHeader>
-            {shows.length > 1 ?
-      <PaginatedCarousel
-        data={shows}
-        renderItem={({ item }) => <Show {...item} />}
-      /> : <Show {...shows[0]} />}
-        </ScrollView>
+      <BackButton navigation={navigation} />
+      <ScrollView>
+        <ShowHeader>
+          <AlbumArtBackground url={top_track.album_art_url}>
+            <Gradient
+              colors={[colors.neutral5, "transparent", colors.neutral5]}
+            >
+              <Display>{name}</Display>
+            </Gradient>
+          </AlbumArtBackground>
+        </ShowHeader>
+        {shows.length > 1 ? (
+          <PaginatedCarousel
+            data={shows}
+            renderItem={({ item }) => <Show {...item} />}
+          />
+        ) : (
+          <Show {...shows[0]} />
+        )}
+      </ScrollView>
     </ShowDetailsContainer>
   );
 };

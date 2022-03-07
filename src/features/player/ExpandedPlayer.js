@@ -64,7 +64,12 @@ const ExpandedPlayer = () => {
           <Text>{artist}</Text>
         </PlayerTextContainer>
         <PlayerControls>
-          <IconButton Icon={RewindIcon} onPress={rewind} />
+          <IconButton
+            Icon={RewindIcon}
+            onPress={rewind}
+            width="48px"
+            height="48px"
+          />
           <PlayPauseButton
             isPlaying={playing}
             onPress={togglePaused}
@@ -74,8 +79,8 @@ const ExpandedPlayer = () => {
           <IconButton
             Icon={FastForwardIcon}
             onPress={skip}
-            width="36px"
-            height="36px"
+            width="48px"
+            height="48px"
           />
         </PlayerControls>
         <TrackPositionBar />

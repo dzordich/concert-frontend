@@ -23,8 +23,8 @@ const TrackPositionBar = (props) => {
       thumbStyle={
         props.disabled ? { display: "none" } : { height: 16, width: 16 }
       }
-      thumbTintColor={colors.secondary60}
-      minimumTrackTintColor={colors.secondary60}
+      thumbTintColor={colors.secondary50}
+      minimumTrackTintColor={colors.secondary50}
       maximumTrackTintColor={colors.neutral80}
       {...props}
     />

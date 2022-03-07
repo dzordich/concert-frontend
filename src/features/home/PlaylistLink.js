@@ -3,8 +3,8 @@ import styled from "styled-components/native";
 import { TouchableHighlight, View } from "react-native";
 import PATHS from "../../contants/paths";
 import { colors } from "../../ui/theme";
-import {H2, H3} from "../../ui/Text";
-import {getWindowWidth} from "../../utils/dimensions";
+import { H2, H3 } from "../../ui/Text";
+import { getWindowWidth } from "../../utils/dimensions";
 
 const PlaylistLinkContainer = styled(View)`
   margin-left: 12px;
@@ -28,10 +28,10 @@ const StyledHighlight = styled(TouchableHighlight)`
 `;
 
 export const PlaylistCard = ({ displayName, background, subHeader, style }) => (
-    <PlaylistLinkBackground source={background} style={style}>
-        <H3>{subHeader}</H3>
-        <H2>{displayName}</H2>
-    </PlaylistLinkBackground>
+  <PlaylistLinkBackground source={background} style={style}>
+    <H3>{subHeader}</H3>
+    <H2>{displayName}</H2>
+  </PlaylistLinkBackground>
 );
 
 const PlaylistLink = ({ playlist, navigation }) => {

@@ -19,7 +19,8 @@
       "infoPlist": {
         "UIBackgroundModes": ["audio"]
       },
-      "bundleIdentifier": "com.brickyardusertest.concertfrontend"
+      "bundleIdentifier": "com.brickyardusertest.concertfrontend",
+      "buildNumber": "3"
     },
     "android": {
       "adaptiveIcon": {

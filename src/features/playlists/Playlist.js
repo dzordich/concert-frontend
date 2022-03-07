@@ -10,7 +10,8 @@ import { H2, Text } from "../../ui/Text";
 import { formatDateWithoutYear } from "../../utils/dates";
 import { usePlayer } from "../player/PlayerState";
 import Track from "./Track";
-import {PlaylistCard} from "../home/PlaylistLink";
+import { PlaylistCard } from "../home/PlaylistLink";
+import PlayPauseButton from "../player/PlayPauseButton";
 
 const PlaylistContainer = styled(View)`
   flex: 1;
@@ -32,14 +33,14 @@ const PlaylistHeader = styled(LinearGradient)`
 
 const PlaylistHeaderText = styled(H2)`
   margin-bottom: 8px;
-`
+`;
 
 const PlaylistHeaderCard = styled(PlaylistCard)`
   width: 140px;
   height: 140px;
   margin-right: 16px;
   padding: 8px;
-`
+`;
 
 const addPerformerToTopTrack = (performer) => ({
   ...performer,
@@ -66,8 +67,14 @@ const songToTrackObject = ({
 const Playlist = ({ route }) => {
   const [performers, setPerformers] = useState([]);
   const { selectedCity } = useCities();
-  const { play, updateQueue, currentTrack } = usePlayer();
-  const { displayName, startDate, endDate } = route.params;
+  const {
+    play,
+    updateQueue,
+    currentTrack,
+    playing,
+    togglePaused,
+  } = usePlayer();
+  const { displayName, startDate, endDate, backgroundColor } = route.params;
 
   useEffect(() => {
     listShows({ city: selectedCity, startDate, endDate }).then((response) =>
@@ -90,17 +97,23 @@ const Playlist = ({ route }) => {
   return (
     <PlaylistContainer>
       <ScrollView>
-        <PlaylistHeader colors={[colors.primary50, colors.neutral5]}>
+        <PlaylistHeader colors={[backgroundColor, colors.neutral5]}>
           <PlaylistHeaderCard {...route.params} />
           <View>
-          <PlaylistHeaderText>{displayName}</PlaylistHeaderText>
-          <Text>
-            {startDate === endDate
-              ? formatDateWithoutYear(startDate)
-              : `${formatDateWithoutYear(startDate)} - ${formatDateWithoutYear(
-                  endDate
-                )}`}
-          </Text>
+            <PlaylistHeaderText>{displayName}</PlaylistHeaderText>
+            <Text>
+              {startDate === endDate
+                ? formatDateWithoutYear(startDate)
+                : `${formatDateWithoutYear(
+                    startDate
+                  )} - ${formatDateWithoutYear(endDate)}`}
+            </Text>
+            <PlayPauseButton
+              isPlaying={playing}
+              onPress={togglePaused}
+              width="52px"
+              height="52px"
+            />
           </View>
         </PlaylistHeader>
         {performers &&

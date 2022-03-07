@@ -5,7 +5,9 @@ import {
   nextSunday,
   nextFriday,
   nextMonday,
-  parseISO, endOfMonth, startOfMonth,
+  parseISO,
+  endOfMonth,
+  startOfMonth,
 } from "date-fns";
 import { compose, map, replace } from "ramda";
 import { takeAfter } from "./strings";
@@ -16,22 +18,25 @@ const format = (formatStr) => (date) => _format(date, formatStr);
 
 export const formatDate = format("yyyy-MM-dd");
 
-export const formatShortDate = format('M.d')
+export const formatShortDate = format("M.d");
 
 export const addDaysToCurrentDate = (days) => add(new Date(), { days });
 
-export const formatTodayPlusDays = compose(
-  formatDate,
+export const formatTodayPlusDays = compose(formatDate, addDaysToCurrentDate);
+
+export const formatTodayPlusDaysShort = compose(
+  formatShortDate,
   addDaysToCurrentDate
 );
-
-export const formatTodayPlusDaysShort = compose(formatShortDate, addDaysToCurrentDate)
 
 export const formatDateWithoutYear = compose(replace("-", "/"), takeAfter("-"));
 
 export const displayDate = compose(format("EEEE, MMMM do"), parseISO);
 
-export const weekdayAtTodayPlusDays = compose(format('EEEE'), addDaysToCurrentDate)
+export const weekdayAtTodayPlusDays = compose(
+  format("EEEE"),
+  addDaysToCurrentDate
+);
 
 // Weekends
 
@@ -63,21 +68,21 @@ const formatStartEndDate = map((date) => formatDate(date));
 export const nextWeekendFormatted = compose(formatStartEndDate, nextWeekend);
 
 export const currentWeekendFormatted = compose(
-    formatStartEndDate,
-    currentWeekend
+  formatStartEndDate,
+  currentWeekend
 );
 
 // Months
 
-export const formatMonth = format('MMMM')
+export const formatMonth = format("MMMM");
 
-export const endOfCurrentMonth = () => formatDate(endOfMonth(new Date()))
+export const endOfCurrentMonth = () => formatDate(endOfMonth(new Date()));
 
-export const currentMonthPlusMonths = months => {
-  const date = add(new Date, {months})
+export const currentMonthPlusMonths = (months) => {
+  const date = add(new Date(), { months });
   return {
     displayName: formatMonth(date),
     startDate: formatDate(startOfMonth(date)),
-    endDate: formatDate(endOfMonth(date))
-  }
-}
+    endDate: formatDate(endOfMonth(date)),
+  };
+};

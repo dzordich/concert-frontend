@@ -23,7 +23,7 @@ const Routes = () => {
         headerStyle: {
           backgroundColor: colors.neutral10,
         },
-            headerTintColor: colors.neutral98,
+        headerTintColor: colors.neutral98,
         headerTitleStyle: {
           fontWeight: "bold",
         },
@@ -32,7 +32,11 @@ const Routes = () => {
     >
       <Stack.Screen name={PATHS.HOME} component={Home} />
       <Stack.Screen name={PATHS.PLAYLIST} component={Playlist} />
-      <Stack.Screen name={PATHS.SHOW_DETAILS} component={ShowDetails} options={{headerShown: false}} />
+      <Stack.Screen
+        name={PATHS.SHOW_DETAILS}
+        component={ShowDetails}
+        options={{ headerShown: false }}
+      />
       <Stack.Group
         screenOptions={{ presentation: "modal", headerShown: false }}
       >

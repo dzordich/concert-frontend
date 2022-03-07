@@ -4,9 +4,9 @@ import Svg, { Path } from "react-native-svg";
 const FastForwardIcon = (props) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
-    height="28px"
+    height="36px"
     viewBox="0 0 24 24"
-    width="28px"
+    width="36px"
     fill="#FFFFFF"
     {...props}
   >

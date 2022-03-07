@@ -11,6 +11,8 @@ import ShiftRight from "../../ui/layout/ShiftRight";
 import { navigate } from "../../utils/navigation";
 import PATHS from "../../contants/paths";
 import TrackPositionBar from "./TrackPositionBar";
+import IconButton from "../../ui/inputs/IconButton";
+import FastForwardIcon from "../../ui/icons/FastForwardIcon";
 
 const PlayerContainer = styled(View)`
   width: 100%;
@@ -39,11 +41,17 @@ const PlayerTextContainer = styled(View)`
   margin-left: 16px;
   overflow: hidden;
   max-width: 100%;
+  flex: 1;
 `;
 
 const ArtistName = styled(Text)`
   color: ${colors.neutral80};
 `;
+
+const PlayerButtons = styled(ShiftRight)`
+  flex-direction: row;
+  align-items: center; 
+`
 
 const Player = () => {
   const { bottom } = useSafeAreaInsets();
@@ -51,6 +59,7 @@ const Player = () => {
     currentTrack: { title, artist, artwork, url },
     playing,
     togglePaused,
+      skip,
   } = usePlayer();
 
   return url ? (
@@ -64,12 +73,18 @@ const Player = () => {
         <PlayerInnerContainer>
           <AlbumArt url={artwork} size="medium" />
           <PlayerTextContainer>
-            <H3>{title}</H3>
-            <ArtistName>{artist}</ArtistName>
+            <H3 numberOfLines={1}>{title}</H3>
+            <ArtistName numberOfLines={1}>{artist}</ArtistName>
           </PlayerTextContainer>
-          <ShiftRight>
+          <PlayerButtons>
+            <IconButton
+              Icon={FastForwardIcon}
+              onPress={skip}
+              width="36px"
+              height="36px"
+            />
             <PlayPauseButton isPlaying={playing} onPress={togglePaused} />
-          </ShiftRight>
+          </PlayerButtons>
         </PlayerInnerContainer>
       </PlayerContainer>
     </Pressable>

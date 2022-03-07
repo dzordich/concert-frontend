@@ -7,7 +7,7 @@ const PlayPauseButton = ({ isPlaying, onPress, ...props }) => (
   <IconButton
     onPress={onPress}
     Icon={isPlaying ? PauseIcon : PlayIcon}
-    iconProps={props}
+    {...props}
   />
 );
 

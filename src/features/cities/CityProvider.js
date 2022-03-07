@@ -13,7 +13,12 @@ const CityContext = React.createContext({
 const CityProvider = ({ children }) => {
   const [cities, setCities] = useState([]);
   // const [selectedCity, setSelectedCity] = useState(null);
-  const [selectedCity, setSelectedCity] = useState({name: "Austin", state: "TX", country: "US", id: 1});
+  const [selectedCity, setSelectedCity] = useState({
+    name: "Austin",
+    state: "TX",
+    country: "US",
+    id: 1,
+  });
   // const [selectedCityLoaded, setSelectedCityLoaded] = useState(false);
   const [selectedCityLoaded, setSelectedCityLoaded] = useState(true);
 
@@ -31,9 +36,7 @@ const CityProvider = ({ children }) => {
   // }, []);
 
   return (
-    <CityContext.Provider
-      value={{ cities, selectedCity, selectedCityLoaded }}
-    >
+    <CityContext.Provider value={{ cities, selectedCity, selectedCityLoaded }}>
       {children}
     </CityContext.Provider>
   );
