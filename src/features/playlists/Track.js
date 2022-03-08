@@ -68,6 +68,7 @@ const Track = ({ performer, onPress, currentTrack, trackIndex }) => {
               flexDirection: "row",
               justifyContent: "flex-end",
               alignItems: "center",
+              paddingLeft: 4
             }}
           >
             {hasFreeShow(shows) && <FreeMarker />}

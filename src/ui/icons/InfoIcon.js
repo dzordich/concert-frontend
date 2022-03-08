@@ -1,5 +1,6 @@
 import React from "react";
 import Svg, { Path } from "react-native-svg";
+import {colors} from "../theme";
 
 const InfoIcon = (props) => (
   <Svg
@@ -7,7 +8,7 @@ const InfoIcon = (props) => (
     height="24px"
     viewBox="0 0 24 24"
     width="24px"
-    fill="#FFFFFF"
+    fill={colors.neutral80}
     {...props}
   >
     <Path d="M0 0h24v24H0z" fill="none" />
