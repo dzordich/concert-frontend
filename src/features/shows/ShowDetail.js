@@ -10,7 +10,7 @@ import PaginatedCarousel from "../../ui/layout/PaginatedCarousel";
 import Button from "../../ui/inputs/Button";
 import { displayDate } from "../../utils/dates";
 import BackButton from "../../ui/actions/BackButton";
-import FreeMarker from "../../ui/FreeMarker";
+import {FreeMarker, FestivalMarker} from "../../ui/Marker";
 import ShiftRight from "../../ui/layout/ShiftRight";
 
 const ShowDetailsContainer = styled(View)`
@@ -51,15 +51,14 @@ const VenueName = styled(H2)`
   margin-bottom: 8px;
 `;
 
-const Show = ({ venue, start_date, start_time, free }) => (
+const Show = ({ venue, start_date, start_time, free, festival }) => (
   <ShowContainer>
     <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
       <VenueName>{venue.name}</VenueName>
-      {!!free && (
-        <ShiftRight>
-          <FreeMarker />
+      <ShiftRight>
+          <FestivalMarker festival={festival} />
+          <FreeMarker free={free} />
         </ShiftRight>
-      )}
     </View>
     <Text>
       {displayDate(start_date)}

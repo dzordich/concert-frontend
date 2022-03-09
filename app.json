@@ -20,7 +20,7 @@
         "UIBackgroundModes": ["audio"]
       },
       "bundleIdentifier": "com.brickyardusertest.concertfrontend",
-      "buildNumber": "3"
+      "buildNumber": "5"
     },
     "android": {
       "adaptiveIcon": {

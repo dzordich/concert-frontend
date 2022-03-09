@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import { TouchableHighlight, View } from "react-native";
+import {any } from "ramda";
 import { H3, Text } from "../../ui/Text";
 import { colors } from "../../ui/theme";
 import AlbumArt from "./AlbumArt";
@@ -9,8 +10,7 @@ import IconButton from "../../ui/inputs/IconButton";
 import InfoIcon from "../../ui/icons/InfoIcon";
 import { navigate } from "../../utils/navigation";
 import PATHS from "../../contants/paths";
-import { any } from "ramda";
-import FreeMarker from "../../ui/FreeMarker";
+import {FreeMarker, FestivalMarker} from "../../ui/Marker";
 
 const TrackContainer = styled(View)`
   flex: 1;
@@ -55,7 +55,7 @@ const Track = ({ performer, onPress, currentTrack, trackIndex }) => {
             currentTrack={track && track.id === currentTrack?.id}
             numberOfLines={1}
           >
-            {name}
+            {trackIndex + 1} - {name}
           </TrackTitle>
           <TrackSubText numberOfLines={1}>
             {shows.length > 0 ? shows[0].venue.name : ""}
@@ -71,7 +71,8 @@ const Track = ({ performer, onPress, currentTrack, trackIndex }) => {
               paddingLeft: 4
             }}
           >
-            {hasFreeShow(shows) && <FreeMarker />}
+            <FestivalMarker shows={shows} />
+            <FreeMarker free={hasFreeShow(shows)}/>
             <IconButton
               Icon={InfoIcon}
               onPress={() => navigate(PATHS.SHOW_DETAILS, performer)}
