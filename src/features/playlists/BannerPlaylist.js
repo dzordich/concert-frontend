@@ -7,7 +7,7 @@ import { colors } from "../../ui/theme";
 import { H2, Text } from "../../ui/Text";
 import { usePlayer } from "../player/PlayerState";
 import Track from "./Track";
-import PlayPauseButton from "../player/PlayPauseButton";
+import PlayPauseButton, {CirclePlayButton} from "../player/PlayPauseButton";
 import { getBannerPlaylist } from "../../api/playlists";
 
 const PlaylistContainer = styled(View)`
@@ -101,17 +101,16 @@ const BannerPlaylist = ({ route }) => {
             style={{
               flex: 1,
               flexDirection: "column",
-              alignItems: "flex-end",
+              alignItems: "center",
               justifyContent: "space-between",
             }}
           >
             <PlaylistHeaderText>{title}</PlaylistHeaderText>
-            <PlayPauseButton
-              isPlaying={playing}
+            <CirclePlayButton
               onPress={togglePaused}
               width="52px"
               height="52px"
-            />
+              />
           </View>
         </PlaylistHeader>
         {performers &&

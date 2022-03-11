@@ -1,18 +1,9 @@
 import React from "react";
 import Svg, { Path } from "react-native-svg";
+import {colors} from "../theme";
 
 const RewindIcon = (props) => (
-  <Svg
-    xmlns="http://www.w3.org/2000/svg"
-    height="36px"
-    viewBox="0 0 24 24"
-    width="36px"
-    fill="#FFFFFF"
-    {...props}
-  >
-    <Path d="M0 0h24v24H0z" fill="none" />
-    <Path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z" />
-  </Svg>
+    <Svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 0 24 24" width="36px" fill={colors.neutral98} {...props}><Path d="M11 16.07V7.93c0-.81-.91-1.28-1.58-.82l-5.77 4.07c-.56.4-.56 1.24 0 1.63l5.77 4.07c.67.47 1.58 0 1.58-.81zm1.66-3.25l5.77 4.07c.66.47 1.58-.01 1.58-.82V7.93c0-.81-.91-1.28-1.58-.82l-5.77 4.07c-.57.4-.57 1.24 0 1.64z"/></Svg>
 );
 
 export default RewindIcon;

@@ -11,7 +11,7 @@ import { formatDateWithoutYear } from "../../utils/dates";
 import { usePlayer } from "../player/PlayerState";
 import Track from "./Track";
 import { PlaylistCard } from "../home/PlaylistLink";
-import PlayPauseButton from "../player/PlayPauseButton";
+import PlayPauseButton, {CirclePlayButton} from "../player/PlayPauseButton";
 
 const PlaylistContainer = styled(View)`
   flex: 1;
@@ -99,17 +99,22 @@ const Playlist = ({ route }) => {
       <ScrollView>
         <PlaylistHeader colors={[backgroundColor, colors.neutral5]}>
           <PlaylistHeaderCard {...route.params} />
-          <View>
+          <View style={{
+            flex: 1,
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "space-between",
+            paddingHorizontal: 20
+          }}>
             <PlaylistHeaderText>{displayName}</PlaylistHeaderText>
-            <Text>
+            <Text style={{paddingBottom: 8}}>
               {startDate === endDate
                 ? formatDateWithoutYear(startDate)
                 : `${formatDateWithoutYear(
                     startDate
                   )} - ${formatDateWithoutYear(endDate)}`}
             </Text>
-            <PlayPauseButton
-              isPlaying={playing}
+            <CirclePlayButton
               onPress={togglePaused}
               width="52px"
               height="52px"

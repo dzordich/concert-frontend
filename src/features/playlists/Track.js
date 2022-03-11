@@ -21,7 +21,7 @@ const TrackContainer = styled(View)`
 `;
 
 const TrackTitle = styled(H3)`
-  margin: 2px 0;
+  margin-top: 4px;
   ${(props) => (props.currentTrack ? `color: ${colors.secondary70};` : "")}
 `;
 

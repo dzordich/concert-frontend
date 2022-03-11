@@ -9,7 +9,7 @@ const Marker = styled.Text`
   padding: 4px;
   border: 1px solid ${colors.primary70};
   border-radius: 4px;
-  width: 40px;
+  min-width: 40px;
   text-align: center;
 `;
 

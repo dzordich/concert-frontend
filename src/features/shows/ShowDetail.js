@@ -12,6 +12,7 @@ import { displayDate } from "../../utils/dates";
 import BackButton from "../../ui/actions/BackButton";
 import { FreeMarker, FestivalMarker } from "../../ui/Marker";
 import ShiftRight from "../../ui/layout/ShiftRight";
+import {formatTime} from "../../utils/time";
 
 const ShowDetailsContainer = styled(View)`
   flex: 1;
@@ -62,7 +63,7 @@ const Show = ({ venue, start_date, start_time, free, festival }) => (
     </View>
     <Text>
       {displayDate(start_date)}
-      {start_time ? `  •  ${start_time}` : ""}
+      {start_time ? `  •  ${formatTime(start_time)}` : ""}
     </Text>
     <VenueLink
       onPress={() => venue.website && Linking.openURL(venue.website)}
