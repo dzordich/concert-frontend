@@ -12,7 +12,7 @@ import { displayDate } from "../../utils/dates";
 import BackButton from "../../ui/actions/BackButton";
 import { FreeMarker, FestivalMarker } from "../../ui/Marker";
 import ShiftRight from "../../ui/layout/ShiftRight";
-import {formatTime} from "../../utils/time";
+import { formatTime } from "../../utils/time";
 
 const ShowDetailsContainer = styled(View)`
   flex: 1;
@@ -29,7 +29,7 @@ const Gradient = styled(LinearGradient)`
   flex: 1;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 8px;
+  padding: 16px;
 `;
 
 const ShowContainer = styled(View)`
@@ -96,7 +96,9 @@ const ShowDetails = ({ route, navigation }) => {
 
   return (
     <ShowDetailsContainer>
-      <BackButton navigation={navigation} />
+      <BackButton
+        navigation={navigation}
+      />
       <ScrollView>
         <ShowHeader>
           <AlbumArtBackground url={top_track.album_art_url}>

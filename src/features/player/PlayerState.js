@@ -79,7 +79,6 @@ const PlayerState = ({ children }) => {
 
   useTrackPlayerEvents([Event.PlaybackTrackChanged], async (event) => {
     if (event.type === Event.PlaybackTrackChanged && event.nextTrack != null) {
-      console.log("track changed");
       const track = await TrackPlayer.getTrack(event.nextTrack);
       setCurrentTrack(track);
     }

@@ -4,10 +4,10 @@ import { View, ScrollView, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { compose, prop } from "ramda";
 import { colors } from "../../ui/theme";
-import { H2, Text } from "../../ui/Text";
+import { H2 } from "../../ui/Text";
 import { usePlayer } from "../player/PlayerState";
 import Track from "./Track";
-import PlayPauseButton, {CirclePlayButton} from "../player/PlayPauseButton";
+import { CirclePlayButton } from "../player/PlayPauseButton";
 import { getBannerPlaylist } from "../../api/playlists";
 
 const PlaylistContainer = styled(View)`
@@ -110,7 +110,7 @@ const BannerPlaylist = ({ route }) => {
               onPress={togglePaused}
               width="52px"
               height="52px"
-              />
+            />
           </View>
         </PlaylistHeader>
         {performers &&

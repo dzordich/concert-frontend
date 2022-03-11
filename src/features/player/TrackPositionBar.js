@@ -14,7 +14,6 @@ const TrackPositionBar = (props) => {
     await TrackPlayer.seekTo(roundTo2Decimals(value * duration));
     await TrackPlayer.play();
   };
-
   return (
     <Slider
       value={position / duration}

@@ -15,9 +15,5 @@ const PlayPauseButton = ({ isPlaying, onPress, ...props }) => (
 export default PlayPauseButton;
 
 export const CirclePlayButton = ({ onPress, ...props }) => (
-  <IconButton
-    onPress={onPress}
-    Icon={CirclePlayIcon}
-    {...props}
-  />
+  <IconButton onPress={onPress} Icon={CirclePlayIcon} {...props} />
 );

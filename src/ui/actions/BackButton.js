@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import IconButton from "../inputs/IconButton";
 import BackIcon from "../icons/BackIcon";
@@ -16,9 +17,19 @@ const BackButton = ({ style, navigation }) => (
     <IconButton
       Icon={BackIcon}
       onPress={() => navigation.goBack()}
-      iconProps={{ style }}
+      iconStyle={style}
     />
   </BackButtonContainer>
 );
 
 export default styled(BackButton)``;
+
+export const RelativeBackButton = ({ style, navigation, containerStyle }) => (
+  <View style={containerStyle}>
+    <IconButton
+      Icon={BackIcon}
+      onPress={() => navigation.goBack()}
+      style={style}
+    />
+  </View>
+);

@@ -11,7 +11,7 @@ import { formatDateWithoutYear } from "../../utils/dates";
 import { usePlayer } from "../player/PlayerState";
 import Track from "./Track";
 import { PlaylistCard } from "../home/PlaylistLink";
-import PlayPauseButton, {CirclePlayButton} from "../player/PlayPauseButton";
+import { CirclePlayButton } from "../player/PlayPauseButton";
 
 const PlaylistContainer = styled(View)`
   flex: 1;
@@ -46,22 +46,23 @@ const addPerformerToTopTrack = (performer) => ({
   ...performer,
   top_track: {
     ...performer.top_track,
-    artistName: performer.name,
+    artistInfo: performer,
   },
 });
 
 const songToTrackObject = ({
   preview_url,
   name,
-  artistName,
+  artistInfo,
   album_art_url,
   id,
 }) => ({
   id,
   url: preview_url,
   title: name,
-  artist: artistName,
+  artist: artistInfo.name,
   artwork: album_art_url,
+  artistInfo,
 });
 
 const Playlist = ({ route }) => {
@@ -99,15 +100,17 @@ const Playlist = ({ route }) => {
       <ScrollView>
         <PlaylistHeader colors={[backgroundColor, colors.neutral5]}>
           <PlaylistHeaderCard {...route.params} />
-          <View style={{
-            flex: 1,
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingHorizontal: 20
-          }}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "space-between",
+              paddingHorizontal: 20,
+            }}
+          >
             <PlaylistHeaderText>{displayName}</PlaylistHeaderText>
-            <Text style={{paddingBottom: 8}}>
+            <Text style={{ paddingBottom: 8 }}>
               {startDate === endDate
                 ? formatDateWithoutYear(startDate)
                 : `${formatDateWithoutYear(

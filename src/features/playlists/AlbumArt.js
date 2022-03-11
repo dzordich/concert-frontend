@@ -6,6 +6,7 @@ import { getWindowWidth } from "../../utils/dimensions";
 const sizes = {
   small: 48,
   medium: 60,
+  large: getWindowWidth() - 48,
   full: getWindowWidth(),
 };
 
