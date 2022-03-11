@@ -96,7 +96,7 @@ const BannerPlaylist = ({ route }) => {
     <PlaylistContainer>
       <ScrollView>
         <PlaylistHeader colors={[colors.primary30, colors.neutral5]}>
-          <PlaylistHeaderCard source={{uri: background}} />
+          <PlaylistHeaderCard source={{ uri: background }} />
           <View
             style={{
               flex: 1,

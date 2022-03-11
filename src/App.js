@@ -19,12 +19,12 @@ export default function App() {
             <StatusBar style="light" />
             <CityProvider>
               <BannerPlaylistProvider>
-              <PlayerState>
-                <PlayerSafeArea>
-                  <Routes />
-                </PlayerSafeArea>
-                <Player />
-              </PlayerState>
+                <PlayerState>
+                  <PlayerSafeArea>
+                    <Routes />
+                  </PlayerSafeArea>
+                  <Player />
+                </PlayerState>
               </BannerPlaylistProvider>
             </CityProvider>
           </ViewPort>

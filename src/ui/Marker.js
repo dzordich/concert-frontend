@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import { colors } from "./theme";
-import {compose, find} from "ramda";
+import { compose, find } from "ramda";
 
 const Marker = styled.Text`
   color: ${colors.primary70};
@@ -13,16 +13,24 @@ const Marker = styled.Text`
   text-align: center;
 `;
 
-export const FreeMarker = ({free}) => free ? <Marker>FREE</Marker> : null;
+export const FreeMarker = ({ free }) => (free ? <Marker>FREE</Marker> : null);
 
-const getFestival = compose(show => show && show.festival?.name, find(show => !!show.festival))
+const getFestival = compose(
+  (show) => show && show.festival?.name,
+  find((show) => !!show.festival)
+);
 
-export const FestivalMarker = styled(({style, shows, festival, long=false}) => {
+export const FestivalMarker = styled(
+  ({ style, shows, festival, long = false }) => {
     const festivalName = shows ? getFestival(shows) : festival?.name;
-    return festivalName ? <Marker style={style}>
-        {festivalName}{long ? " Wristband": ""}
-    </Marker> : null
-        })`
+    return festivalName ? (
+      <Marker style={style}>
+        {festivalName}
+        {long ? " Wristband" : ""}
+      </Marker>
+    ) : null;
+  }
+)`
   color: ${colors.yellow50};
   border-color: ${colors.yellow50};
 `;

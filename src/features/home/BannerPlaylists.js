@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components/native";
-import {ImageBackground, Pressable} from "react-native";
-import {LinearGradient} from "expo-linear-gradient";
+import { ImageBackground, Pressable } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import PaginatedCarousel from "../../ui/layout/PaginatedCarousel";
 import { H2 } from "../../ui/Text";
 import { getWindowWidth } from "../../utils/dimensions";
-import {navigate} from "../../utils/navigation";
+import { navigate } from "../../utils/navigation";
 import PATHS from "../../contants/paths";
-import {useBannerPlaylists} from "../playlists/BannerPlaylistProvider";
-import {colors} from "../../ui/theme";
+import { useBannerPlaylists } from "../playlists/BannerPlaylistProvider";
+import { colors } from "../../ui/theme";
 
 const Container = styled.View`
   margin-horizontal: 12px;
@@ -20,16 +20,16 @@ const Gradient = styled(LinearGradient)`
   flex: 1;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const BannerPlaylist = styled(({ style, playlist }) => (
-    <Pressable onPress={() => navigate(PATHS.BANNER_PLAYLIST, playlist)}>
-  <ImageBackground style={style} source={{ uri: playlist.background }}>
-      <Gradient colors={["transparent", colors.neutral5]} >
-    <H2>{playlist.title}</H2>
+  <Pressable onPress={() => navigate(PATHS.BANNER_PLAYLIST, playlist)}>
+    <ImageBackground style={style} source={{ uri: playlist.background }}>
+      <Gradient colors={["transparent", colors.neutral5]}>
+        <H2>{playlist.title}</H2>
       </Gradient>
-  </ImageBackground>
-    </Pressable>
+    </ImageBackground>
+  </Pressable>
 ))`
   width: ${getWindowWidth() - 24}px;
   height: 150px;
@@ -38,7 +38,7 @@ const BannerPlaylist = styled(({ style, playlist }) => (
 `;
 
 const BannerPlaylists = () => {
-  const {banners} = useBannerPlaylists()
+  const { banners } = useBannerPlaylists();
 
   return (
     <Container>
@@ -52,4 +52,4 @@ const BannerPlaylists = () => {
   );
 };
 
-export default BannerPlaylists
+export default BannerPlaylists;

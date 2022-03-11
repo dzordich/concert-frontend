@@ -6,7 +6,7 @@ import PlaylistLink from "./PlaylistLink";
 import { colors } from "../../ui/theme";
 import { Text } from "../../ui/Text";
 import BannerPlaylists from "./BannerPlaylists";
-import {useBannerPlaylists} from "../playlists/BannerPlaylistProvider";
+import { useBannerPlaylists } from "../playlists/BannerPlaylistProvider";
 
 const Container = styled(View)`
   height: 100%;
@@ -54,45 +54,47 @@ const BannerImage = styled.View`
 `;
 
 const Home = ({ navigation }) => {
-  const {bannersLoaded} = useBannerPlaylists()
+  const { bannersLoaded } = useBannerPlaylists();
   return (
     <Container>
-      {bannersLoaded ? <Playlists>
-              <View style={{ paddingBottom: 36 }}>
-                <BannerPlaylists />
-                <ListHeader>
-                  <ListHeaderText>Upcoming Concerts</ListHeaderText>
-                  <HorizontalLine />
-                </ListHeader>
-                <PlaylistRow horizontal={true}>
-                  {playlists.days.map((playlist, idx) => (
-                    <PlaylistLink
-                      key={idx}
-                      playlist={playlist}
-                      navigation={navigation}
-                    />
-                  ))}
-                </PlaylistRow>
-                <PlaylistRow horizontal={true}>
-                  {playlists.weeks.map((playlist, idx) => (
-                    <PlaylistLink
-                      key={idx}
-                      playlist={playlist}
-                      navigation={navigation}
-                    />
-                  ))}
-                </PlaylistRow>
-                <PlaylistRow horizontal={true}>
-                  {playlists.months.map((playlist, idx) => (
-                    <PlaylistLink
-                      key={idx}
-                      playlist={playlist}
-                      navigation={navigation}
-                    />
-                  ))}
-                </PlaylistRow>
-              </View>
-            </Playlists> : null}
+      {bannersLoaded ? (
+        <Playlists>
+          <View style={{ paddingBottom: 36 }}>
+            <BannerPlaylists />
+            <ListHeader>
+              <ListHeaderText>Upcoming Concerts</ListHeaderText>
+              <HorizontalLine />
+            </ListHeader>
+            <PlaylistRow horizontal={true}>
+              {playlists.days.map((playlist, idx) => (
+                <PlaylistLink
+                  key={idx}
+                  playlist={playlist}
+                  navigation={navigation}
+                />
+              ))}
+            </PlaylistRow>
+            <PlaylistRow horizontal={true}>
+              {playlists.weeks.map((playlist, idx) => (
+                <PlaylistLink
+                  key={idx}
+                  playlist={playlist}
+                  navigation={navigation}
+                />
+              ))}
+            </PlaylistRow>
+            <PlaylistRow horizontal={true}>
+              {playlists.months.map((playlist, idx) => (
+                <PlaylistLink
+                  key={idx}
+                  playlist={playlist}
+                  navigation={navigation}
+                />
+              ))}
+            </PlaylistRow>
+          </View>
+        </Playlists>
+      ) : null}
     </Container>
   );
 };

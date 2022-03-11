@@ -50,8 +50,8 @@ const ArtistName = styled(Text)`
 
 const PlayerButtons = styled(ShiftRight)`
   flex-direction: row;
-  align-items: center; 
-`
+  align-items: center;
+`;
 
 const Player = () => {
   const { bottom } = useSafeAreaInsets();
@@ -59,7 +59,7 @@ const Player = () => {
     currentTrack: { title, artist, artwork, url },
     playing,
     togglePaused,
-      skip,
+    skip,
   } = usePlayer();
 
   return url ? (

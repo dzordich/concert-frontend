@@ -23,4 +23,4 @@ const BannerPlaylistProvider = ({ children }) => {
   );
 };
 
-export default BannerPlaylistProvider
+export default BannerPlaylistProvider;

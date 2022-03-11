@@ -10,7 +10,7 @@ import PaginatedCarousel from "../../ui/layout/PaginatedCarousel";
 import Button from "../../ui/inputs/Button";
 import { displayDate } from "../../utils/dates";
 import BackButton from "../../ui/actions/BackButton";
-import {FreeMarker, FestivalMarker} from "../../ui/Marker";
+import { FreeMarker, FestivalMarker } from "../../ui/Marker";
 import ShiftRight from "../../ui/layout/ShiftRight";
 
 const ShowDetailsContainer = styled(View)`
@@ -56,9 +56,9 @@ const Show = ({ venue, start_date, start_time, free, festival }) => (
     <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
       <VenueName>{venue.name}</VenueName>
       <ShiftRight>
-          <FestivalMarker festival={festival} long />
-          <FreeMarker free={free} />
-        </ShiftRight>
+        <FestivalMarker festival={festival} long />
+        <FreeMarker free={free} />
+      </ShiftRight>
     </View>
     <Text>
       {displayDate(start_date)}
