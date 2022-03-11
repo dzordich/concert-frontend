@@ -5,6 +5,8 @@ import { playlists } from "../../contants/playlists";
 import PlaylistLink from "./PlaylistLink";
 import { colors } from "../../ui/theme";
 import { Text } from "../../ui/Text";
+import BannerPlaylists from "./BannerPlaylists";
+import {useBannerPlaylists} from "../playlists/BannerPlaylistProvider";
 
 const Container = styled(View)`
   height: 100%;
@@ -52,13 +54,12 @@ const BannerImage = styled.View`
 `;
 
 const Home = ({ navigation }) => {
+  const {bannersLoaded} = useBannerPlaylists()
   return (
     <Container>
-            <Playlists>
+      {bannersLoaded ? <Playlists>
               <View style={{ paddingBottom: 36 }}>
-                <BannerImage>
-                  <Text>Banner image</Text>
-                </BannerImage>
+                <BannerPlaylists />
                 <ListHeader>
                   <ListHeaderText>Upcoming Concerts</ListHeaderText>
                   <HorizontalLine />
@@ -91,7 +92,7 @@ const Home = ({ navigation }) => {
                   ))}
                 </PlaylistRow>
               </View>
-            </Playlists>
+            </Playlists> : null}
     </Container>
   );
 };

@@ -56,7 +56,7 @@ const Show = ({ venue, start_date, start_time, free, festival }) => (
     <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
       <VenueName>{venue.name}</VenueName>
       <ShiftRight>
-          <FestivalMarker festival={festival} />
+          <FestivalMarker festival={festival} long />
           <FreeMarker free={free} />
         </ShiftRight>
     </View>

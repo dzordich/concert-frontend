@@ -55,11 +55,11 @@ const Track = ({ performer, onPress, currentTrack, trackIndex }) => {
             currentTrack={track && track.id === currentTrack?.id}
             numberOfLines={1}
           >
-            {trackIndex + 1} - {name}
+            {name}
+            <TrackSubText numberOfLines={1}>
+              {shows.length > 0 ? ` — ${shows[0].venue.name}` : ""}
+            </TrackSubText>
           </TrackTitle>
-          <TrackSubText numberOfLines={1}>
-            {shows.length > 0 ? shows[0].venue.name : ""}
-          </TrackSubText>
         </TrackText>
         <ShiftRight>
           <View

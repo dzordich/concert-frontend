@@ -4,7 +4,7 @@ import { Image, View, ImageBackground } from "react-native";
 import { getWindowWidth } from "../../utils/dimensions";
 
 const sizes = {
-  small: 52,
+  small: 48,
   medium: 60,
   full: getWindowWidth(),
 };

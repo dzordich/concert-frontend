@@ -73,17 +73,17 @@ const Player = () => {
         <PlayerInnerContainer>
           <AlbumArt url={artwork} size="medium" />
           <PlayerTextContainer>
-            <H3 numberOfLines={1}>{title}</H3>
-            <ArtistName numberOfLines={1}>{artist}</ArtistName>
+            <ArtistName numberOfLines={1}>{title}</ArtistName>
+            <H3 numberOfLines={1}>{artist}</H3>
           </PlayerTextContainer>
           <PlayerButtons>
+            <PlayPauseButton isPlaying={playing} onPress={togglePaused} />
             <IconButton
               Icon={FastForwardIcon}
               onPress={skip}
               width="36px"
               height="36px"
             />
-            <PlayPauseButton isPlaying={playing} onPress={togglePaused} />
           </PlayerButtons>
         </PlayerInnerContainer>
       </PlayerContainer>

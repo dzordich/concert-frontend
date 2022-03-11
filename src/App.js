@@ -8,6 +8,7 @@ import PlayerState from "./features/player/PlayerState";
 import Player, { PlayerSafeArea } from "./features/player/Player";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { navigationRef } from "./utils/navigation";
+import BannerPlaylistProvider from "./features/playlists/BannerPlaylistProvider";
 
 export default function App() {
   return (
@@ -17,12 +18,14 @@ export default function App() {
           <ViewPort>
             <StatusBar style="light" />
             <CityProvider>
+              <BannerPlaylistProvider>
               <PlayerState>
                 <PlayerSafeArea>
                   <Routes />
                 </PlayerSafeArea>
                 <Player />
               </PlayerState>
+              </BannerPlaylistProvider>
             </CityProvider>
           </ViewPort>
         </Layout>
