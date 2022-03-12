@@ -22,7 +22,7 @@ const Routes = () => {
           ? `${selectedCity.name}, ${selectedCity.state}`.toUpperCase()
           : "",
         headerStyle: {
-          backgroundColor: colors.neutral10,
+          backgroundColor: colors.neutral5,
         },
         headerTintColor: colors.neutral98,
         headerTitleStyle: {
