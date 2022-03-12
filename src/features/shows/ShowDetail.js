@@ -37,7 +37,8 @@ const ShowContainer = styled(View)`
 `;
 
 const VenueLink = styled(Button)`
-  background-color: ${colors.primary40};
+  color: ${colors.primary60};
+  border: 1px solid ${colors.primary60};
   margin: 24px 0;
 `;
 
@@ -69,7 +70,7 @@ const Show = ({ venue, start_date, start_time, free, festival }) => (
       onPress={() => venue.website && Linking.openURL(venue.website)}
       activeOpacity={0.6}
     >
-      <Text>Purchase Tickets</Text>
+      <Text style={{color: colors.primary60}}>Purchase Tickets</Text>
     </VenueLink>
 
     <StyledMap

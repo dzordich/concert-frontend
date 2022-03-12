@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
-import { View, ScrollView } from "react-native";
+import {View, ScrollView, Platform} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { compose, prop } from "ramda";
 import { useCities } from "../cities/CityProvider";
@@ -12,6 +12,7 @@ import { usePlayer } from "../player/PlayerState";
 import Track from "./Track";
 import { PlaylistCard } from "../home/PlaylistLink";
 import { CirclePlayButton } from "../player/PlayPauseButton";
+import ScrollBounceBackground from "../../ui/layout/ScrollBounceBackground";
 
 const PlaylistContainer = styled(View)`
   flex: 1;
@@ -65,7 +66,7 @@ const songToTrackObject = ({
   artistInfo,
 });
 
-const Playlist = ({ route }) => {
+const Playlist = ({ route, navigation }) => {
   const [performers, setPerformers] = useState([]);
   const { selectedCity } = useCities();
   const {
@@ -95,9 +96,12 @@ const Playlist = ({ route }) => {
     }
   };
 
+  useMemo(() => navigation.setOptions({headerStyle: { backgroundColor, borderWidth: 0 }}), [])
+
   return (
     <PlaylistContainer>
       <ScrollView>
+        <ScrollBounceBackground color={backgroundColor}/>
         <PlaylistHeader colors={[backgroundColor, colors.neutral5]}>
           <PlaylistHeaderCard {...route.params} />
           <View

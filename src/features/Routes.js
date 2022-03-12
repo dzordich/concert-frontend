@@ -24,6 +24,7 @@ const Routes = () => {
         headerStyle: {
           backgroundColor: colors.neutral5,
         },
+          headerShadowVisible: false,
         headerTintColor: colors.neutral98,
         headerTitleStyle: {
           fontWeight: "bold",
