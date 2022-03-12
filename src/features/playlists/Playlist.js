@@ -112,7 +112,7 @@ const Playlist = ({ route, navigation }) => {
             }}
           >
             <Text style={{ paddingBottom: 8, color: colors.neutral90 }}>
-              Discover all the artists playing in {`${selectedCity.name}, ${selectedCity.state}`} {descriptionName ? descriptionName : displayName.toLowerCase()}.
+              Discover artists playing in {selectedCity.name} {descriptionName}.
             </Text>
           </View>
         </PlaylistHeader>

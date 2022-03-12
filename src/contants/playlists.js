@@ -18,7 +18,8 @@ const todayFormatted = formatDate(today);
 export const playlists = {
   days: [
     {
-      displayName: "Tonight",
+      displayName: "Today",
+      descriptionName: "today",
       subHeader: formatTodayPlusDaysShort(0),
       startDate: todayFormatted,
       endDate: todayFormatted,
@@ -27,6 +28,7 @@ export const playlists = {
     },
     {
       displayName: "Tomorrow",
+      descriptionName: "tomorrow",
       subHeader: formatTodayPlusDaysShort(1),
       startDate: formatTodayPlusDays(1),
       endDate: formatTodayPlusDays(1),
@@ -35,6 +37,7 @@ export const playlists = {
     },
     {
       displayName: weekdayAtTodayPlusDays(2),
+      descriptionName: `on ${weekdayAtTodayPlusDays(2)}`,
       subHeader: formatTodayPlusDaysShort(2),
       startDate: formatTodayPlusDays(2),
       endDate: formatTodayPlusDays(2),
@@ -43,6 +46,7 @@ export const playlists = {
     },
     {
       displayName: weekdayAtTodayPlusDays(3),
+      descriptionName: `on ${weekdayAtTodayPlusDays(3)}`,
       subHeader: formatTodayPlusDaysShort(3),
       startDate: formatTodayPlusDays(3),
       endDate: formatTodayPlusDays(3),
@@ -51,6 +55,7 @@ export const playlists = {
     },
     {
       displayName: weekdayAtTodayPlusDays(4),
+      descriptionName: `on ${weekdayAtTodayPlusDays(4)}`,
       subHeader: formatTodayPlusDaysShort(4),
       startDate: formatTodayPlusDays(4),
       endDate: formatTodayPlusDays(4),
@@ -59,6 +64,7 @@ export const playlists = {
     },
     {
       displayName: weekdayAtTodayPlusDays(5),
+      descriptionName: `on ${weekdayAtTodayPlusDays(5)}`,
       subHeader: formatTodayPlusDaysShort(5),
       startDate: formatTodayPlusDays(5),
       endDate: formatTodayPlusDays(5),
@@ -67,9 +73,66 @@ export const playlists = {
     },
     {
       displayName: weekdayAtTodayPlusDays(6),
+      descriptionName: `on ${weekdayAtTodayPlusDays(6)}`,
       subHeader: formatTodayPlusDaysShort(6),
       startDate: formatTodayPlusDays(6),
       endDate: formatTodayPlusDays(6),
+      background: require("../../assets/bg-day-7.png"),
+      backgroundColor: colors.bgDay,
+    },
+    {
+      displayName: weekdayAtTodayPlusDays(7),
+      subHeader: formatTodayPlusDaysShort(7),
+      startDate: formatTodayPlusDays(7),
+      endDate: formatTodayPlusDays(7),
+      background: require("../../assets/bg-day-3.png"),
+      backgroundColor: colors.bgDay,
+    },
+    {
+      displayName: weekdayAtTodayPlusDays(8),
+      subHeader: formatTodayPlusDaysShort(8),
+      startDate: formatTodayPlusDays(8),
+      endDate: formatTodayPlusDays(8),
+      background: require("../../assets/bg-day-4.png"),
+      backgroundColor: colors.bgDay,
+    },
+    {
+      displayName: weekdayAtTodayPlusDays(9),
+      subHeader: formatTodayPlusDaysShort(9),
+      startDate: formatTodayPlusDays(9),
+      endDate: formatTodayPlusDays(9),
+      background: require("../../assets/bg-day-5.png"),
+      backgroundColor: colors.bgDay,
+    },
+    {
+      displayName: weekdayAtTodayPlusDays(10),
+      subHeader: formatTodayPlusDaysShort(10),
+      startDate: formatTodayPlusDays(10),
+      endDate: formatTodayPlusDays(10),
+      background: require("../../assets/bg-day-6.png"),
+      backgroundColor: colors.bgDay,
+    },
+    {
+      displayName: weekdayAtTodayPlusDays(11),
+      subHeader: formatTodayPlusDaysShort(11),
+      startDate: formatTodayPlusDays(11),
+      endDate: formatTodayPlusDays(11),
+      background: require("../../assets/bg-day-7.png"),
+      backgroundColor: colors.bgDay,
+    },
+    {
+      displayName: weekdayAtTodayPlusDays(12),
+      subHeader: formatTodayPlusDaysShort(12),
+      startDate: formatTodayPlusDays(12),
+      endDate: formatTodayPlusDays(12),
+      background: require("../../assets/bg-day-6.png"),
+      backgroundColor: colors.bgDay,
+    },
+    {
+      displayName: weekdayAtTodayPlusDays(13),
+      subHeader: formatTodayPlusDaysShort(13),
+      startDate: formatTodayPlusDays(13),
+      endDate: formatTodayPlusDays(13),
       background: require("../../assets/bg-day-7.png"),
       backgroundColor: colors.bgDay,
     },
@@ -77,22 +140,27 @@ export const playlists = {
   weeks: [
     {
       displayName: "This Weekend",
+      descriptionName: "this weekend",
       subHeader: "Top 40",
       background: require("../../assets/bg-week-1.png"),
       backgroundColor: colors.bgWeek,
+      limit: 40,
       ...currentWeekendFormatted(),
     },
     {
       displayName: "Next Weekend",
+      descriptionName: "next weekend",
       subHeader: "Top 40",
       background: require("../../assets/bg-week-2.png"),
       backgroundColor: colors.bgWeek,
+      limit: 40,
       ...nextWeekendFormatted(),
     },
   ],
   months: [
     {
       displayName: formatMonth(new Date()),
+      descriptionName: 'this month',
       subHeader: "Top 100",
       startDate: todayFormatted,
       endDate: endOfCurrentMonth(),
