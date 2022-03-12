@@ -22,7 +22,7 @@ const ListHeader = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 12px;
+  margin: 24px 12px;
   overflow: hidden;
 `;
 
@@ -40,17 +40,6 @@ const HorizontalLine = styled.View`
 
 const PlaylistRow = styled.ScrollView`
   margin-bottom: 12px;
-`;
-
-const BannerImage = styled.View`
-  margin: 0 12px 12px;
-  border-radius: 4px;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  background-color: ${colors.neutral50};
-  height: 150px;
-  overflow: hidden;
 `;
 
 const Home = ({ navigation }) => {

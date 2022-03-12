@@ -46,6 +46,7 @@ export const colors = {
   neutral20: "#3B3B3B",
   neutral10: "#222222",
   neutral5: "#0f1418",
+  neutralOpaque5: "rgba(15,20,24,0.5)",
 
   // Cyan
   // secondary98: "#E0FCFF",

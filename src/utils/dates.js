@@ -20,6 +20,8 @@ export const formatDate = format("yyyy-MM-dd");
 
 export const formatShortDate = format("M.d");
 
+export const parseAndFormatShortDate = compose(formatShortDate, parseISO)
+
 export const addDaysToCurrentDate = (days) => add(new Date(), { days });
 
 export const formatTodayPlusDays = compose(formatDate, addDaysToCurrentDate);
@@ -80,8 +82,10 @@ export const endOfCurrentMonth = () => formatDate(endOfMonth(new Date()));
 
 export const currentMonthPlusMonths = (months) => {
   const date = add(new Date(), { months });
+  const formatted = formatMonth(date)
   return {
-    displayName: formatMonth(date),
+    displayName: formatted,
+    descriptionName: `this ${formatted}`,
     startDate: formatDate(startOfMonth(date)),
     endDate: formatDate(endOfMonth(date)),
   };

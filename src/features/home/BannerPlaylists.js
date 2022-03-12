@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components/native";
-import { ImageBackground, Pressable } from "react-native";
+import { ImageBackground, Pressable, Linking } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import PaginatedCarousel from "../../ui/layout/PaginatedCarousel";
-import { H2 } from "../../ui/Text";
+import {Display, Text} from "../../ui/Text";
 import { getWindowWidth } from "../../utils/dimensions";
 import { navigate } from "../../utils/navigation";
 import PATHS from "../../contants/paths";
 import { useBannerPlaylists } from "../playlists/BannerPlaylistProvider";
 import { colors } from "../../ui/theme";
+import {parseAndFormatShortDate} from "../../utils/dates";
 
 const Container = styled.View`
   margin-horizontal: 12px;
@@ -23,10 +24,13 @@ const Gradient = styled(LinearGradient)`
 `;
 
 const BannerPlaylist = styled(({ style, playlist }) => (
-  <Pressable onPress={() => navigate(PATHS.BANNER_PLAYLIST, playlist)}>
+  <Pressable onPress={() =>
+      playlist.web_link ? Linking.openURL(playlist.web_link) : navigate(PATHS.BANNER_PLAYLIST, playlist)
+  }>
     <ImageBackground style={style} source={{ uri: playlist.background }}>
-      <Gradient colors={["transparent", colors.neutral5]}>
-        <H2>{playlist.title}</H2>
+      <Gradient colors={["transparent", "transparent", colors.neutralOpaque5]}>
+          {playlist.start_date && playlist.end_date && <Text>{parseAndFormatShortDate(playlist.start_date)} - {parseAndFormatShortDate(playlist.end_date)}</Text>}
+        <Display style={{fontSize: 28}}>{playlist.title}</Display>
       </Gradient>
     </ImageBackground>
   </Pressable>

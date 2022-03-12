@@ -1,17 +1,15 @@
 import React, {useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
-import {View, ScrollView, Platform} from "react-native";
+import {View, ScrollView} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { compose, prop } from "ramda";
 import { useCities } from "../cities/CityProvider";
 import { listShows } from "../../api/shows";
 import { colors } from "../../ui/theme";
 import { H2, Text } from "../../ui/Text";
-import { formatDateWithoutYear } from "../../utils/dates";
 import { usePlayer } from "../player/PlayerState";
 import Track from "./Track";
 import { PlaylistCard } from "../home/PlaylistLink";
-import { CirclePlayButton } from "../player/PlayPauseButton";
 import ScrollBounceBackground from "../../ui/layout/ScrollBounceBackground";
 
 const PlaylistContainer = styled(View)`
@@ -76,13 +74,7 @@ const Playlist = ({ route, navigation }) => {
     playing,
     togglePaused,
   } = usePlayer();
-  const { displayName, startDate, endDate, backgroundColor } = route.params;
-
-  useEffect(() => {
-    listShows({ city: selectedCity, startDate, endDate }).then((response) =>
-      setPerformers(response.map(addPerformerToTopTrack))
-    );
-  }, [selectedCity, startDate, endDate]);
+  const { displayName, startDate, endDate, backgroundColor, limit, descriptionName } = route.params;
 
   const onSongPress = async (song, index) => {
     if (song.preview_url) {
@@ -96,7 +88,13 @@ const Playlist = ({ route, navigation }) => {
     }
   };
 
-  useMemo(() => navigation.setOptions({headerStyle: { backgroundColor, borderWidth: 0 }}), [])
+  useEffect(() => {
+    listShows({ city: selectedCity, startDate, endDate, limit }).then((response) =>
+        setPerformers(response.map(addPerformerToTopTrack))
+    );
+  }, [selectedCity, startDate, endDate]);
+
+  useEffect(() => navigation.setOptions({headerStyle: { backgroundColor, borderWidth: 0 }}), [])
 
   return (
     <PlaylistContainer>
@@ -109,23 +107,13 @@ const Playlist = ({ route, navigation }) => {
               flex: 1,
               flexDirection: "column",
               alignItems: "center",
-              justifyContent: "space-between",
+              justifyContent: "flex-start",
               paddingHorizontal: 20,
             }}
           >
-            <PlaylistHeaderText>{displayName}</PlaylistHeaderText>
-            <Text style={{ paddingBottom: 8 }}>
-              {startDate === endDate
-                ? formatDateWithoutYear(startDate)
-                : `${formatDateWithoutYear(
-                    startDate
-                  )} - ${formatDateWithoutYear(endDate)}`}
+            <Text style={{ paddingBottom: 8, color: colors.neutral90 }}>
+              Discover all the artists playing in {`${selectedCity.name}, ${selectedCity.state}`} {descriptionName ? descriptionName : displayName.toLowerCase()}.
             </Text>
-            <CirclePlayButton
-              onPress={togglePaused}
-              width="52px"
-              height="52px"
-            />
           </View>
         </PlaylistHeader>
         {performers &&

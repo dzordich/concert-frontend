@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
 import { View, ScrollView, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { compose, prop } from "ramda";
 import { colors } from "../../ui/theme";
-import { H2 } from "../../ui/Text";
+import {H2, Text} from "../../ui/Text";
 import { usePlayer } from "../player/PlayerState";
 import Track from "./Track";
-import { CirclePlayButton } from "../player/PlayPauseButton";
 import { getBannerPlaylist } from "../../api/playlists";
+import ScrollBounceBackground from "../../ui/layout/ScrollBounceBackground";
+import {parseAndFormatShortDate} from "../../utils/dates";
 
 const PlaylistContainer = styled(View)`
   flex: 1;
@@ -63,7 +64,7 @@ const songToTrackObject = ({
   artwork: album_art_url,
 });
 
-const BannerPlaylist = ({ route }) => {
+const BannerPlaylist = ({ route, navigation }) => {
   const [performers, setPerformers] = useState([]);
   const {
     play,
@@ -72,13 +73,7 @@ const BannerPlaylist = ({ route }) => {
     playing,
     togglePaused,
   } = usePlayer();
-  const { id, title, background } = route.params;
-
-  useEffect(() => {
-    getBannerPlaylist(id).then((response) =>
-      setPerformers(response.artists.map(addPerformerToTopTrack))
-    );
-  }, [id]);
+  const { id, title, background, start_date, end_date } = route.params;
 
   const onSongPress = async (song, index) => {
     if (song.preview_url) {
@@ -92,10 +87,19 @@ const BannerPlaylist = ({ route }) => {
     }
   };
 
+  useEffect(() => {
+    getBannerPlaylist(id).then((response) =>
+        setPerformers(response.artists.map(addPerformerToTopTrack))
+    );
+  }, [id]);
+
+  useMemo(() => navigation.setOptions({headerStyle: { backgroundColor: colors.primary40, borderWidth: 0 }}), [])
+
   return (
     <PlaylistContainer>
       <ScrollView>
-        <PlaylistHeader colors={[colors.primary30, colors.neutral5]}>
+        <ScrollBounceBackground color={colors.primary40}/>
+        <PlaylistHeader colors={[colors.primary40, colors.neutral5]}>
           <PlaylistHeaderCard source={{ uri: background }} />
           <View
             style={{
@@ -106,11 +110,7 @@ const BannerPlaylist = ({ route }) => {
             }}
           >
             <PlaylistHeaderText>{title}</PlaylistHeaderText>
-            <CirclePlayButton
-              onPress={togglePaused}
-              width="52px"
-              height="52px"
-            />
+            {start_date && end_date && <Text>{parseAndFormatShortDate(start_date)} - {parseAndFormatShortDate(end_date)}</Text>}
           </View>
         </PlaylistHeader>
         {performers &&
