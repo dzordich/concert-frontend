@@ -15,11 +15,15 @@ const today = new Date();
 
 const todayFormatted = formatDate(today);
 
+const createDescription = (timeframe, quantifier = "all") => ({
+  timeframe, quantifier
+})
+
 export const playlists = {
   days: [
     {
       displayName: "Today",
-      descriptionName: "today",
+      description: createDescription("today"),
       subHeader: formatTodayPlusDaysShort(0),
       startDate: todayFormatted,
       endDate: todayFormatted,
@@ -28,7 +32,7 @@ export const playlists = {
     },
     {
       displayName: "Tomorrow",
-      descriptionName: "tomorrow",
+      description: createDescription("tomorrow"),
       subHeader: formatTodayPlusDaysShort(1),
       startDate: formatTodayPlusDays(1),
       endDate: formatTodayPlusDays(1),
@@ -37,7 +41,7 @@ export const playlists = {
     },
     {
       displayName: weekdayAtTodayPlusDays(2),
-      descriptionName: `on ${weekdayAtTodayPlusDays(2)}`,
+      description: createDescription(`on ${weekdayAtTodayPlusDays(2)}`),
       subHeader: formatTodayPlusDaysShort(2),
       startDate: formatTodayPlusDays(2),
       endDate: formatTodayPlusDays(2),
@@ -46,7 +50,7 @@ export const playlists = {
     },
     {
       displayName: weekdayAtTodayPlusDays(3),
-      descriptionName: `on ${weekdayAtTodayPlusDays(3)}`,
+      description: createDescription(`on ${weekdayAtTodayPlusDays(3)}`),
       subHeader: formatTodayPlusDaysShort(3),
       startDate: formatTodayPlusDays(3),
       endDate: formatTodayPlusDays(3),
@@ -55,7 +59,7 @@ export const playlists = {
     },
     {
       displayName: weekdayAtTodayPlusDays(4),
-      descriptionName: `on ${weekdayAtTodayPlusDays(4)}`,
+      description: createDescription(`on ${weekdayAtTodayPlusDays(4)}`),
       subHeader: formatTodayPlusDaysShort(4),
       startDate: formatTodayPlusDays(4),
       endDate: formatTodayPlusDays(4),
@@ -64,7 +68,7 @@ export const playlists = {
     },
     {
       displayName: weekdayAtTodayPlusDays(5),
-      descriptionName: `on ${weekdayAtTodayPlusDays(5)}`,
+      description: createDescription(`on ${weekdayAtTodayPlusDays(5)}`),
       subHeader: formatTodayPlusDaysShort(5),
       startDate: formatTodayPlusDays(5),
       endDate: formatTodayPlusDays(5),
@@ -73,7 +77,7 @@ export const playlists = {
     },
     {
       displayName: weekdayAtTodayPlusDays(6),
-      descriptionName: `on ${weekdayAtTodayPlusDays(6)}`,
+      description: createDescription(`on ${weekdayAtTodayPlusDays(6)}`),
       subHeader: formatTodayPlusDaysShort(6),
       startDate: formatTodayPlusDays(6),
       endDate: formatTodayPlusDays(6),
@@ -84,7 +88,7 @@ export const playlists = {
   weeks: [
     {
       displayName: "This Weekend",
-      descriptionName: "this weekend",
+      description: createDescription('this weekend', 'the top 40'),
       subHeader: "Top 40",
       background: require("../../assets/bg-week-1.png"),
       backgroundColor: colors.bgWeek,
@@ -93,7 +97,7 @@ export const playlists = {
     },
     {
       displayName: "Next Weekend",
-      descriptionName: "next weekend",
+      description: createDescription('next weekend', 'the top 40'),
       subHeader: "Top 40",
       background: require("../../assets/bg-week-2.png"),
       backgroundColor: colors.bgWeek,
@@ -104,7 +108,7 @@ export const playlists = {
   months: [
     {
       displayName: formatMonth(new Date()),
-      descriptionName: 'this month',
+      description: createDescription('this month', 'the top 100'),
       subHeader: "Top 100",
       startDate: todayFormatted,
       endDate: endOfCurrentMonth(),
@@ -113,6 +117,7 @@ export const playlists = {
     },
     {
       subHeader: "Top 100",
+      description: createDescription('next month', 'the top 100'),
       background: require("../../assets/bg-month-2.png"),
       backgroundColor: colors.bgMonth,
       ...currentMonthPlusMonths(1),

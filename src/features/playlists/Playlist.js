@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
-import {View, ScrollView} from "react-native";
+import {View, ScrollView, Pressable, Linking} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { compose, prop } from "ramda";
 import { useCities } from "../cities/CityProvider";
@@ -64,6 +64,8 @@ const songToTrackObject = ({
   artistInfo,
 });
 
+const formatDescription = (description , city)=> `Discover ${description.quantifier} artists playing in ${city} ${description.timeframe}.`
+
 const Playlist = ({ route, navigation }) => {
   const [performers, setPerformers] = useState([]);
   const { selectedCity } = useCities();
@@ -74,7 +76,7 @@ const Playlist = ({ route, navigation }) => {
     playing,
     togglePaused,
   } = usePlayer();
-  const { displayName, startDate, endDate, backgroundColor, limit, descriptionName } = route.params;
+  const { displayName, startDate, endDate, backgroundColor, limit, description } = route.params;
 
   const onSongPress = async (song, index) => {
     if (song.preview_url) {
@@ -111,9 +113,9 @@ const Playlist = ({ route, navigation }) => {
               paddingHorizontal: 20,
             }}
           >
-            <Text style={{ paddingBottom: 8, color: colors.neutral90 }}>
-              Discover artists playing in {selectedCity.name} {descriptionName}.
-            </Text>
+            {description && <Text style={{ paddingBottom: 8, color: colors.neutral90 }}>
+              {formatDescription(description, selectedCity.name)}
+            </Text>}
           </View>
         </PlaylistHeader>
         {performers &&

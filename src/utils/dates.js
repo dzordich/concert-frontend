@@ -85,7 +85,7 @@ export const currentMonthPlusMonths = (months) => {
   const formatted = formatMonth(date)
   return {
     displayName: formatted,
-    descriptionName: `in ${formatted}`,
+    description: {timeframe: `this ${formatted}`, quantifier: "the top 100"},
     startDate: formatDate(startOfMonth(date)),
     endDate: formatDate(endOfMonth(date)),
   };

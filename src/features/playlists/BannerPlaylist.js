@@ -42,26 +42,28 @@ const PlaylistHeaderCard = styled(Image)`
   overflow: hidden;
 `;
 
+
 const addPerformerToTopTrack = (performer) => ({
   ...performer,
   top_track: {
     ...performer.top_track,
-    artistName: performer.name,
+    artistInfo: performer,
   },
 });
 
 const songToTrackObject = ({
-  preview_url,
-  name,
-  artistName,
-  album_art_url,
-  id,
-}) => ({
+                             preview_url,
+                             name,
+                             artistInfo,
+                             album_art_url,
+                             id,
+                           }) => ({
   id,
   url: preview_url,
   title: name,
-  artist: artistName,
+  artist: artistInfo.name,
   artwork: album_art_url,
+  artistInfo,
 });
 
 const BannerPlaylist = ({ route, navigation }) => {

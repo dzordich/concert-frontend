@@ -6,7 +6,6 @@
     "orientation": "portrait",
     "icon": "./assets/appIcon.png",
     "splash": {
-      "image": "./assets/logoTransparent.png",
       "resizeMode": "contain",
       "backgroundColor": "#0f1418"
     },
@@ -20,7 +19,7 @@
         "UIBackgroundModes": ["audio"]
       },
       "bundleIdentifier": "com.brickyardusertest.concertfrontend",
-      "buildNumber": "14"
+      "buildNumber": "17"
     },
     "android": {
       "adaptiveIcon": {
