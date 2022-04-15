@@ -1,26 +1,42 @@
 import React, { useMemo } from "react";
+import styled from "styled-components/native";
+import { View } from "react-native";
 import { useCities } from "./CityProvider";
 import DropDown from "../../ui/inputs/DropDown";
+import {RelativeBackButton} from "../../ui/actions/BackButton";
+import {navigate} from "../../utils/navigation";
+import PATHS from "../../contants/paths";
+import {colors} from "../../ui/theme";
+import ActivityIndicator from "../../ui/ActivityIndicator";
 
-const CitySelect = () => {
-  const { cities, selectedCity, selectCity, selectedCityLoaded } = useCities();
+const CitySelect = ({ style, navigation }) => {
+  const { cities, selectedCity, selectCity, citiesLoaded } = useCities();
   const cityOptions = useMemo(
     () =>
-      cities.map((city, index) => ({
+      cities.map((city) => ({
         label: city.display_name,
         value: city.id,
       })),
     [cities]
   );
-  return selectedCityLoaded ? (
-    <DropDown
-      initialValue={selectedCity?.id}
-      items={cityOptions}
-      onValueChange={(value) =>
-        selectCity(cities.find((city) => city.id === value))
-      }
-    />
-  ) : null;
+  return (
+    <View style={style}>
+      {citiesLoaded ? (
+        <DropDown
+          initialValue={selectedCity?.id}
+          items={cityOptions}
+          placeholder="Select city..."
+          onValueChange={(value) =>
+            selectCity(cities.find((city) => city.id === value))
+          }
+        />
+      ) : <ActivityIndicator />}
+    </View>
+  );
 };
 
-export default CitySelect;
+export default styled(CitySelect)`
+  padding: 16px;
+  height: 100%;
+  background-color: ${colors.neutral5};
+`;

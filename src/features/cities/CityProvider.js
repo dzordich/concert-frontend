@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { listCities } from "../../api/cities";
 import { getItem, setItem } from "../../utils/localStorage";
 import { CITY_STORAGE_KEY } from "../../contants/storageKeys";
@@ -6,42 +6,39 @@ import { CITY_STORAGE_KEY } from "../../contants/storageKeys";
 const CityContext = React.createContext({
   cities: [],
   selectedCity: null,
-  selectedCityLoaded: false,
+  citiesLoaded: false,
   selectCity: null,
 });
 
-const CityProvider = ({ children }) => {
-  const [cities, setCities] = useState([]);
-  // const [selectedCity, setSelectedCity] = useState(null);
-  const [selectedCity, setSelectedCity] = useState({
-    name: "Austin",
-    state: "TX",
-    country: "US",
-    id: 1,
-  });
-  // const [selectedCityLoaded, setSelectedCityLoaded] = useState(false);
-  const [selectedCityLoaded, setSelectedCityLoaded] = useState(true);
+export const useCities = () => useContext(CityContext);
 
-  // const selectCity = (city) => {
-  //   setSelectedCity(city);
-  //   setItem(CITY_STORAGE_KEY, city);
-  // };
-  //
-  // useEffect(() => {
-  //   listCities()
-  //     .then(setCities)
-  //     .then(() => getItem(CITY_STORAGE_KEY))
-  //     .then((item) => item && setSelectedCity(item))
-  //     .then(() => setSelectedCityLoaded(true));
-  // }, []);
+class CityProvider extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cities: [],
+      selectedCity: null,
+      citiesLoaded: false,
+      selectCity: this.selectCity
+    }
+  }
 
-  return (
-    <CityContext.Provider value={{ cities, selectedCity, selectedCityLoaded }}>
-      {children}
+  selectCity = selectedCity => {
+    this.setState({selectedCity});
+    setItem(CITY_STORAGE_KEY, selectedCity)
+  }
+
+  async componentDidMount() {
+    const cities = await listCities()
+    const selectedCity = await getItem(CITY_STORAGE_KEY)
+    this.setState({cities, selectedCity, citiesLoaded: true})
+  }
+
+  render() {
+    return <CityContext.Provider value={this.state}>
+      {this.props.children}
     </CityContext.Provider>
-  );
-};
+  }
+}
 
 export default CityProvider;
-
-export const useCities = () => useContext(CityContext);

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import DropDownPicker from "react-native-dropdown-picker";
 import { colors } from "../theme";
 
-const DropDown = ({ items, initialValue, onValueChange }) => {
+const DropDown = ({ items, initialValue, onValueChange, ...props }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(initialValue);
 
@@ -16,9 +16,11 @@ const DropDown = ({ items, initialValue, onValueChange }) => {
       setValue={setValue}
       onChangeValue={onValueChange}
       searchable={true}
-      style={{ backgroundColor: colors.neutral30 }}
-      dropDownContainerStyle={{ backgroundColor: colors.neutral20, zIndex: 9 }}
+      style={{ backgroundColor: colors.neutral5, borderColor: colors.neutral30 }}
+      dropDownContainerStyle={{ backgroundColor: colors.neutral5, borderColor: colors.neutral30, zIndex: 9 }}
       theme="DARK"
+      searchPlaceholder="Search..."
+      {...props}
     />
   );
 };
