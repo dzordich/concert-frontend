@@ -7,8 +7,7 @@
     "icon": "./assets/appIcon.png",
     "splash": {
       "resizeMode": "contain",
-      "backgroundColor": "#0f1418",
-      "image": "./assets/appIcon.png"
+      "backgroundColor": "#0f1418"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -20,7 +19,7 @@
         "UIBackgroundModes": ["audio"]
       },
       "bundleIdentifier": "com.brickyardusertest.concertfrontend",
-      "buildNumber": "19"
+      "buildNumber": "20"
     },
     "android": {
       "adaptiveIcon": {

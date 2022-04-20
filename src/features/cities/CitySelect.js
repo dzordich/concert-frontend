@@ -3,8 +3,6 @@ import styled from "styled-components/native";
 import { View } from "react-native";
 import { useCities } from "./CityProvider";
 import DropDown from "../../ui/inputs/DropDown";
-import {RelativeBackButton} from "../../ui/actions/BackButton";
-import {navigate} from "../../utils/navigation";
 import PATHS from "../../contants/paths";
 import {colors} from "../../ui/theme";
 import ActivityIndicator from "../../ui/ActivityIndicator";
@@ -26,8 +24,10 @@ const CitySelect = ({ style, navigation }) => {
           initialValue={selectedCity?.id}
           items={cityOptions}
           placeholder="Select city..."
-          onValueChange={(value) =>
-            selectCity(cities.find((city) => city.id === value))
+          onValueChange={(value) => {
+              selectCity(cities.find((city) => city.id === value))
+              navigation.navigate(PATHS.HOME)
+          }
           }
         />
       ) : <ActivityIndicator />}
