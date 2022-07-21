@@ -50,7 +50,7 @@ const PlayerState = ({ children }) => {
     return await TrackPlayer.seekTo(0);
   };
 
-  useEffect(async () => {
+  const _setup = async () => {
     await TrackPlayer.updateOptions({
       stopWithApp: false, // false=> music continues in background even when app is closed
       // Media controls capabilities
@@ -64,6 +64,10 @@ const PlayerState = ({ children }) => {
       ],
     });
     await TrackPlayer.setupPlayer({});
+  }
+
+  useEffect(() => {
+    _setup();
     return () => TrackPlayer.destroy();
   }, []);
 

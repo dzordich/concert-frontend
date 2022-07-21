@@ -4,12 +4,9 @@
   },
   "build": {
     "development": {
-      "developmentClient": true,
-      "distribution": "internal"
+      "developmentClient": true
     },
-    "preview": {
-      "distribution": "internal"
-    },
+    "preview": {},
     "production": {}
   },
   "submit": {
