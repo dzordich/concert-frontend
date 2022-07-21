@@ -17,6 +17,7 @@ const CitySelect = ({ style, navigation }) => {
       })),
     [cities]
   );
+  const shouldNavigate = useMemo(() => !!selectedCity, [selectedCity])
   return (
     <View style={style}>
       {citiesLoaded ? (
@@ -26,7 +27,7 @@ const CitySelect = ({ style, navigation }) => {
           placeholder="Select city..."
           onValueChange={(value) => {
               selectCity(cities.find((city) => city.id === value))
-              navigation.navigate(PATHS.HOME)
+              shouldNavigate && navigation.navigate(PATHS.HOME)
           }
           }
         />

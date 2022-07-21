@@ -15,6 +15,9 @@ import { FreeMarker, FestivalMarker } from "../../ui/Marker";
 import ShiftRight from "../../ui/layout/ShiftRight";
 import { formatTime } from "../../utils/time";
 import {formatList, isNotEmpty} from "../../utils/arrays";
+import TicketIcon from "../../ui/icons/TicketIcon";
+import ShareIcon from "../../ui/icons/ShareIcon";
+import {shareShow} from "../../utils/sms";
 
 const ShowDetailsContainer = styled(View)`
   flex: 1;
@@ -38,10 +41,18 @@ const ShowContainer = styled(View)`
   padding: 16px;
 `;
 
+const VenueLinkContainer = styled(View)`
+  flex-direction: row;
+  width: 100%;
+`
+
 const VenueLink = styled(Button)`
   color: ${colors.primary60};
-  border: 1px solid ${colors.primary60};
+  width: 50%;
   margin: 24px 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
 `;
 
 const StyledMap = styled(MapView)`
@@ -56,11 +67,11 @@ const VenueName = styled(H2)`
 `;
 
 
-const Show = ({ venue, start_date, start_time, free, festival, otherPerformers }) =>(
+const Show = ({ venue, start_date, start_time, free, festival, mainPerformer, performers }) =>{
+    const otherPerformers = performers.filter((performer) => performer.name !== mainPerformer)
+    return (
         <ShowContainer>
-
             <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-
                 <VenueName>{venue.name}</VenueName>
                 <ShiftRight>
                     <FestivalMarker festival={festival} long />
@@ -74,12 +85,21 @@ const Show = ({ venue, start_date, start_time, free, festival, otherPerformers }
                 {displayDate(start_date)}
                 {start_time ? `  •  ${formatTime(start_time)}` : ""}
             </Text>
-            <VenueLink
-                onPress={() => venue.website && Linking.openURL(venue.website)}
-                activeOpacity={0.6}
-            >
-                <Text style={{color: colors.primary60}}>Purchase Tickets</Text>
-            </VenueLink>
+            <VenueLinkContainer>
+                <VenueLink
+                    onPress={() => venue.website && Linking.openURL(venue.website)}
+                    activeOpacity={0.6}
+                    style={{borderRightColor: colors.neutral20, borderRightWidth: 1}}
+                >
+                    <TicketIcon style={{color: colors.primary60, marginRight: 8}}/><Text style={{color: colors.primary70}}>Tickets</Text>
+                </VenueLink>
+                <VenueLink
+                    onPress={() => shareShow(mainPerformer, venue.name, displayDate(start_date))}
+                    activeOpacity={0.6}
+                >
+                    <ShareIcon style={{color: colors.primary60, marginRight: 8}}/><Text style={{color: colors.primary70}}>Share</Text>
+                </VenueLink>
+            </VenueLinkContainer>
 
             <StyledMap
                 initialRegion={{
@@ -98,7 +118,8 @@ const Show = ({ venue, start_date, start_time, free, festival, otherPerformers }
                 />
             </StyledMap>
         </ShowContainer>
-)
+    )
+}
 
 const ShowDetails = ({ route, navigation }) => {
   const { name, shows, top_track } = route.params;
@@ -121,10 +142,10 @@ const ShowDetails = ({ route, navigation }) => {
         {shows.length > 1 ? (
           <PaginatedCarousel
             data={shows}
-            renderItem={({ item }) => <Show {...item} otherPerformers={item.performers.filter((performer) => performer.name !== name)} />}
+            renderItem={({ item }) => <Show {...item} mainPerformer={name} />}
           />
         ) : (
-          <Show {...shows[0]} otherPerformers={shows[0].performers.filter((performer) => performer.name !== name)} />
+          <Show {...shows[0]} mainPerformer={name} />
         )}
       </ScrollView>
     </ShowDetailsContainer>
