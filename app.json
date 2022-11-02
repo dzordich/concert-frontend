@@ -2,7 +2,7 @@
   "expo": {
     "name": "StageBite",
     "slug": "StageBite",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/appIcon.png",
     "splash": {
@@ -12,19 +12,25 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "UIBackgroundModes": ["audio"]
+        "UIBackgroundModes": [
+          "audio"
+        ]
       },
-      "buildNumber": "27"
+      "buildNumber": "31",
+      "bundleIdentifier": "com.brickyardusertest.concertfrontend"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.dzordich.StageBite"
     },
     "web": {
       "favicon": "./assets/favicon.png"

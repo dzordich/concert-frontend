@@ -9,8 +9,8 @@
     <key>EXUpdatesLaunchWaitMs</key>
     <integer>0</integer>
     <key>EXUpdatesSDKVersion</key>
-    <string>43.0.0</string>
+    <string>45.0.0</string>
     <key>EXUpdatesURL</key>
-    <string>https://exp.host/@dzordich/concert-frontend</string>
+    <string>https://exp.host/@dzordich/StageBite</string>
   </dict>
 </plist>
