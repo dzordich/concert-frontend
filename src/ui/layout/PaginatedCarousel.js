@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import Carousel, { Pagination } from "react-native-snap-carousel";
+import Carousel, { Pagination } from "react-native-new-snap-carousel";
 import { getWindowWidth } from "../../utils/dimensions";
 import { colors } from "../theme";
 

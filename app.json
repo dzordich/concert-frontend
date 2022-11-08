@@ -22,7 +22,7 @@
           "audio"
         ]
       },
-      "buildNumber": "31",
+      "buildNumber": "34",
       "bundleIdentifier": "com.brickyardusertest.concertfrontend"
     },
     "android": {
@@ -34,6 +34,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3a4ac98e-117d-4b9f-be77-a9d50bb4b89e"
+      }
     }
   }
 }
