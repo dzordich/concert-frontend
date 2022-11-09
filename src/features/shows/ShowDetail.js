@@ -17,6 +17,7 @@ import { formatTime } from "../../utils/time";
 import {formatList, isNotEmpty} from "../../utils/arrays";
 import TicketIcon from "../../ui/icons/TicketIcon";
 import ShareIcon from "../../ui/icons/ShareIcon";
+import SpotifyLogo from "../../ui/icons/SpotifyLogo";
 import {shareShow} from "../../utils/sms";
 
 const ShowDetailsContainer = styled(View)`
@@ -43,12 +44,13 @@ const ShowContainer = styled(View)`
 
 const VenueLinkContainer = styled(View)`
   flex-direction: row;
+  justify-content: space-between;
   width: 100%;
 `
 
 const VenueLink = styled(Button)`
   color: ${colors.primary60};
-  width: 50%;
+  width: 33%;
   margin: 24px 0;
   align-items: center;
   justify-content: center;
@@ -67,7 +69,7 @@ const VenueName = styled(H2)`
 `;
 
 
-const Show = ({ venue, start_date, start_time, free, festival, mainPerformer, performers }) =>{
+const Show = ({ venue, start_date, start_time, free, festival, mainPerformer, performers, spotifyLink }) =>{
     const otherPerformers = performers.filter((performer) => performer.name !== mainPerformer)
     return (
         <ShowContainer>
@@ -89,15 +91,22 @@ const Show = ({ venue, start_date, start_time, free, festival, mainPerformer, pe
                 <VenueLink
                     onPress={() => venue.website && Linking.openURL(venue.website)}
                     activeOpacity={0.6}
-                    style={{borderRightColor: colors.neutral20, borderRightWidth: 1}}
+                    style={{borderRightColor: colors.neutral20, borderRightWidth: 1, borderRadius: 0}}
                 >
                     <TicketIcon style={{color: colors.primary60, marginRight: 8}}/><Text style={{color: colors.primary70}}>Tickets</Text>
                 </VenueLink>
                 <VenueLink
                     onPress={() => shareShow(mainPerformer, venue.name, displayDate(start_date))}
                     activeOpacity={0.6}
+                    style={{borderRightColor: colors.neutral20, borderRightWidth: 1, borderRadius: 0}}
                 >
                     <ShareIcon style={{color: colors.primary60, marginRight: 8}}/><Text style={{color: colors.primary70}}>Share</Text>
+                </VenueLink>
+                <VenueLink
+                    onPress={() => Linking.openURL(spotifyLink)}
+                    activeOpacity={0.6}
+                >
+                    <SpotifyLogo style={{color: colors.primary60, marginRight: 8}}/><Text style={{color: colors.primary70}}>Spotify</Text>
                 </VenueLink>
             </VenueLinkContainer>
 
@@ -122,7 +131,7 @@ const Show = ({ venue, start_date, start_time, free, festival, mainPerformer, pe
 }
 
 const ShowDetails = ({ route, navigation }) => {
-  const { name, shows, top_track } = route.params;
+  const { name, shows, top_track, spotify_id } = route.params;
 
   return (
     <ShowDetailsContainer>
@@ -142,7 +151,7 @@ const ShowDetails = ({ route, navigation }) => {
         {shows.length > 1 ? (
           <PaginatedCarousel
             data={shows}
-            renderItem={({ item }) => <Show {...item} mainPerformer={name} />}
+            renderItem={({ item }) => <Show {...item} mainPerformer={name} spotifyLink={`https://open.spotify.com/artist/${spotify_id}`}/>}
           />
         ) : (
           <Show {...shows[0]} mainPerformer={name} />
