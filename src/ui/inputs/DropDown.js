@@ -16,8 +16,15 @@ const DropDown = ({ items, initialValue, onValueChange, ...props }) => {
       setValue={setValue}
       onChangeValue={onValueChange}
       searchable={true}
-      style={{ backgroundColor: colors.neutral5, borderColor: colors.neutral30 }}
-      dropDownContainerStyle={{ backgroundColor: colors.neutral5, borderColor: colors.neutral30, zIndex: 9 }}
+      style={{
+        backgroundColor: colors.neutral5,
+        borderColor: colors.neutral30,
+      }}
+      dropDownContainerStyle={{
+        backgroundColor: colors.neutral5,
+        borderColor: colors.neutral30,
+        zIndex: 9,
+      }}
       theme="DARK"
       searchPlaceholder="Search..."
       {...props}

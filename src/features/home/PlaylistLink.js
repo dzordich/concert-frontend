@@ -5,7 +5,7 @@ import PATHS from "../../contants/paths";
 import { colors } from "../../ui/theme";
 import { H2, H3 } from "../../ui/Text";
 import { getWindowWidth } from "../../utils/dimensions";
-import {wrapWords} from "../../utils/strings";
+import { wrapWords } from "../../utils/strings";
 
 const PlaylistLinkContainer = styled(View)`
   margin-left: 12px;

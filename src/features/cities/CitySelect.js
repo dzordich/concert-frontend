@@ -4,7 +4,7 @@ import { View } from "react-native";
 import { useCities } from "./CityProvider";
 import DropDown from "../../ui/inputs/DropDown";
 import PATHS from "../../contants/paths";
-import {colors} from "../../ui/theme";
+import { colors } from "../../ui/theme";
 import ActivityIndicator from "../../ui/ActivityIndicator";
 
 const CitySelect = ({ style, navigation }) => {
@@ -17,7 +17,7 @@ const CitySelect = ({ style, navigation }) => {
       })),
     [cities]
   );
-  const shouldNavigate = useMemo(() => !!selectedCity, [selectedCity])
+  const shouldNavigate = useMemo(() => !!selectedCity, [selectedCity]);
   return (
     <View style={style}>
       {citiesLoaded ? (
@@ -26,12 +26,13 @@ const CitySelect = ({ style, navigation }) => {
           items={cityOptions}
           placeholder="Select city..."
           onValueChange={(value) => {
-              selectCity(cities.find((city) => city.id === value))
-              shouldNavigate && navigation.navigate(PATHS.HOME)
-          }
-          }
+            selectCity(cities.find((city) => city.id === value));
+            shouldNavigate && navigation.navigate(PATHS.HOME);
+          }}
         />
-      ) : <ActivityIndicator />}
+      ) : (
+        <ActivityIndicator />
+      )}
     </View>
   );
 };

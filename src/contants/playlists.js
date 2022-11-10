@@ -16,8 +16,9 @@ const today = new Date();
 const todayFormatted = formatDate(today);
 
 const createDescription = (timeframe, quantifier = "all") => ({
-  timeframe, quantifier
-})
+  timeframe,
+  quantifier,
+});
 
 export const playlists = {
   days: [
@@ -88,7 +89,7 @@ export const playlists = {
   weeks: [
     {
       displayName: "This Weekend",
-      description: createDescription('this weekend', 'the top 40'),
+      description: createDescription("this weekend", "the top 40"),
       subHeader: "Top 40",
       background: require("../../assets/bg-week-1.png"),
       backgroundColor: colors.bgWeek,
@@ -97,7 +98,7 @@ export const playlists = {
     },
     {
       displayName: "Next Weekend",
-      description: createDescription('next weekend', 'the top 40'),
+      description: createDescription("next weekend", "the top 40"),
       subHeader: "Top 40",
       background: require("../../assets/bg-week-2.png"),
       backgroundColor: colors.bgWeek,
@@ -108,7 +109,7 @@ export const playlists = {
   months: [
     {
       displayName: formatMonth(new Date()),
-      description: createDescription('this month', 'the top 100'),
+      description: createDescription("this month", "the top 100"),
       subHeader: "Top 100",
       startDate: todayFormatted,
       endDate: endOfCurrentMonth(),
@@ -117,7 +118,7 @@ export const playlists = {
     },
     {
       subHeader: "Top 100",
-      description: createDescription('next month', 'the top 100'),
+      description: createDescription("next month", "the top 100"),
       background: require("../../assets/bg-month-2.png"),
       backgroundColor: colors.bgMonth,
       ...currentMonthPlusMonths(1),

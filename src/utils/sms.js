@@ -6,7 +6,7 @@ const sendMessage = async (messageContent) => {
   if (isAvailable) {
     await SMS.sendSMSAsync([], messageContent);
   } else {
-      console.warn("SMS service not available")
+    console.warn("SMS service not available");
   }
 };
 

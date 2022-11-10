@@ -64,7 +64,7 @@ const PlayerState = ({ children }) => {
       ],
     });
     await TrackPlayer.setupPlayer({});
-  }
+  };
 
   useEffect(() => {
     _setup();

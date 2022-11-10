@@ -19,25 +19,27 @@ class CityProvider extends React.Component {
       cities: [],
       selectedCity: null,
       citiesLoaded: false,
-      selectCity: this.selectCity
-    }
+      selectCity: this.selectCity,
+    };
   }
 
-  selectCity = selectedCity => {
-    this.setState({selectedCity});
-    setItem(CITY_STORAGE_KEY, selectedCity)
-  }
+  selectCity = (selectedCity) => {
+    this.setState({ selectedCity });
+    setItem(CITY_STORAGE_KEY, selectedCity);
+  };
 
   async componentDidMount() {
-    const cities = await listCities()
-    const selectedCity = await getItem(CITY_STORAGE_KEY)
-    this.setState({cities, selectedCity, citiesLoaded: true})
+    const cities = await listCities();
+    const selectedCity = await getItem(CITY_STORAGE_KEY);
+    this.setState({ cities, selectedCity, citiesLoaded: true });
   }
 
   render() {
-    return <CityContext.Provider value={this.state}>
-      {this.props.children}
-    </CityContext.Provider>
+    return (
+      <CityContext.Provider value={this.state}>
+        {this.props.children}
+      </CityContext.Provider>
+    );
   }
 }
 
