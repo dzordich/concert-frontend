@@ -1,193 +1,211 @@
-import React from "react";
-import styled from "styled-components";
-import { View, ScrollView, Linking } from "react-native";
-import MapView, { Marker } from "react-native-maps";
-import { prop } from "ramda";
-import { LinearGradient } from "expo-linear-gradient";
-import { Display, H2, Text } from "../../ui/Text";
-import { colors } from "../../ui/theme";
-import { AlbumArtBackground } from "../playlists/AlbumArt";
-import PaginatedCarousel from "../../ui/layout/PaginatedCarousel";
-import Button from "../../ui/inputs/Button";
-import { displayDate } from "../../utils/dates";
-import BackButton from "../../ui/actions/BackButton";
-import { FreeMarker, FestivalMarker } from "../../ui/Marker";
-import ShiftRight from "../../ui/layout/ShiftRight";
-import { formatTime } from "../../utils/time";
-import { formatList, isNotEmpty } from "../../utils/arrays";
-import TicketIcon from "../../ui/icons/TicketIcon";
-import ShareIcon from "../../ui/icons/ShareIcon";
-import SpotifyLogo from "../../ui/icons/SpotifyLogo";
-import { shareShow } from "../../utils/sms";
+import React from 'react';
+import styled from 'styled-components';
+import { View, ScrollView, Linking } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
+import { prop } from 'ramda';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Display, H2, Text } from '../../ui/Text';
+import { colors } from '../../ui/theme';
+import { AlbumArtBackground } from '../playlists/AlbumArt';
+import PaginatedCarousel from '../../ui/layout/PaginatedCarousel';
+import Button from '../../ui/inputs/Button';
+import { displayDate } from '../../utils/dates';
+import BackButton from '../../ui/actions/BackButton';
+import { FreeMarker, FestivalMarker } from '../../ui/Marker';
+import ShiftRight from '../../ui/layout/ShiftRight';
+import { formatTime } from '../../utils/time';
+import { formatList, isNotEmpty } from '../../utils/arrays';
+import TicketIcon from '../../ui/icons/TicketIcon';
+import ShareIcon from '../../ui/icons/ShareIcon';
+import SpotifyLogo from '../../ui/icons/SpotifyLogo';
+import { shareShow } from '../../utils/sms';
 
 const ShowDetailsContainer = styled(View)`
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  background-color: ${colors.neutral5};
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    background-color: ${colors.neutral5};
 `;
 
 const ShowHeader = styled(View)``;
 
 const Gradient = styled(LinearGradient)`
-  width: 100%;
-  height: 100%;
-  flex: 1;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 16px;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 16px;
 `;
 
 const ShowContainer = styled(View)`
-  padding: 16px;
+    padding: 16px;
 `;
 
 const VenueLinkContainer = styled(View)`
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 `;
 
 const VenueLink = styled(Button)`
-  color: ${colors.primary60};
-  width: 33%;
-  margin: 24px 0;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
+    color: ${colors.primary60};
+    width: 33%;
+    margin: 24px 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
 `;
 
 const StyledMap = styled(MapView)`
-  width: 100%;
-  height: 200px;
-  border-radius: 4px;
-  overflow: hidden;
+    width: 100%;
+    height: 200px;
+    border-radius: 4px;
+    overflow: hidden;
 `;
 
 const VenueName = styled(H2)`
-  margin-bottom: 8px;
+    margin-bottom: 8px;
 `;
 
 const Show = ({
-  venue,
-  start_date,
-  start_time,
-  free,
-  festival,
-  mainPerformer,
-  performers,
-  spotifyLink,
+    venue,
+    start_date,
+    start_time,
+    free,
+    festival,
+    mainPerformer,
+    performers,
+    spotifyLink,
 }) => {
-  const otherPerformers = performers.filter(
-    (performer) => performer.name !== mainPerformer
-  );
-  return (
-    <ShowContainer>
-      <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-        <VenueName>{venue.name}</VenueName>
-        <ShiftRight>
-          <FestivalMarker festival={festival} long />
-          <FreeMarker free={free} />
-        </ShiftRight>
-      </View>
-      {isNotEmpty(otherPerformers) && (
-        <Text style={{ marginBottom: 8 }}>
-          With {formatList(otherPerformers.map(prop("name")))}
-        </Text>
-      )}
-      <Text>
-        {displayDate(start_date)}
-        {start_time ? `  •  ${formatTime(start_time)}` : ""}
-      </Text>
-      <VenueLinkContainer>
-        <VenueLink
-          onPress={() => venue.website && Linking.openURL(venue.website)}
-          activeOpacity={0.6}
-          style={{
-            borderRightColor: colors.neutral20,
-            borderRightWidth: 1,
-            borderRadius: 0,
-          }}
-        >
-          <TicketIcon style={{ color: colors.primary60, marginRight: 8 }} />
-          <Text style={{ color: colors.primary70 }}>Tickets</Text>
-        </VenueLink>
-        <VenueLink
-          onPress={() =>
-            shareShow(mainPerformer, venue.name, displayDate(start_date))
-          }
-          activeOpacity={0.6}
-          style={{
-            borderRightColor: colors.neutral20,
-            borderRightWidth: 1,
-            borderRadius: 0,
-          }}
-        >
-          <ShareIcon style={{ color: colors.primary60, marginRight: 8 }} />
-          <Text style={{ color: colors.primary70 }}>Share</Text>
-        </VenueLink>
-        <VenueLink
-          onPress={() => Linking.openURL(spotifyLink)}
-          activeOpacity={0.6}
-        >
-          <SpotifyLogo style={{ color: colors.primary60, marginRight: 8 }} />
-          <Text style={{ color: colors.primary70 }}>Spotify</Text>
-        </VenueLink>
-      </VenueLinkContainer>
+    const otherPerformers = performers.filter(
+        performer => performer.name !== mainPerformer
+    );
+    return (
+        <ShowContainer>
+            <View
+                style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
+            >
+                <VenueName>{venue.name}</VenueName>
+                <ShiftRight>
+                    <FestivalMarker festival={festival} long />
+                    <FreeMarker free={free} />
+                </ShiftRight>
+            </View>
+            {isNotEmpty(otherPerformers) && (
+                <Text style={{ marginBottom: 8 }}>
+                    With {formatList(otherPerformers.map(prop('name')))}
+                </Text>
+            )}
+            <Text>
+                {displayDate(start_date)}
+                {start_time ? `  •  ${formatTime(start_time)}` : ''}
+            </Text>
+            <VenueLinkContainer>
+                <VenueLink
+                    onPress={() =>
+                        venue.website && Linking.openURL(venue.website)
+                    }
+                    activeOpacity={0.6}
+                    style={{
+                        borderRightColor: colors.neutral20,
+                        borderRightWidth: 1,
+                        borderRadius: 0,
+                    }}
+                >
+                    <TicketIcon
+                        style={{ color: colors.primary60, marginRight: 8 }}
+                    />
+                    <Text style={{ color: colors.primary70 }}>Tickets</Text>
+                </VenueLink>
+                <VenueLink
+                    onPress={() =>
+                        shareShow(
+                            mainPerformer,
+                            venue.name,
+                            displayDate(start_date)
+                        )
+                    }
+                    activeOpacity={0.6}
+                    style={{
+                        borderRightColor: colors.neutral20,
+                        borderRightWidth: 1,
+                        borderRadius: 0,
+                    }}
+                >
+                    <ShareIcon
+                        style={{ color: colors.primary60, marginRight: 8 }}
+                    />
+                    <Text style={{ color: colors.primary70 }}>Share</Text>
+                </VenueLink>
+                <VenueLink
+                    onPress={() => Linking.openURL(spotifyLink)}
+                    activeOpacity={0.6}
+                >
+                    <SpotifyLogo
+                        style={{ color: colors.primary60, marginRight: 8 }}
+                    />
+                    <Text style={{ color: colors.primary70 }}>Spotify</Text>
+                </VenueLink>
+            </VenueLinkContainer>
 
-      <StyledMap
-        initialRegion={{
-          latitude: Number(venue.lat),
-          longitude: Number(venue.lng),
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01,
-        }}
-      >
-        <Marker
-          coordinate={{
-            latitude: Number(venue.lat),
-            longitude: Number(venue.lng),
-          }}
-          title={venue.name}
-        />
-      </StyledMap>
-    </ShowContainer>
-  );
+            <StyledMap
+                initialRegion={{
+                    latitude: Number(venue.lat),
+                    longitude: Number(venue.lng),
+                    latitudeDelta: 0.01,
+                    longitudeDelta: 0.01,
+                }}
+            >
+                <Marker
+                    coordinate={{
+                        latitude: Number(venue.lat),
+                        longitude: Number(venue.lng),
+                    }}
+                    title={venue.name}
+                />
+            </StyledMap>
+        </ShowContainer>
+    );
 };
 
 const ShowDetails = ({ route, navigation }) => {
-  const { name, shows, top_track, spotify_id } = route.params;
+    const { name, shows, top_track, spotify_id } = route.params;
 
-  return (
-    <ShowDetailsContainer>
-      <BackButton navigation={navigation} />
-      <ScrollView>
-        <ShowHeader>
-          <AlbumArtBackground url={top_track.album_art_url}>
-            <Gradient
-              colors={[colors.neutral5, "transparent", colors.neutral5]}
-            >
-              <Display>{name}</Display>
-            </Gradient>
-          </AlbumArtBackground>
-        </ShowHeader>
-        {shows.length > 1 ? (
-          <PaginatedCarousel
-            data={shows}
-            renderItem={({ item }) => (
-              <Show
-                {...item}
-                mainPerformer={name}
-                spotifyLink={`https://open.spotify.com/artist/${spotify_id}`}
-              />
-            )}
-          />
-        ) : (
-          <Show {...shows[0]} mainPerformer={name} />
-        )}
-      </ScrollView>
-    </ShowDetailsContainer>
-  );
+    return (
+        <ShowDetailsContainer>
+            <BackButton navigation={navigation} />
+            <ScrollView>
+                <ShowHeader>
+                    <AlbumArtBackground url={top_track.album_art_url}>
+                        <Gradient
+                            colors={[
+                                colors.neutral5,
+                                'transparent',
+                                colors.neutral5,
+                            ]}
+                        >
+                            <Display>{name}</Display>
+                        </Gradient>
+                    </AlbumArtBackground>
+                </ShowHeader>
+                {shows.length > 1 ? (
+                    <PaginatedCarousel
+                        data={shows}
+                        renderItem={({ item }) => (
+                            <Show
+                                {...item}
+                                mainPerformer={name}
+                                spotifyLink={`https://open.spotify.com/artist/${spotify_id}`}
+                            />
+                        )}
+                    />
+                ) : (
+                    <Show {...shows[0]} mainPerformer={name} />
+                )}
+            </ScrollView>
+        </ShowDetailsContainer>
+    );
 };
 
 export default ShowDetails;

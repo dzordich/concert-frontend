@@ -1,3 +1,3 @@
-import { get } from "./http";
+import { get } from './http';
 
-export const listCities = () => get("/cities");
+export const listCities = () => get('/cities');
