@@ -35,7 +35,7 @@ const HorizontalLine = styled.View`
     height: 0;
     width: 50%;
     margin-left: auto;
-    border: 0.5px solid ${colors.neutral30};
+    border: 0.5px solid ${colors.neutral40};
 `;
 
 const PlaylistRow = styled.ScrollView`

@@ -2,14 +2,12 @@ import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { View, ScrollView, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { compose, prop } from 'ramda';
 import { colors } from '../../ui/theme';
 import { H2, Text } from '../../ui/Text';
-import { usePlayer } from '../player/PlayerState';
-import Track from './Track';
 import { getBannerPlaylist } from '../../api/playlists';
 import ScrollBounceBackground from '../../ui/layout/ScrollBounceBackground';
 import { parseAndFormatShortDate } from '../../utils/dates';
+import PlaylistTracks from './PlaylistTracks';
 
 const PlaylistContainer = styled(View)`
     flex: 1;
@@ -50,43 +48,9 @@ const addPerformerToTopTrack = performer => ({
     },
 });
 
-const songToTrackObject = ({
-    preview_url,
-    name,
-    artistInfo,
-    album_art_url,
-    id,
-}) => ({
-    id,
-    url: preview_url,
-    title: name,
-    artist: artistInfo.name,
-    artwork: album_art_url,
-    artistInfo,
-});
-
 const BannerPlaylist = ({ route, navigation }) => {
     const [performers, setPerformers] = useState([]);
-    const {
-        play,
-        updateQueue,
-        currentTrack,
-        playing,
-        togglePaused,
-    } = usePlayer();
     const { id, title, background, start_date, end_date } = route.params;
-
-    const onSongPress = async (song, index) => {
-        if (song.preview_url) {
-            await updateQueue(
-                performers
-                    .slice(index, performers.length)
-                    .filter(performer => !!performer.top_track?.preview_url)
-                    .map(compose(songToTrackObject, prop('top_track')))
-            );
-            await play();
-        }
-    };
 
     useEffect(() => {
         getBannerPlaylist(id).then(response =>
@@ -94,7 +58,7 @@ const BannerPlaylist = ({ route, navigation }) => {
         );
     }, [id]);
 
-    useMemo(
+    useEffect(
         () =>
             navigation.setOptions({
                 headerStyle: {
@@ -128,19 +92,7 @@ const BannerPlaylist = ({ route, navigation }) => {
                         )}
                     </View>
                 </PlaylistHeader>
-                {performers &&
-                    performers.map(
-                        (performer, idx) =>
-                            performer.top_track && (
-                                <Track
-                                    performer={performer}
-                                    onPress={onSongPress}
-                                    trackIndex={idx}
-                                    currentTrack={currentTrack}
-                                    key={idx}
-                                />
-                            )
-                    )}
+                <PlaylistTracks performers={performers} />
             </ScrollView>
         </PlaylistContainer>
     );

@@ -1,3 +1,5 @@
+import { padTo2Digits } from './numbers';
+
 export const formatTime = time => {
     if (time) {
         try {
@@ -10,3 +12,6 @@ export const formatTime = time => {
     }
     return '';
 };
+
+export const secondsToDisplay = seconds =>
+    `${Math.floor(seconds / 60)}:${padTo2Digits(Math.floor(seconds % 60))}`;

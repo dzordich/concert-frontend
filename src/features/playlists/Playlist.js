@@ -1,16 +1,14 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { View, ScrollView, Pressable, Linking } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { compose, prop } from 'ramda';
 import { useCities } from '../cities/CityProvider';
 import { listShows } from '../../api/shows';
 import { colors } from '../../ui/theme';
 import { H2, Text } from '../../ui/Text';
-import { usePlayer } from '../player/PlayerState';
-import Track from './Track';
 import { PlaylistCard } from '../home/PlaylistLink';
 import ScrollBounceBackground from '../../ui/layout/ScrollBounceBackground';
+import PlaylistTracks from './PlaylistTracks';
 
 const PlaylistContainer = styled(View)`
     flex: 1;
@@ -49,34 +47,12 @@ const addPerformerToTopTrack = performer => ({
     },
 });
 
-const songToTrackObject = ({
-    preview_url,
-    name,
-    artistInfo,
-    album_art_url,
-    id,
-}) => ({
-    id,
-    url: preview_url,
-    title: name,
-    artist: artistInfo.name,
-    artwork: album_art_url,
-    artistInfo,
-});
-
 const formatDescription = (description, city) =>
     `Discover ${description.quantifier} artists playing in ${city} ${description.timeframe}.`;
 
 const Playlist = ({ route, navigation }) => {
     const [performers, setPerformers] = useState([]);
     const { selectedCity } = useCities();
-    const {
-        play,
-        updateQueue,
-        currentTrack,
-        playing,
-        togglePaused,
-    } = usePlayer();
     const {
         displayName,
         startDate,
@@ -85,18 +61,6 @@ const Playlist = ({ route, navigation }) => {
         limit,
         description,
     } = route.params;
-
-    const onSongPress = async (song, index) => {
-        if (song.preview_url) {
-            await updateQueue(
-                performers
-                    .slice(index, performers.length)
-                    .filter(performer => !!performer.top_track?.preview_url)
-                    .map(compose(songToTrackObject, prop('top_track')))
-            );
-            await play();
-        }
-    };
 
     useEffect(() => {
         listShows({ city: selectedCity, startDate, endDate, limit })
@@ -146,19 +110,7 @@ const Playlist = ({ route, navigation }) => {
                         )}
                     </View>
                 </PlaylistHeader>
-                {performers &&
-                    performers.map(
-                        (performer, idx) =>
-                            performer.top_track && (
-                                <Track
-                                    performer={performer}
-                                    onPress={onSongPress}
-                                    trackIndex={idx}
-                                    currentTrack={currentTrack}
-                                    key={idx}
-                                />
-                            )
-                    )}
+                <PlaylistTracks performers={performers} />
             </ScrollView>
         </PlaylistContainer>
     );

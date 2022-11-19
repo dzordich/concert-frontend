@@ -1,14 +1,15 @@
 import React from 'react';
 import Svg, { Path } from 'react-native-svg';
 import { colors } from '../theme';
+import styled from 'styled-components/native';
 
 const InfoIcon = props => (
     <Svg
         xmlns="http://www.w3.org/2000/svg"
-        height="24px"
+        height="22px"
         viewBox="0 0 24 24"
-        width="24px"
-        fill={colors.neutral80}
+        width="22px"
+        fill={colors.neutral60}
         {...props}
     >
         <Path d="M0 0h24v24H0z" fill="none" />
@@ -16,4 +17,6 @@ const InfoIcon = props => (
     </Svg>
 );
 
-export default InfoIcon;
+export default styled(InfoIcon)`
+    transform: rotate(90deg);
+`;
