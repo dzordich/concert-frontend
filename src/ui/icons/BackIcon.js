@@ -1,5 +1,6 @@
 import React from 'react';
 import Svg, { G, Path, Rect } from 'react-native-svg';
+import styled from 'styled-components/native';
 
 const BackIcon = props => (
     <Svg
@@ -18,4 +19,4 @@ const BackIcon = props => (
     </Svg>
 );
 
-export default BackIcon;
+export default styled(BackIcon)``;

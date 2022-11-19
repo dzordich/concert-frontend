@@ -5,7 +5,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { H3, Text } from '../../ui/Text';
 import { colors } from '../../ui/theme';
 import { usePlayer } from './PlayerState';
-import AlbumArt from '../playlists/AlbumArt';
 import PlayPauseButton from './PlayPauseButton';
 import ShiftRight from '../../ui/layout/ShiftRight';
 import { navigate } from '../../utils/navigation';
@@ -13,6 +12,9 @@ import PATHS from '../../contants/paths';
 import TrackPositionBar from './TrackPositionBar';
 import IconButton from '../../ui/inputs/IconButton';
 import FastForwardIcon from '../../ui/icons/FastForwardIcon';
+import HeartIcon from '../../ui/icons/HeartIcon';
+import { useLikedShows } from '../../utils/hooks/LikedShowsState';
+import FilledInHeartIcon from '../../ui/icons/FilledInHeartIcon';
 
 const PlayerContainer = styled(View)`
     width: 100%;
@@ -23,7 +25,7 @@ const PlayerContainer = styled(View)`
     flex: 0;
     flex-direction: column;
     justify-content: flex-start;
-    background-color: ${colors.neutral5};
+    background-color: ${colors.primary10};
 `;
 
 const PlayerInnerContainer = styled(View)`
@@ -33,7 +35,7 @@ const PlayerInnerContainer = styled(View)`
     justify-content: flex-start;
     align-items: center;
     margin: 0;
-    padding: 0;
+    padding: 0 16px;
     height: 60px;
 `;
 
@@ -56,14 +58,19 @@ const PlayerButtons = styled(ShiftRight)`
 const Player = () => {
     const { bottom } = useSafeAreaInsets();
     const {
-        currentTrack: { title, artist, artwork, url },
+        currentTrack: { title, artist, url, artistInfo },
         playing,
         togglePaused,
         skip,
     } = usePlayer();
+    const { likeShow, dislikeShow, isShowLiked } = useLikedShows();
 
-    return url ? (
-        <Pressable onPress={() => navigate(PATHS.PLAYER_EXPANDED)}>
+    if (!url) {
+        return null;
+    }
+
+    return (
+        <Pressable onPress={() => navigate(PATHS.SHOW_DETAILS, artistInfo)}>
             <PlayerContainer
                 style={{
                     paddingBottom: bottom,
@@ -74,12 +81,32 @@ const Player = () => {
                     containerStyle={{ height: 4 }}
                 />
                 <PlayerInnerContainer>
-                    <AlbumArt url={artwork} size="medium" />
                     <PlayerTextContainer>
                         <ArtistName numberOfLines={1}>{title}</ArtistName>
                         <H3 numberOfLines={1}>{artist}</H3>
                     </PlayerTextContainer>
                     <PlayerButtons>
+                        {isShowLiked(artistInfo.shows[0].id) ? (
+                            <IconButton
+                                Icon={FilledInHeartIcon}
+                                onPress={() => {
+                                    console.log(artistInfo);
+                                    dislikeShow(artistInfo.shows[0].id);
+                                }}
+                                width="20px"
+                                height="20px"
+                            />
+                        ) : (
+                            <IconButton
+                                Icon={HeartIcon}
+                                onPress={() => {
+                                    console.log(artistInfo);
+                                    likeShow(artistInfo.shows[0].id);
+                                }}
+                                width="20px"
+                                height="20px"
+                            />
+                        )}
                         <PlayPauseButton
                             isPlaying={playing}
                             onPress={togglePaused}
@@ -94,17 +121,18 @@ const Player = () => {
                 </PlayerInnerContainer>
             </PlayerContainer>
         </Pressable>
-    ) : null;
+    );
 };
 
 export default Player;
 
 export const PlayerSafeArea = ({ children }) => {
     const { bottom } = useSafeAreaInsets();
-    const { currentTrack } = usePlayer();
-    const playerHeight = useMemo(() => (currentTrack?.url ? 64 + bottom : 0), [
-        currentTrack,
-    ]);
+    const { currentTrack, expanded } = usePlayer();
+    const playerHeight = useMemo(
+        () => (currentTrack?.url ? (expanded ? 218 : 64 + bottom) : 0),
+        [currentTrack]
+    );
     return (
         <View style={{ paddingBottom: playerHeight, height: '100%' }}>
             {children}

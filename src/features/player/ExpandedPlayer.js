@@ -1,39 +1,30 @@
 import React from 'react';
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import { View } from 'react-native';
-import { H3, Text } from '../../ui/Text';
-import { colors } from '../../ui/theme';
-import { usePlayer } from './PlayerState';
-import AlbumArt from '../playlists/AlbumArt';
-import PlayPauseButton from './PlayPauseButton';
-import TrackPositionBar from './TrackPositionBar';
-import IconButton from '../../ui/inputs/IconButton';
-import FastForwardIcon from '../../ui/icons/FastForwardIcon';
-import RewindIcon from '../../ui/icons/RewindIcon';
-import PATHS from '../../contants/paths';
-import { RelativeBackButton } from '../../ui/actions/BackButton';
 import ShiftRight from '../../ui/layout/ShiftRight';
+import IconButton from '../../ui/inputs/IconButton';
 import InfoIcon from '../../ui/icons/InfoIcon';
+import TrackPositionBar from './TrackPositionBar';
+import { secondsToDisplay } from '../../utils/time';
+import RewindIcon from '../../ui/icons/RewindIcon';
+import PlayPauseButton from './PlayPauseButton';
+import FastForwardIcon from '../../ui/icons/FastForwardIcon';
+import { colors } from '../../ui/theme';
+import { H3, Text } from '../../ui/Text';
+import { usePlayer } from './PlayerState';
+import { useProgress } from 'react-native-track-player';
 
-const PlayerContainer = styled(View)`
+const layout = css`
     width: 100%;
-    flex: 1;
     flex-direction: column;
-    justify-content: flex-start;
-    background-color: ${colors.neutral5};
-    z-index: 100;
-    padding: 36px 24px;
+    justify-content: flex-end;
+    background-color: ${colors.primary10};
+    padding: 24px;
+    opacity: 0.9;
 `;
 
-const PlayerBody = styled(View)`
-    flex: 1;
-    flex-direction: column;
-    justify-content: flex-start;
-`;
-
-const PlayerTextContainer = styled(View)`
-    padding-top: 48px;
-    padding-bottom: 24px;
+const ExpandedPlayerTextContainer = styled(View)`
+    padding-bottom: 16px;
     flex-direction: row;
 `;
 
@@ -50,79 +41,89 @@ const TrackSubText = styled(Text)`
 `;
 
 const PlayerControls = styled(View)`
-    margin-top: 24px;
+    margin-top: 16px;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
 `;
 
-const ExpandedPlayer = ({ navigation }) => {
+const TrackTimeContainer = styled(View)`
+    flex-direction: row;
+    justify-content: space-between;
+`;
+const TrackTime = styled(TrackSubText)`
+    font-size: 14px;
+`;
+
+const ExpandedPlayer = ({ style }) => {
+    const { position, duration } = useProgress(100);
     const {
-        currentTrack: { title, artist, artwork, artistInfo },
+        currentTrack: { title, artist, artwork, url, artistInfo },
         playing,
         togglePaused,
         skip,
         rewind,
     } = usePlayer();
 
+    if (!url) {
+        return null;
+    }
     return (
-        <PlayerContainer>
-            <RelativeBackButton
-                navigation={navigation}
-                style={{ transform: [{ rotate: '-90deg' }] }}
-                containerStyle={{ height: 24, marginBottom: 48 }}
-            />
-            <AlbumArt size="large" url={artwork} />
-            <PlayerBody>
-                <PlayerTextContainer>
-                    <View>
-                        <TrackSubText>{title}</TrackSubText>
-                        <SongTitle numberOfLines={1}>
-                            {artist}
-                            <TrackSubText numberOfLines={1}>
-                                {artistInfo.shows.length > 0
-                                    ? ` — ${artistInfo.shows[0].venue.name}`
-                                    : ''}
-                            </TrackSubText>
-                        </SongTitle>
-                    </View>
-                    <ShiftRight style={{ marginRight: 0 }}>
-                        <IconButton
-                            Icon={InfoIcon}
-                            onPress={() => {
-                                navigation.goBack();
-                                navigation.navigate(
-                                    PATHS.SHOW_DETAILS,
-                                    artistInfo
-                                );
-                            }}
-                        />
-                    </ShiftRight>
-                </PlayerTextContainer>
-                <TrackPositionBar />
-                <PlayerControls>
+        <View style={style}>
+            <ExpandedPlayerTextContainer>
+                <View>
+                    <TrackSubText>{title}</TrackSubText>
+                    <SongTitle numberOfLines={1}>
+                        {artist}
+                        <TrackSubText numberOfLines={1}>
+                            {artistInfo.shows.length > 0
+                                ? ` — ${artistInfo.shows[0].venue.name}`
+                                : ''}
+                        </TrackSubText>
+                    </SongTitle>
+                </View>
+                <ShiftRight style={{ marginRight: 0 }}>
                     <IconButton
-                        Icon={RewindIcon}
-                        onPress={rewind}
-                        width="48px"
-                        height="48px"
+                        Icon={InfoIcon}
+                        onPress={() => {
+                            // navigation.goBack();
+                            // navigation.navigate(
+                            //     PATHS.SHOW_DETAILS,
+                            //     artistInfo
+                            // );
+                        }}
                     />
-                    <PlayPauseButton
-                        isPlaying={playing}
-                        onPress={togglePaused}
-                        width="52px"
-                        height="52px"
-                    />
-                    <IconButton
-                        Icon={FastForwardIcon}
-                        onPress={skip}
-                        width="48px"
-                        height="48px"
-                    />
-                </PlayerControls>
-            </PlayerBody>
-        </PlayerContainer>
+                </ShiftRight>
+            </ExpandedPlayerTextContainer>
+            <TrackPositionBar />
+            <TrackTimeContainer>
+                <TrackTime>{secondsToDisplay(position)}</TrackTime>
+                <TrackTime>{secondsToDisplay(duration)}</TrackTime>
+            </TrackTimeContainer>
+            <PlayerControls>
+                <IconButton
+                    Icon={RewindIcon}
+                    onPress={rewind}
+                    width="48px"
+                    height="48px"
+                />
+                <PlayPauseButton
+                    isPlaying={playing}
+                    onPress={togglePaused}
+                    width="52px"
+                    height="52px"
+                />
+                <IconButton
+                    Icon={FastForwardIcon}
+                    onPress={skip}
+                    width="48px"
+                    height="48px"
+                />
+            </PlayerControls>
+        </View>
     );
 };
 
-export default ExpandedPlayer;
+export default styled(ExpandedPlayer)`
+    ${layout}
+`;

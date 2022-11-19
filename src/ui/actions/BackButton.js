@@ -33,3 +33,17 @@ export const RelativeBackButton = ({ style, navigation, containerStyle }) => (
         />
     </View>
 );
+
+const DownIcon = styled(BackIcon)`
+    transform: rotate(270deg);
+`;
+
+export const DownButton = ({ style, navigation }) => (
+    <BackButtonContainer style={{ top: 0, left: 16 }}>
+        <IconButton
+            Icon={DownIcon}
+            onPress={() => navigation.goBack()}
+            iconStyle={style}
+        />
+    </BackButtonContainer>
+);

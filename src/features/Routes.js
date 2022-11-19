@@ -6,12 +6,11 @@ import Playlist from './playlists/Playlist';
 import { useCities } from './cities/CityProvider';
 import { colors } from '../ui/theme';
 import ShowDetails from './shows/ShowDetail';
-import ExpandedPlayer from './player/ExpandedPlayer';
 import BannerPlaylist from './playlists/BannerPlaylist';
 import CitySelect from './cities/CitySelect';
 import { Pressable } from 'react-native';
 import { navigate } from '../utils/navigation';
-import { H2, H3, Text } from '../ui/Text';
+import { H3 } from '../ui/Text';
 
 const Stack = createNativeStackNavigator();
 
@@ -54,11 +53,6 @@ const Routes = () => {
                         name={PATHS.BANNER_PLAYLIST}
                         component={BannerPlaylist}
                     />
-                    <Stack.Screen
-                        name={PATHS.SHOW_DETAILS}
-                        component={ShowDetails}
-                        options={{ headerShown: false }}
-                    />
                     <Stack.Group
                         screenOptions={{
                             presentation: 'modal',
@@ -66,8 +60,9 @@ const Routes = () => {
                         }}
                     >
                         <Stack.Screen
-                            name={PATHS.PLAYER_EXPANDED}
-                            component={ExpandedPlayer}
+                            name={PATHS.SHOW_DETAILS}
+                            component={ShowDetails}
+                            options={{ headerShown: false }}
                         />
                     </Stack.Group>
                 </>
