@@ -46,7 +46,7 @@ const Track = ({ performer, onPress, currentTrack, trackIndex }) => {
 
     return (
         <TouchableHighlight
-            onPress={async () => onPress(track, trackIndex)}
+            onPress={async () => onPress(trackIndex)}
             activeOpacity={1}
             underlayColor={colors.neutral5}
         >

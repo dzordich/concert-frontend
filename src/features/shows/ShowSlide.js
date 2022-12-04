@@ -75,9 +75,7 @@ const ShowSlide = ({
                 }}
             >
                 <VenueIcon />
-                <VenueName numberOfLines={2}>
-                    {venue.name.toUpperCase()}
-                </VenueName>
+                <VenueName>{venue.name.toUpperCase()}</VenueName>
                 <ShiftRight>
                     <FestivalMarker festival={festival} long />
                     <FreeMarker free={free} />

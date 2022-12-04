@@ -6,6 +6,11 @@ export const Text = styled(NativeText)`
     color: ${colors.neutral98};
 `;
 
+export const H1 = styled(Text)`
+    font-size: 24px;
+    font-weight: 700;
+`;
+
 export const H2 = styled(Text)`
     font-size: 20px;
     font-weight: 700;
