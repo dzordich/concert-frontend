@@ -48,3 +48,18 @@ const PlaylistLink = ({ playlist, navigation }) => {
 };
 
 export default PlaylistLink;
+
+export const LikedShowsLink = ({ navigation }) => {
+    return (
+        <PlaylistLinkContainer>
+            <StyledHighlight
+                onPress={() => navigation.navigate(PATHS.LIKED_SHOWS)}
+            >
+                <PlaylistCard
+                    displayName="Liked Shows"
+                    background={require('../../../assets/bg-week-1.png')}
+                />
+            </StyledHighlight>
+        </PlaylistLinkContainer>
+    );
+};

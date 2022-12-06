@@ -10,18 +10,15 @@ const PlaylistTracks = ({ performers, onSongPress }) => {
     }
     return (
         <>
-            {performers.map(
-                (performer, idx) =>
-                    performer.top_track && (
-                        <Track
-                            performer={performer}
-                            onPress={onSongPress}
-                            trackIndex={idx}
-                            currentTrack={currentTrack}
-                            key={idx}
-                        />
-                    )
-            )}
+            {performers.map((performer, idx) => (
+                <Track
+                    performer={performer}
+                    onPress={onSongPress}
+                    trackIndex={idx}
+                    currentTrack={currentTrack}
+                    key={idx}
+                />
+            ))}
         </>
     );
 };

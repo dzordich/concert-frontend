@@ -11,6 +11,7 @@ import CitySelect from './cities/CitySelect';
 import { Pressable } from 'react-native';
 import { navigate } from '../utils/navigation';
 import { H3 } from '../ui/Text';
+import LikedShows from './likedShows/LikedShows';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +50,10 @@ const Routes = () => {
                         options={{ title: 'LOCATION' }}
                     />
                     <Stack.Screen name={PATHS.PLAYLIST} component={Playlist} />
+                    <Stack.Screen
+                        name={PATHS.LIKED_SHOWS}
+                        component={LikedShows}
+                    />
                     <Stack.Screen
                         name={PATHS.BANNER_PLAYLIST}
                         component={BannerPlaylist}

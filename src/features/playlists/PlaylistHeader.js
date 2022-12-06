@@ -37,7 +37,7 @@ const PlaylistHeader = ({ onPlayButtonPress, displayName, subHeader }) => {
                 }}
             >
                 <View>
-                    <H3>{subHeader}</H3>
+                    {subHeader && <H3>{subHeader}</H3>}
                     <H1>{displayName}</H1>
                 </View>
                 <View

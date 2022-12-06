@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { View } from 'react-native';
 import { playlists } from '../../contants/playlists';
-import PlaylistLink from './PlaylistLink';
+import PlaylistLink, { LikedShowsLink } from './PlaylistLink';
 import { colors } from '../../ui/theme';
 import { Text } from '../../ui/Text';
 import BannerPlaylists from './BannerPlaylists';
@@ -80,6 +80,9 @@ const Home = ({ navigation }) => {
                                     navigation={navigation}
                                 />
                             ))}
+                        </PlaylistRow>
+                        <PlaylistRow horizontal={true}>
+                            <LikedShowsLink navigation={navigation} />
                         </PlaylistRow>
                     </View>
                 </Playlists>
