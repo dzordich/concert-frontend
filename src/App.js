@@ -10,8 +10,27 @@ import Player, { PlayerSafeArea } from './features/player/Player';
 import { navigationRef } from './utils/navigation';
 import BannerPlaylistProvider from './features/playlists/BannerPlaylistProvider';
 import LikedShowsState from './utils/hooks/LikedShowsState';
-
+import {
+    useFonts,
+    Montserrat_400Regular,
+    Montserrat_500Medium,
+    Montserrat_600SemiBold,
+    Montserrat_700Bold,
+    Montserrat_800ExtraBold,
+} from '@expo-google-fonts/montserrat';
 export default function App() {
+    let [fontsLoaded] = useFonts({
+        Montserrat_400Regular,
+        Montserrat_500Medium,
+        Montserrat_600SemiBold,
+        Montserrat_700Bold,
+        Montserrat_800ExtraBold,
+    });
+
+    if (!fontsLoaded) {
+        return null;
+    }
+
     return (
         <NavigationContainer ref={navigationRef}>
             <SafeAreaProvider>

@@ -15,6 +15,7 @@ import FastForwardIcon from '../../ui/icons/FastForwardIcon';
 import HeartIcon from '../../ui/icons/HeartIcon';
 import { useLikedShows } from '../../utils/hooks/LikedShowsState';
 import FilledInHeartIcon from '../../ui/icons/FilledInHeartIcon';
+import LikeShowButton from '../../ui/inputs/LikeShowButton';
 
 const PlayerContainer = styled(View)`
     width: 100%;
@@ -63,7 +64,6 @@ const Player = () => {
         togglePaused,
         skip,
     } = usePlayer();
-    const { likeShow, dislikeShow, isShowLiked } = useLikedShows();
 
     if (!url) {
         return null;
@@ -86,27 +86,7 @@ const Player = () => {
                         <H3 numberOfLines={1}>{artist}</H3>
                     </PlayerTextContainer>
                     <PlayerButtons>
-                        {isShowLiked(artistInfo.shows[0].id) ? (
-                            <IconButton
-                                Icon={FilledInHeartIcon}
-                                onPress={() => {
-                                    console.log(artistInfo);
-                                    dislikeShow(artistInfo.shows[0].id);
-                                }}
-                                width="20px"
-                                height="20px"
-                            />
-                        ) : (
-                            <IconButton
-                                Icon={HeartIcon}
-                                onPress={() => {
-                                    console.log(artistInfo);
-                                    likeShow(artistInfo.shows[0].id);
-                                }}
-                                width="20px"
-                                height="20px"
-                            />
-                        )}
+                        <LikeShowButton showId={artistInfo.shows[0].id} />
                         <PlayPauseButton
                             isPlaying={playing}
                             onPress={togglePaused}

@@ -4,8 +4,8 @@ import Svg, { Path } from 'react-native-svg';
 const BackIcon = props => (
     <Svg
         xmlns="http://www.w3.org/2000/svg"
-        height="22px"
-        width="22px"
+        height="24px"
+        width="24px"
         version="1.1"
         viewBox="0 0 168 168"
         {...props}

@@ -39,7 +39,9 @@ const DownIcon = styled(BackIcon)`
 `;
 
 export const DownButton = ({ style, navigation }) => (
-    <BackButtonContainer style={{ top: 0, left: 16 }}>
+    <BackButtonContainer
+        style={{ top: 0, width: '100%', marginHorizontal: 16 }}
+    >
         <IconButton
             Icon={DownIcon}
             onPress={() => navigation.goBack()}

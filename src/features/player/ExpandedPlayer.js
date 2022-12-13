@@ -31,7 +31,6 @@ const ExpandedPlayerTextContainer = styled(View)`
 const SongTitle = styled(H3)`
     font-size: 18px;
     margin-top: 4px;
-    font-weight: 600;
 `;
 
 const TrackSubText = styled(Text)`

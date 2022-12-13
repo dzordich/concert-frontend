@@ -4,7 +4,12 @@ import Carousel, { Pagination } from 'react-native-new-snap-carousel';
 import { getWindowWidth } from '../../utils/dimensions';
 import { colors } from '../theme';
 
-const PaginatedCarousel = ({ data, renderItem }) => {
+const PaginatedCarousel = ({
+    data,
+    renderItem,
+    paginationStyle = {},
+    ...props
+}) => {
     const [activeSlide, setActiveSlide] = useState(0);
     const windowWidth = getWindowWidth();
 
@@ -15,17 +20,25 @@ const PaginatedCarousel = ({ data, renderItem }) => {
                 renderItem={renderItem}
                 itemWidth={windowWidth}
                 sliderWidth={windowWidth}
-                onSnapToItem={setActiveSlide}
+                onSnapToItem={index => {
+                    setActiveSlide(index);
+                    props.onSnapToItem && props.onSnapToItem(index);
+                }}
             />
             <View
                 style={{
-                    zIndex: 10,
-                    position: 'absolute',
-                    bottom: -10,
-                    left: 0,
-                    right: 0,
-                    width: '100%',
-                    justifyContent: 'center',
+                    // zIndex: 10,
+                    // position: 'absolute',
+                    // bottom: -10,
+                    // left: 0,
+                    // right: 0,
+                    // width: '100%',
+                    // justifyContent: 'center',
+                    // ...paginationStyle,
+                    margin: 0,
+                    padding: 0,
+                    // height: 16,
+                    // backgroundColor: 'red',
                 }}
                 pointerEvents="none"
             >
@@ -34,6 +47,11 @@ const PaginatedCarousel = ({ data, renderItem }) => {
                     activeDotIndex={activeSlide}
                     dotColor={colors.neutral98}
                     inactiveDotColor={colors.neutral90}
+                    containerStyle={{
+                        margin: 0,
+                        padding: 0,
+                        // backgroundColor: 'red',
+                    }}
                 />
             </View>
         </View>
