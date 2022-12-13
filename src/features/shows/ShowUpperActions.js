@@ -1,14 +1,13 @@
 import React from 'react';
 import IconButton from '../../ui/inputs/IconButton';
 import styled, { css } from 'styled-components/native';
-import { Linking, SafeAreaView, View } from 'react-native';
+import { Linking, View } from 'react-native';
 import BackIcon from '../../ui/icons/BackIcon';
 import SpotifyLogo from '../../ui/icons/SpotifyLogo';
 import { colors } from '../../ui/theme';
 import ShareIcon from '../../ui/icons/ShareIcon';
 import { shareShow } from '../../utils/sms';
 import { displayDate } from '../../utils/dates';
-import LikeShowButton from '../../ui/inputs/LikeShowButton';
 
 const layout = css`
     position: absolute;
@@ -30,7 +29,7 @@ const ShowUpperActions = ({
     spotifyId,
     navigation,
     artistName,
-    show: { venue, start_date, id },
+    show: { venue, start_date },
     style,
 }) => (
     <View style={style}>
@@ -54,9 +53,8 @@ const ShowUpperActions = ({
                 onPress={() =>
                     shareShow(artistName, venue.name, displayDate(start_date))
                 }
-                style={{ color: colors.neutral98, marginRight: 16 }}
+                style={{ color: colors.neutral98 }}
             />
-            <LikeShowButton showId={id} width="24px" height="24px" />
         </View>
     </View>
 );

@@ -27,18 +27,9 @@ const PaginatedCarousel = ({
             />
             <View
                 style={{
-                    // zIndex: 10,
-                    // position: 'absolute',
-                    // bottom: -10,
-                    // left: 0,
-                    // right: 0,
-                    // width: '100%',
-                    // justifyContent: 'center',
-                    // ...paginationStyle,
                     margin: 0,
                     padding: 0,
-                    // height: 16,
-                    // backgroundColor: 'red',
+                    ...paginationStyle,
                 }}
                 pointerEvents="none"
             >
@@ -50,7 +41,6 @@ const PaginatedCarousel = ({
                     containerStyle={{
                         margin: 0,
                         padding: 0,
-                        // backgroundColor: 'red',
                     }}
                 />
             </View>

@@ -8,9 +8,6 @@ import { colors } from '../ui/theme';
 import ShowDetails from './shows/ShowDetail';
 import BannerPlaylist from './playlists/BannerPlaylist';
 import CitySelect from './cities/CitySelect';
-import { Pressable } from 'react-native';
-import { navigate } from '../utils/navigation';
-import { H3 } from '../ui/Text';
 import LikedShows from './likedShows/LikedShows';
 
 const Stack = createNativeStackNavigator();
@@ -22,14 +19,7 @@ const Routes = () => {
         <Stack.Navigator
             initialRouteName={PATHS.HOME}
             screenOptions={{
-                headerTitle: ({ children }) => (
-                    <Pressable onPress={() => navigate(PATHS.CITIES)}>
-                        <H3 style={{ fontWeight: '700' }}>{children}</H3>
-                    </Pressable>
-                ),
-                title: selectedCity
-                    ? `${selectedCity.name}, ${selectedCity.state}`.toUpperCase()
-                    : '',
+                title: '',
                 headerStyle: {
                     backgroundColor: colors.neutral5,
                 },
@@ -43,7 +33,13 @@ const Routes = () => {
         >
             {selectedCity ? (
                 <>
-                    <Stack.Screen name={PATHS.HOME} component={Home} />
+                    <Stack.Screen
+                        name={PATHS.HOME}
+                        component={Home}
+                        options={{
+                            headerShown: false,
+                        }}
+                    />
                     <Stack.Screen
                         name={PATHS.CITIES}
                         component={CitySelect}
@@ -75,7 +71,6 @@ const Routes = () => {
                 <Stack.Screen
                     name={PATHS.INITIAL_CITY_SELECT}
                     component={CitySelect}
-                    options={{ title: 'LOCATION' }}
                 />
             )}
         </Stack.Navigator>

@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { View } from 'react-native';
-import { playlists } from '../../contants/playlists';
-import PlaylistLink, { LikedShowsLink } from './PlaylistLink';
+import { Pressable, View } from 'react-native';
 import { colors } from '../../ui/theme';
-import { Text } from '../../ui/Text';
+import { H2 } from '../../ui/Text';
 import BannerPlaylists from './BannerPlaylists';
 import { useBannerPlaylists } from '../playlists/BannerPlaylistProvider';
+import { navigate } from '../../utils/navigation';
+import PATHS from '../../contants/paths';
+import { useCities } from '../cities/CityProvider';
+import ToggleButton from '../../ui/actions/ToggleButton';
+import ConcertsTab from './ConcertsTab';
+import FestivalsTab from './FestivalsTab';
 
 const Container = styled(View)`
     height: 100%;
@@ -14,76 +18,57 @@ const Container = styled(View)`
 `;
 
 const Playlists = styled.ScrollView`
-    padding-vertical: 16px;
+    padding-bottom: 16px;
     z-index: -1;
 `;
 
-const ListHeader = styled.View`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 24px 12px;
-    overflow: hidden;
-`;
-
-const ListHeaderText = styled(Text)`
-    font-size: 18px;
-    color: ${colors.neutral90};
-`;
-
-const HorizontalLine = styled.View`
-    height: 0;
-    width: 50%;
-    margin-left: auto;
-    border: 0.5px solid ${colors.neutral40};
-`;
-
-const PlaylistRow = styled.ScrollView`
-    margin-bottom: 12px;
-`;
-
-const Home = ({ navigation }) => {
+const Home = () => {
     const { bannersLoaded } = useBannerPlaylists();
+    const { selectedCity } = useCities();
+    const [activeTab, setActiveTab] = useState(0);
+
     return (
         <Container>
             {bannersLoaded ? (
                 <Playlists>
-                    <View style={{ paddingBottom: 36 }}>
+                    <View
+                        style={{ paddingBottom: 36, justifyContent: 'center' }}
+                    >
                         <BannerPlaylists />
-                        <ListHeader>
-                            <ListHeaderText>Upcoming Concerts</ListHeaderText>
-                            <HorizontalLine />
-                        </ListHeader>
-                        <PlaylistRow horizontal={true}>
-                            {playlists.days.map((playlist, idx) => (
-                                <PlaylistLink
-                                    key={idx}
-                                    playlist={playlist}
-                                    navigation={navigation}
-                                />
-                            ))}
-                        </PlaylistRow>
-                        <PlaylistRow horizontal={true}>
-                            {playlists.weeks.map((playlist, idx) => (
-                                <PlaylistLink
-                                    key={idx}
-                                    playlist={playlist}
-                                    navigation={navigation}
-                                />
-                            ))}
-                        </PlaylistRow>
-                        <PlaylistRow horizontal={true}>
-                            {playlists.months.map((playlist, idx) => (
-                                <PlaylistLink
-                                    key={idx}
-                                    playlist={playlist}
-                                    navigation={navigation}
-                                />
-                            ))}
-                        </PlaylistRow>
-                        <PlaylistRow horizontal={true}>
-                            <LikedShowsLink navigation={navigation} />
-                        </PlaylistRow>
+                        <Pressable
+                            onPress={() => navigate(PATHS.CITIES)}
+                            style={{
+                                width: '100%',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                marginBottom: 24,
+                                marginTop: -36,
+                            }}
+                        >
+                            <H2
+                                style={{
+                                    fontWeight: '700',
+                                    textDecorationLine: 'underline',
+                                }}
+                            >
+                                {`${selectedCity.name}, ${selectedCity.state}`}
+                            </H2>
+                        </Pressable>
+                        <View
+                            style={{
+                                marginBottom: 24,
+                                alignItems: 'center',
+                                width: '100%',
+                            }}
+                        >
+                            <ToggleButton
+                                options={['Concerts', 'Festivals']}
+                                selectedIndex={activeTab}
+                                onSelect={setActiveTab}
+                            />
+                        </View>
+                        {activeTab === 0 && <ConcertsTab />}
+                        {activeTab === 1 && <FestivalsTab />}
                     </View>
                 </Playlists>
             ) : null}

@@ -40,7 +40,7 @@ export const colors = {
     neutral20: 'hsl(0, 0%, 20%)',
     neutral10: 'hsl(0, 0%, 10%)',
     neutral5: 'hsl(0, 0%, 5%)',
-    neutralOpaque5: 'rgba(15,20,24,0.5)',
+    neutralOpaque5: 'hsla(0, 0%, 5% ,0.7)',
 
     // Cyan
     // secondary98: "#E0FCFF",

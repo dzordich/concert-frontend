@@ -78,7 +78,6 @@ const ShowDetails = ({ route, navigation }) => {
                     <PaginatedCarousel
                         data={shows}
                         onSnapToItem={setCurrentShowIndex}
-                        paginationStyle={{ bottom: -36 }}
                         renderItem={({ item }) => (
                             <ShowSlide
                                 {...item}

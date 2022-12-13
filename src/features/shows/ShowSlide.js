@@ -44,7 +44,14 @@ const DateContainer = styled.View`
     background-color: ${colors.neutral10};
 `;
 
-const ShowSlide = ({ id, venue, mainPerformer, performers, style }) => {
+const ShowSlide = ({
+    id,
+    venue,
+    mainPerformer,
+    performers,
+    start_date,
+    style,
+}) => {
     const otherPerformers = performers.filter(
         performer => performer.name !== mainPerformer
     );
