@@ -38,10 +38,6 @@ const LikedShowsState = ({ children }) => {
         );
     }, []);
 
-    useEffect(() => {
-        console.log(likedShowIds);
-    }, [likedShowIds]);
-
     return (
         <LikedShowsContext.Provider
             value={{ likedShowIds, likeShow, dislikeShow, isShowLiked }}
