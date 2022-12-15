@@ -6,6 +6,10 @@ import PaginatedCarousel from '../../ui/layout/PaginatedCarousel';
 import { Display, Text } from '../../ui/Text';
 import { getWindowWidth } from '../../utils/dimensions';
 import { colors } from '../../ui/theme';
+import { navigate } from '../../utils/navigation';
+import PATHS from '../../contants/paths';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import CircleHeart from '../../ui/icons/CircleHeart';
 
 const Container = styled.View``;
 
@@ -23,7 +27,6 @@ const BannerPlaylist = styled(({ style, playlist }) => (
             <Gradient
                 colors={[
                     colors.neutralOpaque5,
-                    'transparent',
                     'transparent',
                     colors.neutral5,
                 ]}
@@ -62,6 +65,7 @@ const BANNERS = [
 ];
 
 const BannerPlaylists = () => {
+    const { top } = useSafeAreaInsets();
     return (
         <Container>
             <PaginatedCarousel
@@ -77,6 +81,26 @@ const BannerPlaylists = () => {
                 }}
                 renderItem={({ item }) => <BannerPlaylist playlist={item} />}
             />
+            <Pressable
+                style={{
+                    position: 'absolute',
+                    top: 12 + top,
+                    right: 12,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+                onPress={() => navigate(PATHS.LIKED_SHOWS)}
+            >
+                <CircleHeart />
+                <Text
+                    style={{
+                        fontSize: 12,
+                        marginTop: 4,
+                    }}
+                >
+                    Favorites
+                </Text>
+            </Pressable>
         </Container>
     );
 };

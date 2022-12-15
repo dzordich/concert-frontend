@@ -33,7 +33,7 @@ export const formatTodayPlusDaysShort = compose(
 
 export const formatDateWithoutYear = compose(replace('-', '/'), takeAfter('-'));
 
-export const displayDate = compose(format('EEEE, MMM do'), parseISO);
+export const displayDate = compose(format('EEEE, MMM d'), parseISO);
 
 export const weekdayAtTodayPlusDays = compose(
     format('EEEE'),

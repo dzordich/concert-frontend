@@ -78,23 +78,6 @@ const PlaylistLink = ({ playlist, style }) => {
 
 export default PlaylistLink;
 
-export const LikedShowsLink = () => {
-    const navigation = useNavigation();
-
-    return (
-        <PlaylistLinkContainer>
-            <TouchableHighlight
-                onPress={() => navigation.navigate(PATHS.LIKED_SHOWS)}
-            >
-                <PlaylistCard
-                    displayName="Liked Shows"
-                    image={require('../../../assets/bg-week-1.png')}
-                />
-            </TouchableHighlight>
-        </PlaylistLinkContainer>
-    );
-};
-
 export const LargePlaylistLink = ({ playlist, style, ...props }) => {
     const navigation = useNavigation();
 

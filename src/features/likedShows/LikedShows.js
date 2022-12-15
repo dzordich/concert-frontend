@@ -29,7 +29,7 @@ const LikedShows = ({ style }) => {
             <ScrollView>
                 <ScrollBounceBackground color={colors.neutral10} />
                 <PlaylistHeader
-                    displayName="Liked Shows"
+                    displayName="Favorites"
                     onPlayButtonPress={() => onSongPress(0)}
                 />
                 <PlaylistTracks

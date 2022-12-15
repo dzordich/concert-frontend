@@ -3,10 +3,7 @@ import styled from 'styled-components/native';
 import { ScrollView, View } from 'react-native';
 import { listToPairs } from '../../utils/arrays';
 import { playlists } from '../../contants/playlists';
-import PlaylistLink, {
-    LargePlaylistLink,
-    LikedShowsLink,
-} from './PlaylistLink';
+import PlaylistLink, { LargePlaylistLink } from './PlaylistLink';
 import { getWindowWidth } from '../../utils/dimensions';
 import { colors } from '../../ui/theme';
 
@@ -56,10 +53,6 @@ const ConcertsTab = () => {
                         playlist={playlist}
                     />
                 ))}
-            </ScrollView>
-            <HorizontalLine />
-            <ScrollView horizontal={true}>
-                <LikedShowsLink />
             </ScrollView>
         </>
     );

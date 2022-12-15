@@ -11,6 +11,7 @@ import { useCities } from '../cities/CityProvider';
 import ToggleButton from '../../ui/actions/ToggleButton';
 import ConcertsTab from './ConcertsTab';
 import FestivalsTab from './FestivalsTab';
+import PlaceIcon from '../../ui/icons/PlaceIcon';
 
 const Container = styled(View)`
     height: 100%;
@@ -38,17 +39,18 @@ const Home = () => {
                         <Pressable
                             onPress={() => navigate(PATHS.CITIES)}
                             style={{
-                                width: '100%',
                                 justifyContent: 'center',
                                 alignItems: 'center',
+                                flexDirection: 'row',
                                 marginBottom: 24,
                                 marginTop: -36,
                             }}
                         >
+                            <PlaceIcon />
                             <H2
                                 style={{
                                     fontWeight: '700',
-                                    textDecorationLine: 'underline',
+                                    marginRight: 4,
                                 }}
                             >
                                 {`${selectedCity.name}, ${selectedCity.state}`}
