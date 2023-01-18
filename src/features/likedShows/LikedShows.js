@@ -9,10 +9,14 @@ import styled from 'styled-components/native';
 import { playlistStyle } from '../playlists/playlistStyle';
 import { listLikedShows } from '../../api/shows';
 import { useLikedShows } from '../../utils/hooks/LikedShowsState';
-import { isEmpty } from 'ramda';
+import { isEmpty, map } from 'ramda';
+import ToggleButton from '../../ui/actions/ToggleButton';
+
+const tabs = ['upcoming', 'past'];
 
 const LikedShows = ({ style }) => {
     const [performers, setPerformers] = useState([]);
+    const [activeTab, setActiveTab] = useState(0);
     const { likedShowIds } = useLikedShows();
     const { onSongPress, addPerformerToTopTrack } =
         usePlaylistActions(performers);
@@ -20,7 +24,12 @@ const LikedShows = ({ style }) => {
     useEffect(() => {
         !isEmpty(likedShowIds) &&
             listLikedShows(Array.from(likedShowIds)).then(response => {
-                setPerformers(response.map(addPerformerToTopTrack));
+                console.log(response);
+                setPerformers(
+                    map(artists => artists.map(addPerformerToTopTrack))(
+                        response
+                    )
+                );
             });
     }, []);
 
@@ -32,8 +41,21 @@ const LikedShows = ({ style }) => {
                     displayName="Favorites"
                     onPlayButtonPress={() => onSongPress(0)}
                 />
+                <View
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginBottom: 24,
+                    }}
+                >
+                    <ToggleButton
+                        options={['Upcoming', 'Past']}
+                        onSelect={setActiveTab}
+                        selectedIndex={activeTab}
+                    />
+                </View>
                 <PlaylistTracks
-                    performers={performers}
+                    performers={performers[tabs[activeTab]]}
                     onSongPress={onSongPress}
                 />
             </ScrollView>
