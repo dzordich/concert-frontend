@@ -14,11 +14,13 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true,
+      "scheme": "stagebite",
+      "associatedDomains": ["applinks:stagebiteapp.com"],
+      "supportsTablet": false,
       "infoPlist": {
         "UIBackgroundModes": ["audio"]
       },
-      "buildNumber": "37",
+      "buildNumber": "38",
       "bundleIdentifier": "com.brickyardusertest.concertfrontend"
     },
     "android": {

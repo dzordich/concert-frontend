@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { Pressable, View } from 'react-native';
+import { Linking, Pressable, View } from 'react-native';
 import { colors } from '../../ui/theme';
-import { H2 } from '../../ui/Text';
+import { H2, Text } from '../../ui/Text';
 import BannerPlaylists from './BannerPlaylists';
 import { useBannerPlaylists } from '../playlists/BannerPlaylistProvider';
 import { navigate } from '../../utils/navigation';
@@ -12,6 +12,10 @@ import ToggleButton from '../../ui/actions/ToggleButton';
 import ConcertsTab from './ConcertsTab';
 import FestivalsTab from './FestivalsTab';
 import PlaceIcon from '../../ui/icons/PlaceIcon';
+import {
+    PRIVACY_POLICY_URL,
+    SUPPORT_EMAIL,
+} from '../../contants/externalLinks';
 
 const Container = styled(View)`
     height: 100%;
@@ -71,6 +75,35 @@ const Home = () => {
                         </View>
                         {activeTab === 0 && <ConcertsTab />}
                         {activeTab === 1 && <FestivalsTab />}
+                    </View>
+                    <View
+                        style={{
+                            width: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginBottom: 16,
+                        }}
+                    >
+                        <Pressable
+                            onPress={() => Linking.openURL(PRIVACY_POLICY_URL)}
+                            style={{ marginBottom: 16 }}
+                        >
+                            <Text
+                                style={{
+                                    color: colors.primary80,
+                                }}
+                            >
+                                Privacy Policy
+                            </Text>
+                        </Pressable>
+                        <Pressable
+                            onPress={() => Linking.openURL(SUPPORT_EMAIL)}
+                            style={{ marginBottom: 16 }}
+                        >
+                            <Text style={{ color: colors.primary80 }}>
+                                Contact Support
+                            </Text>
+                        </Pressable>
                     </View>
                 </Playlists>
             ) : null}
