@@ -80,4 +80,6 @@ export const colors = {
     bgDay: '#4b27b6',
     bgWeek: '#B934CF',
     bgMonth: '#CF7E34',
+
+    spotifyGreen: '#1DB954',
 };

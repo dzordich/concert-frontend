@@ -7,7 +7,7 @@ const sizes = {
     small: 48,
     medium: 60,
     large: getWindowWidth() - 48,
-    full: getWindowWidth(),
+    full: getWindowWidth() * 0.7,
 };
 
 const getSizeFromProps = props => sizes[props.size];
@@ -24,6 +24,7 @@ const AlbumArtImage = styled(Image)`
 
 const AlbumArtBackgroundImage = styled(ImageBackground)`
     ${layout}
+    align-self: center;
 `;
 
 const EmptyAlbumArt = styled(View)`

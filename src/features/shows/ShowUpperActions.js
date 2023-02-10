@@ -8,17 +8,15 @@ import { colors } from '../../ui/theme';
 import ShareIcon from '../../ui/icons/ShareIcon';
 import { shareShow } from '../../utils/sms';
 import { displayDate } from '../../utils/dates';
+import OpenSpotifyButton from './OpenSpotifyButton';
 
 const layout = css`
-    position: absolute;
-    z-index: 9;
-    top: 32px;
-    left: 0;
     width: 100%;
     flex: 1;
-  padding: 16px
+    padding: 24px 16px;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 `;
 
 const DownIcon = styled(BackIcon)`
@@ -38,16 +36,8 @@ const ShowUpperActions = ({
             onPress={() => navigation.goBack()}
             iconStyle={style}
         />
+        <OpenSpotifyButton spotifyId={spotifyId} />
         <View style={{ flexDirection: 'row' }}>
-            <IconButton
-                Icon={SpotifyLogo}
-                onPress={() =>
-                    Linking.openURL(
-                        `https://open.spotify.com/artist/${spotifyId}`
-                    )
-                }
-                style={{ color: colors.neutral98, marginRight: 16 }}
-            />
             <IconButton
                 Icon={ShareIcon}
                 onPress={() =>

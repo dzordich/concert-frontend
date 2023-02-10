@@ -11,6 +11,7 @@ import ShowSlide from './ShowSlide';
 import ShowMap from './ShowMap';
 import ShowUpperActions from './ShowUpperActions';
 import VenueIcon from '../../ui/icons/VenueIcon';
+import OpenSpotifyButton from './OpenSpotifyButton';
 
 const ShowDetailsContainer = styled(View)`
     flex: 1;
@@ -32,7 +33,6 @@ const VenueName = styled(H2)`
     font-weight: 400;
     margin-left: 8px;
     font-size: 16px;
-    flex: 1;
     flex-wrap: wrap;
 `;
 
@@ -42,38 +42,33 @@ const ShowDetails = ({ route, navigation }) => {
 
     return (
         <ShowDetailsContainer>
-            <ShowUpperActions
-                navigation={navigation}
-                spotifyId={spotify_id}
-                artistName={name}
-                show={shows[currentShowIndex]}
-            />
             <ScrollView style={{ flex: 2, flexGrow: 1 }}>
-                <AlbumArtBackground url={top_track.album_art_url}>
-                    <Gradient
-                        colors={[
-                            colors.neutral5,
-                            'transparent',
-                            colors.neutral5,
-                        ]}
+                <ShowUpperActions
+                    navigation={navigation}
+                    spotifyId={spotify_id}
+                    artistName={name}
+                    show={shows[currentShowIndex]}
+                />
+                <AlbumArtBackground
+                    url={top_track.album_art_url}
+                ></AlbumArtBackground>
+                <View style={{ alignItems: 'center', marginTop: 24 }}>
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginBottom: 4,
+                        }}
                     >
-                        <View
-                            style={{
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                marginBottom: 4,
-                            }}
-                        >
-                            <VenueIcon />
-                            <VenueName>
-                                {shows[currentShowIndex].venue.name}
-                            </VenueName>
-                            {/*  festival marker used to be here */}
-                        </View>
-                        <Display>{name}</Display>
-                    </Gradient>
-                </AlbumArtBackground>
+                        <VenueIcon />
+                        <VenueName>
+                            {shows[currentShowIndex].venue.name}
+                        </VenueName>
+                        {/*  festival marker used to be here */}
+                    </View>
+                    <Display style={{ fontSize: 32 }}>{name}</Display>
+                </View>
                 {shows.length > 1 ? (
                     <PaginatedCarousel
                         data={shows}

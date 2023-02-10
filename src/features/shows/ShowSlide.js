@@ -26,7 +26,6 @@ const VenueLinkContainer = styled(View)`
 
 const VenueLink = styled(Button)`
     background-color: ${colors.primary60};
-    align-items: center;
     flex-direction: row;
     padding: 12px;
     height: 40px;
@@ -57,19 +56,21 @@ const ShowSlide = ({
     );
     return (
         <View style={style}>
-            {isNotEmpty(otherPerformers) && (
-                <Text style={{ marginBottom: 8, color: colors.neutral80 }}>
-                    With{' '}
-                    <Text
-                        style={{
-                            fontWeight: '600',
-                            fontFamily: 'Montserrat_600SemiBold',
-                        }}
-                    >
-                        {formatList(otherPerformers.map(prop('name')))}
+            <View style={{ alignItems: 'center' }}>
+                {isNotEmpty(otherPerformers) && (
+                    <Text style={{ marginBottom: 8, color: colors.neutral80 }}>
+                        With{' '}
+                        <Text
+                            style={{
+                                fontWeight: '600',
+                                fontFamily: 'Montserrat_600SemiBold',
+                            }}
+                        >
+                            {formatList(otherPerformers.map(prop('name')))}
+                        </Text>
                     </Text>
-                </Text>
-            )}
+                )}
+            </View>
             <VenueLinkContainer>
                 <VenueLink
                     onPress={() =>

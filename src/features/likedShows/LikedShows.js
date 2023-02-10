@@ -18,8 +18,9 @@ const LikedShows = ({ style }) => {
     const [performers, setPerformers] = useState([]);
     const [activeTab, setActiveTab] = useState(0);
     const { likedShowIds } = useLikedShows();
-    const { onSongPress, addPerformerToTopTrack } =
-        usePlaylistActions(performers);
+    const { onSongPress, addPerformerToTopTrack } = usePlaylistActions(
+        performers?.[tabs[activeTab]]
+    );
 
     useEffect(() => {
         !isEmpty(likedShowIds) &&

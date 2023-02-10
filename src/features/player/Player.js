@@ -16,6 +16,7 @@ import HeartIcon from '../../ui/icons/HeartIcon';
 import { useLikedShows } from '../../utils/hooks/LikedShowsState';
 import FilledInHeartIcon from '../../ui/icons/FilledInHeartIcon';
 import LikeShowButton from '../../ui/inputs/LikeShowButton';
+import { OpenSpotifyLink } from '../shows/OpenSpotifyButton';
 
 const PlayerContainer = styled(View)`
     width: 100%;
@@ -26,6 +27,7 @@ const PlayerContainer = styled(View)`
     flex: 0;
     flex-direction: column;
     justify-content: flex-start;
+    align-items: center;
     background-color: ${colors.primary10};
 `;
 
@@ -59,7 +61,7 @@ const PlayerButtons = styled(ShiftRight)`
 const Player = () => {
     const { bottom } = useSafeAreaInsets();
     const {
-        currentTrack: { title, artist, url, artistInfo },
+        currentTrack: { title, artist, url, artistInfo, spotifyUri },
         playing,
         togglePaused,
         skip,
@@ -78,7 +80,7 @@ const Player = () => {
             >
                 <TrackPositionBar
                     disabled={true}
-                    containerStyle={{ height: 4 }}
+                    containerStyle={{ height: 4, alignSelf: 'stretch' }}
                 />
                 <PlayerInnerContainer>
                     <PlayerTextContainer>
@@ -99,6 +101,9 @@ const Player = () => {
                         />
                     </PlayerButtons>
                 </PlayerInnerContainer>
+                <OpenSpotifyLink
+                    spotifyUri={artistInfo.top_track.spotify_uri}
+                />
             </PlayerContainer>
         </Pressable>
     );
