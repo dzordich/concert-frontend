@@ -5,11 +5,10 @@ import { compose, find } from 'ramda';
 
 const Marker = styled.Text`
     color: ${colors.primary80};
-    font-size: 10px;
+    font-size: 8px;
     padding: 4px;
     border: 1px solid ${colors.primary80};
     border-radius: 4px;
-    min-width: 40px;
     text-align: center;
 `;
 

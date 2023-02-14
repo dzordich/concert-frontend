@@ -10,6 +10,7 @@ import { navigate } from '../../utils/navigation';
 import PATHS from '../../contants/paths';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CircleHeart from '../../ui/icons/CircleHeart';
+import { useBannerPlaylists } from '../playlists/BannerPlaylistProvider';
 
 const Container = styled.View``;
 
@@ -22,14 +23,16 @@ const Gradient = styled(LinearGradient)`
 `;
 
 const BannerPlaylist = styled(({ style, playlist }) => (
-    <Pressable onPress={() => Linking.openURL(playlist.webLink)}>
+    <Pressable
+        onPress={() =>
+            playlist.onPress
+                ? playlist.onPress()
+                : Linking.openURL(playlist.webLink)
+        }
+    >
         <ImageBackground style={style} source={playlist.image}>
             <Gradient
-                colors={[
-                    colors.neutralOpaque5,
-                    'transparent',
-                    colors.neutral5,
-                ]}
+                colors={[colors.neutralOpaque5, 'transparent', colors.neutral5]}
             >
                 <Display style={{ marginBottom: 8, fontSize: 32 }}>
                     {playlist.title.toUpperCase()}
@@ -44,28 +47,37 @@ const BannerPlaylist = styled(({ style, playlist }) => (
     overflow: hidden;
 `;
 
-const BANNERS = [
-    {
-        image: {
-            uri: 'https://concertfindermedia.s3.amazonaws.com/concert-backend/bannerBackgrounds/arctic-monkeys-singer.png',
-        },
-        title: 'Arctic Monkeys',
-        subHeader: 'North American Tour',
-        webLink: 'https://arcticmonkeys.com/live',
-    },
-    {
-        image: {
-            uri: 'https://concertfindermedia.s3.amazonaws.com/concert-backend/bannerBackgrounds/the-car.png',
-        },
-        title: 'The Car',
-        subHeader: 'Album Out Now',
-        webLink:
-            'https://open.spotify.com/album/2GROf0WKoP5Er2M9RXVNNs?si=vzPRjrVyRguvT7JB-_ZsNA',
-    },
-];
-
 const BannerPlaylists = () => {
     const { top } = useSafeAreaInsets();
+    const { banners } = useBannerPlaylists();
+
+    const BANNERS = [
+        {
+            image: {
+                uri: 'https://concertfindermedia.s3.amazonaws.com/concert-backend/bannerBackgrounds/sxsw-banner-1.png',
+            },
+            title: 'SXSW',
+            subHeader: 'Hip-Hop Lineup',
+            onPress: () => navigate(PATHS.BANNER_PLAYLIST, banners[2]),
+        },
+        {
+            image: {
+                uri: 'https://concertfindermedia.s3.amazonaws.com/concert-backend/bannerBackgrounds/arctic-monkeys-singer.png',
+            },
+            title: 'Arctic Monkeys',
+            subHeader: 'North American Tour',
+            webLink: 'https://arcticmonkeys.com/live',
+        },
+        {
+            image: {
+                uri: 'https://concertfindermedia.s3.amazonaws.com/concert-backend/bannerBackgrounds/the-car.png',
+            },
+            title: 'The Car',
+            subHeader: 'Album Out Now',
+            webLink:
+                'https://open.spotify.com/album/2GROf0WKoP5Er2M9RXVNNs?si=vzPRjrVyRguvT7JB-_ZsNA',
+        },
+    ];
     return (
         <Container>
             <PaginatedCarousel

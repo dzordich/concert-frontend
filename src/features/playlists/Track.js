@@ -77,7 +77,10 @@ const Track = ({ performer, onPress, currentTrack, trackIndex }) => {
                             paddingLeft: 4,
                         }}
                     >
-                        <FestivalMarker shows={shows} />
+                        <FestivalMarker
+                            shows={shows}
+                            style={{ marginRight: 8 }}
+                        />
                         <FreeMarker free={hasFreeShow(shows)} />
                         {shows.some(({ id }) => isShowLiked(id)) && (
                             <FilledInHeartIcon
