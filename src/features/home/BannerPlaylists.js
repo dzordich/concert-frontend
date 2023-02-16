@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components/native';
 import { ImageBackground, Pressable, Linking } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -42,7 +42,7 @@ const BannerPlaylist = styled(({ style, playlist }) => (
         </ImageBackground>
     </Pressable>
 ))`
-    height: ${getWindowWidth() * 0.7}px;
+    height: ${getWindowWidth() * 0.85}px;
     border-radius: 4px;
     overflow: hidden;
 `;
@@ -51,33 +51,31 @@ const BannerPlaylists = () => {
     const { top } = useSafeAreaInsets();
     const { banners } = useBannerPlaylists();
 
-    const BANNERS = [
-        {
-            image: {
-                uri: 'https://concertfindermedia.s3.amazonaws.com/concert-backend/bannerBackgrounds/sxsw-banner-1.png',
+    const BANNERS = useMemo(
+        () => [
+            {
+                image: {
+                    uri: 'https://concertfindermedia.s3.amazonaws.com/concert-backend/bannerBackgrounds/sxsw-banner-1.png',
+                },
+                title: 'SXSW',
+                subHeader: 'Hip-Hop Lineup',
+                onPress: () =>
+                    navigate(
+                        PATHS.BANNER_PLAYLIST,
+                        banners.find(banner => banner.id === 22)
+                    ),
             },
-            title: 'SXSW',
-            subHeader: 'Hip-Hop Lineup',
-            onPress: () => navigate(PATHS.BANNER_PLAYLIST, banners[2]),
-        },
-        {
-            image: {
-                uri: 'https://concertfindermedia.s3.amazonaws.com/concert-backend/bannerBackgrounds/arctic-monkeys-singer.png',
+            {
+                image: {
+                    uri: 'https://concertfindermedia.s3.amazonaws.com/concert-backend/bannerBackgrounds/arctic-monkeys-singer.png',
+                },
+                title: 'Arctic Monkeys',
+                subHeader: 'North American Tour',
+                webLink: 'https://arcticmonkeys.com/live',
             },
-            title: 'Arctic Monkeys',
-            subHeader: 'North American Tour',
-            webLink: 'https://arcticmonkeys.com/live',
-        },
-        {
-            image: {
-                uri: 'https://concertfindermedia.s3.amazonaws.com/concert-backend/bannerBackgrounds/the-car.png',
-            },
-            title: 'The Car',
-            subHeader: 'Album Out Now',
-            webLink:
-                'https://open.spotify.com/album/2GROf0WKoP5Er2M9RXVNNs?si=vzPRjrVyRguvT7JB-_ZsNA',
-        },
-    ];
+        ],
+        [banners]
+    );
     return (
         <Container>
             <PaginatedCarousel
