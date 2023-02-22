@@ -15,7 +15,6 @@ const getSizeFromProps = props => sizes[props.size];
 const layout = css`
     width: ${props => getSizeFromProps(props)}px;
     height: ${props => getSizeFromProps(props)}px;
-    border-radius: ${props => (props.size === 'full' ? '0' : '1px')};
 `;
 
 const AlbumArtImage = styled(Image)`

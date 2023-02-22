@@ -11,9 +11,9 @@ const layout = css`
     background-color: ${colors.spotifyGreen};
     flex-direction: row;
     height: 40px;
-    border-radius: 40px;
+    border-radius: 6px;
     justify-content: center;
-    padding: 0 16px;
+    padding: 0 12px;
 `;
 
 const OpenSpotifyButton = ({ style, spotifyId }) => (

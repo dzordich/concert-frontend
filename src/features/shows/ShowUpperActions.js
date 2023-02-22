@@ -1,9 +1,8 @@
 import React from 'react';
+import { View } from 'react-native';
 import IconButton from '../../ui/inputs/IconButton';
 import styled, { css } from 'styled-components/native';
-import { Linking, View } from 'react-native';
 import BackIcon from '../../ui/icons/BackIcon';
-import SpotifyLogo from '../../ui/icons/SpotifyLogo';
 import { colors } from '../../ui/theme';
 import ShareIcon from '../../ui/icons/ShareIcon';
 import { shareShow } from '../../utils/sms';

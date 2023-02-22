@@ -9,6 +9,7 @@ import ShowDetails from './shows/ShowDetail';
 import BannerPlaylist from './playlists/BannerPlaylist';
 import CitySelect from './cities/CitySelect';
 import LikedShows from './likedShows/LikedShows';
+import SpotifyLogo from '../ui/icons/SpotifyLogo';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,14 +46,20 @@ const Routes = () => {
                         component={CitySelect}
                         options={{ title: 'LOCATION' }}
                     />
-                    <Stack.Screen name={PATHS.PLAYLIST} component={Playlist} />
+                    <Stack.Screen
+                        name={PATHS.PLAYLIST}
+                        component={Playlist}
+                        options={{ headerRight: () => <SpotifyLogo /> }}
+                    />
                     <Stack.Screen
                         name={PATHS.LIKED_SHOWS}
                         component={LikedShows}
+                        options={{ headerRight: () => <SpotifyLogo /> }}
                     />
                     <Stack.Screen
                         name={PATHS.BANNER_PLAYLIST}
                         component={BannerPlaylist}
+                        options={{ headerRight: () => <SpotifyLogo /> }}
                     />
                     <Stack.Group
                         screenOptions={{

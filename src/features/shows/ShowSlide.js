@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components/native';
 import { Linking, View } from 'react-native';
 import ShiftRight from '../../ui/layout/ShiftRight';
 import { formatList, isNotEmpty } from '../../utils/arrays';
-import { Text } from '../../ui/Text';
+import { H2, Text } from '../../ui/Text';
 import { prop } from 'ramda';
 import { displayDate } from '../../utils/dates';
 import { colors } from '../../ui/theme';
@@ -11,6 +11,7 @@ import TicketIcon from '../../ui/icons/TicketIcon';
 import Button from '../../ui/inputs/Button';
 import CalendarIcon from '../../ui/icons/CalendarIcon';
 import LikeShowButton from '../../ui/inputs/LikeShowButton';
+import VenueIcon from '../../ui/icons/VenueIcon';
 
 const layout = css`
     padding: 0 16px;
@@ -43,6 +44,27 @@ const DateContainer = styled.View`
     background-color: ${colors.neutral10};
 `;
 
+const VenueName = styled(H2)`
+    font-weight: 400;
+    margin-left: 8px;
+    font-size: 16px;
+    flex-wrap: wrap;
+`;
+
+const getOtherPerformers = (performers, mainPerformer) => {
+    const maxVisiblePerformers = 10;
+    const otherPerformers = performers.filter(
+        performer => performer.name !== mainPerformer
+    );
+
+    return otherPerformers.length > maxVisiblePerformers
+        ? [
+              ...otherPerformers.slice(0, maxVisiblePerformers + 1),
+              { name: 'more' },
+          ]
+        : otherPerformers;
+};
+
 const ShowSlide = ({
     id,
     venue,
@@ -51,9 +73,8 @@ const ShowSlide = ({
     start_date,
     style,
 }) => {
-    const otherPerformers = performers.filter(
-        performer => performer.name !== mainPerformer
-    );
+    // todo: make a proper collapsable list
+    const otherPerformers = getOtherPerformers(performers, mainPerformer);
     return (
         <View style={style}>
             <View style={{ alignItems: 'center' }}>
@@ -70,6 +91,19 @@ const ShowSlide = ({
                         </Text>
                     </Text>
                 )}
+
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginBottom: 4,
+                    }}
+                >
+                    <VenueIcon />
+                    <VenueName>{venue.name}</VenueName>
+                    {/*  festival marker used to be here */}
+                </View>
             </View>
             <VenueLinkContainer>
                 <VenueLink

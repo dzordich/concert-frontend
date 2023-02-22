@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { View, ScrollView } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Display, H2 } from '../../ui/Text';
+import { Display } from '../../ui/Text';
 import { colors } from '../../ui/theme';
 import { AlbumArtBackground } from '../playlists/AlbumArt';
 import PaginatedCarousel from '../../ui/layout/PaginatedCarousel';
@@ -10,30 +9,12 @@ import ExpandedPlayer from '../player/ExpandedPlayer';
 import ShowSlide from './ShowSlide';
 import ShowMap from './ShowMap';
 import ShowUpperActions from './ShowUpperActions';
-import VenueIcon from '../../ui/icons/VenueIcon';
-import OpenSpotifyButton from './OpenSpotifyButton';
 
 const ShowDetailsContainer = styled(View)`
     flex: 1;
     width: 100%;
     height: 100%;
     background-color: ${colors.neutral5};
-`;
-
-const Gradient = styled(LinearGradient)`
-    width: 100%;
-    height: 100%;
-    flex: 1;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 4px 16px;
-`;
-
-const VenueName = styled(H2)`
-    font-weight: 400;
-    margin-left: 8px;
-    font-size: 16px;
-    flex-wrap: wrap;
 `;
 
 const ShowDetails = ({ route, navigation }) => {
@@ -53,21 +34,9 @@ const ShowDetails = ({ route, navigation }) => {
                     url={top_track.album_art_url}
                 ></AlbumArtBackground>
                 <View style={{ alignItems: 'center', marginTop: 24 }}>
-                    <View
-                        style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            marginBottom: 4,
-                        }}
-                    >
-                        <VenueIcon />
-                        <VenueName>
-                            {shows[currentShowIndex].venue.name}
-                        </VenueName>
-                        {/*  festival marker used to be here */}
-                    </View>
-                    <Display style={{ fontSize: 32 }}>{name}</Display>
+                    <Display style={{ fontSize: 32, marginBottom: 4 }}>
+                        {name}
+                    </Display>
                 </View>
                 {shows.length > 1 ? (
                     <PaginatedCarousel
