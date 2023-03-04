@@ -6,9 +6,9 @@ import styled from 'styled-components/native';
 const InfoIcon = props => (
     <Svg
         xmlns="http://www.w3.org/2000/svg"
-        height="22px"
+        height="24px"
         viewBox="0 0 24 24"
-        width="22px"
+        width="24px"
         fill={colors.neutral60}
         {...props}
     >

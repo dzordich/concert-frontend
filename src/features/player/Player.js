@@ -88,7 +88,10 @@ const Player = () => {
                         <H3 numberOfLines={1}>{artist}</H3>
                     </PlayerTextContainer>
                     <PlayerButtons>
-                        <LikeShowButton showId={artistInfo.shows[0].id} />
+                        <LikeShowButton
+                            showId={artistInfo.shows[0].id}
+                            style={{ marginRight: 4 }}
+                        />
                         <PlayPauseButton
                             isPlaying={playing}
                             onPress={togglePaused}
