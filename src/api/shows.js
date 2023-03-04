@@ -9,3 +9,5 @@ export const listShows = ({ city: { id }, startDate, endDate, limit }) =>
 
 export const listLikedShows = showIds =>
     get(`/likedShows?${showIds.map(showId => `show_ids=${showId}`).join('&')}`);
+
+export const getShow = showId => get(`/shows/${showId}`);

@@ -6,7 +6,6 @@ import BackIcon from '../../ui/icons/BackIcon';
 import { colors } from '../../ui/theme';
 import ShareIcon from '../../ui/icons/ShareIcon';
 import { shareShow } from '../../utils/sms';
-import { displayDate } from '../../utils/dates';
 import OpenSpotifyButton from './OpenSpotifyButton';
 
 const layout = css`
@@ -26,7 +25,7 @@ const ShowUpperActions = ({
     spotifyId,
     navigation,
     artistName,
-    show: { venue, start_date },
+    show: { venue, start_date, id },
     style,
 }) => (
     <View style={style}>
@@ -39,9 +38,7 @@ const ShowUpperActions = ({
         <View style={{ flexDirection: 'row' }}>
             <IconButton
                 Icon={ShareIcon}
-                onPress={() =>
-                    shareShow(artistName, venue.name, displayDate(start_date))
-                }
+                onPress={() => shareShow(id)}
                 style={{ color: colors.neutral98 }}
             />
         </View>

@@ -1,5 +1,5 @@
 import * as SMS from 'expo-sms';
-import { BETA_URL } from '../contants/stagebite';
+import { WEB_URL } from '../contants/stagebite';
 
 const sendMessage = async messageContent => {
     const isAvailable = await SMS.isAvailableAsync();
@@ -10,7 +10,4 @@ const sendMessage = async messageContent => {
     }
 };
 
-export const shareShow = (performerName, venueName, date) =>
-    sendMessage(
-        `Let's see ${performerName} at ${venueName} on ${date}. Join the Stagebite beta: ${BETA_URL}`
-    );
+export const shareShow = id => sendMessage(`${WEB_URL}/shows/${id}`);

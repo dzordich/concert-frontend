@@ -10,11 +10,14 @@ import BannerPlaylist from './playlists/BannerPlaylist';
 import CitySelect from './cities/CitySelect';
 import LikedShows from './likedShows/LikedShows';
 import SpotifyLogo from '../ui/icons/SpotifyLogo';
+import useLinkHandler from '../utils/hooks/useLinkHandler';
 
 const Stack = createNativeStackNavigator();
 
 const Routes = () => {
     const { selectedCity } = useCities();
+
+    useLinkHandler();
 
     return (
         <Stack.Navigator

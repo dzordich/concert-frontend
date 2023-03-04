@@ -18,7 +18,6 @@ import Player, { PlayerSafeArea } from './features/player/Player';
 import { navigationRef } from './utils/navigation';
 import BannerPlaylistProvider from './features/playlists/BannerPlaylistProvider';
 import LikedShowsState from './utils/hooks/LikedShowsState';
-import { linking } from './ui/deepLinks';
 
 export default function App() {
     let [fontsLoaded] = useFonts({
@@ -34,10 +33,7 @@ export default function App() {
     }
 
     return (
-        <NavigationContainer
-            ref={navigationRef}
-            // linking={linking}
-        >
+        <NavigationContainer ref={navigationRef}>
             <SafeAreaProvider>
                 <Layout>
                     <ViewPort>
