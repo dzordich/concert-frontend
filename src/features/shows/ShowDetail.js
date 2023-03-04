@@ -34,9 +34,7 @@ const ShowDetails = ({ route, navigation }) => {
                     url={top_track.album_art_url}
                 ></AlbumArtBackground>
                 <View style={{ alignItems: 'center', marginTop: 24 }}>
-                    <Display style={{ fontSize: 32, marginBottom: 4 }}>
-                        {name}
-                    </Display>
+                    <Display style={{ marginBottom: 4 }}>{name}</Display>
                 </View>
                 {shows.length > 1 ? (
                     <PaginatedCarousel

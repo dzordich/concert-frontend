@@ -20,19 +20,15 @@ const CitySelect = ({ style, navigation }) => {
     const shouldNavigate = useMemo(() => !!selectedCity, [selectedCity]);
     return (
         <View style={style}>
-            {citiesLoaded ? (
-                <DropDown
-                    initialValue={selectedCity?.id}
-                    items={cityOptions}
-                    placeholder="Select city..."
-                    onValueChange={value => {
-                        selectCity(cities.find(city => city.id === value));
-                        shouldNavigate && navigation.navigate(PATHS.HOME);
-                    }}
-                />
-            ) : (
-                <ActivityIndicator />
-            )}
+            <DropDown
+                initialValue={selectedCity?.id}
+                items={cityOptions}
+                placeholder="Select city..."
+                onValueChange={value => {
+                    selectCity(cities.find(city => city.id === value));
+                    shouldNavigate && navigation.navigate(PATHS.HOME);
+                }}
+            />
         </View>
     );
 };

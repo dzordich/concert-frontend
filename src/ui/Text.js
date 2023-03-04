@@ -27,7 +27,7 @@ export const H3 = styled(Text)`
 `;
 
 export const Display = styled(Text)`
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 800;
     font-family: 'Montserrat_800ExtraBold';
 `;

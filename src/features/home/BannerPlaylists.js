@@ -34,7 +34,7 @@ const BannerPlaylist = styled(({ style, playlist }) => (
             <Gradient
                 colors={[colors.neutralOpaque5, 'transparent', colors.neutral5]}
             >
-                <Display style={{ marginBottom: 8, fontSize: 32 }}>
+                <Display style={{ marginBottom: 8 }}>
                     {playlist.title.toUpperCase()}
                 </Display>
                 <Text>{playlist.subHeader.toUpperCase()}</Text>

@@ -6,19 +6,12 @@ export const colors = {
     primary60: 'hsl(227, 100%, 60%)',
     primary40: 'hsl(227, 100%, 40%)',
     primary20: 'hsl(227, 100%, 20%)',
-    primary10: 'hsl(227, 100%, 10%)',
+    primary10: 'hsl(227, 100%, 8%)',
 
-    // Cyan (Vivid)
-    secondary98: '#E1FCF8',
-    secondary90: '#C1FEF6',
-    secondary80: '#92FDF2',
-    secondary70: '#62F4EB',
-    secondary60: '#3AE7E1',
-    secondary50: '#1CD4D4',
-    secondary40: '#0FB5BA',
-    secondary30: '#099AA4',
-    secondary20: '#07818F',
-    secondary10: '#05606E',
+    secondary80: 'hsl(81, 97%, 80%)',
+    secondary70: 'hsl(81, 97%, 70%)',
+    secondary60: 'hsl(81, 97%, 60%)',
+    secondary40: 'hsl(81, 97%, 40%)',
 
     // Purple
     // primary98: "#EAE2F8",
@@ -38,8 +31,8 @@ export const colors = {
     neutral60: 'hsl(0, 0%, 60%)',
     neutral40: 'hsl(0, 0%, 40%)',
     neutral20: 'hsl(0, 0%, 20%)',
-    neutral10: 'hsl(0, 0%, 10%)',
-    neutral5: 'hsl(0, 0%, 5%)',
+    neutral10: 'hsl(0, 0%, 8%)',
+    neutral5: 'hsl(0, 0%, 2%)',
     neutralOpaque5: 'hsla(0, 0%, 5% ,0.7)',
 
     // Cyan
