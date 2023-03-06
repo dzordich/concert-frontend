@@ -1,19 +1,17 @@
 import { useEffect } from 'react';
 import { hideAsync } from 'expo-splash-screen';
 import { useCities } from '../../features/cities/CityProvider';
-import { useBannerPlaylists } from '../../features/playlists/BannerPlaylistProvider';
 
 const LoadingScreen = ({ children, fontsLoaded }) => {
     const { citiesLoaded } = useCities();
-    const { bannersLoaded } = useBannerPlaylists();
 
     useEffect(() => {
-        if (fontsLoaded && citiesLoaded && bannersLoaded) {
+        if (fontsLoaded && citiesLoaded) {
             hideAsync();
         }
-    }, [fontsLoaded, citiesLoaded, bannersLoaded]);
+    }, [fontsLoaded, citiesLoaded]);
 
-    if (!fontsLoaded && !citiesLoaded && !bannersLoaded) {
+    if (!fontsLoaded && !citiesLoaded) {
         return null;
     }
 

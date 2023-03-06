@@ -5,7 +5,6 @@ import { useCities } from './CityProvider';
 import DropDown from '../../ui/inputs/DropDown';
 import PATHS from '../../contants/paths';
 import { colors } from '../../ui/theme';
-import ActivityIndicator from '../../ui/ActivityIndicator';
 
 const CitySelect = ({ style, navigation }) => {
     const { cities, selectedCity, selectCity, citiesLoaded } = useCities();
@@ -17,7 +16,9 @@ const CitySelect = ({ style, navigation }) => {
             })),
         [cities]
     );
+
     const shouldNavigate = useMemo(() => !!selectedCity, [selectedCity]);
+
     return (
         <View style={style}>
             <DropDown
@@ -25,8 +26,10 @@ const CitySelect = ({ style, navigation }) => {
                 items={cityOptions}
                 placeholder="Select city..."
                 onValueChange={value => {
-                    selectCity(cities.find(city => city.id === value));
-                    shouldNavigate && navigation.navigate(PATHS.HOME);
+                    if (value) {
+                        selectCity(cities.find(city => city.id === value));
+                        shouldNavigate && navigation.navigate(PATHS.HOME);
+                    }
                 }}
             />
         </View>

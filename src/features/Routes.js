@@ -15,11 +15,11 @@ import useLinkHandler from '../utils/hooks/useLinkHandler';
 const Stack = createNativeStackNavigator();
 
 const Routes = () => {
-    const { selectedCity } = useCities();
+    const { selectedCity, citiesLoaded } = useCities();
 
     useLinkHandler();
 
-    return (
+    return citiesLoaded ? (
         <Stack.Navigator
             initialRouteName={PATHS.HOME}
             screenOptions={{
@@ -84,7 +84,7 @@ const Routes = () => {
                 />
             )}
         </Stack.Navigator>
-    );
+    ) : null;
 };
 
 export default Routes;

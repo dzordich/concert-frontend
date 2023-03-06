@@ -21,7 +21,7 @@
       "infoPlist": {
         "UIBackgroundModes": ["audio"]
       },
-      "buildNumber": "45",
+      "buildNumber": "47",
       "bundleIdentifier": "com.brickyardusertest.concertfrontend"
     },
     "android": {
