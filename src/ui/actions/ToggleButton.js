@@ -8,17 +8,20 @@ const layout = css`
     flex-direction: row;
     border-radius: 4px;
     overflow: hidden;
+    background-color: ${colors.neutral10};
 `;
 
 const Option = styled.TouchableHighlight`
-    padding: 12px 36px;
+    padding: 12px 48px;
     background-color: ${colors.neutral10};
+    justify-content: center;
 
     ${props =>
         props.selected
             ? `
     background-color: ${colors.primary60};
     border-radius: 4px;
+    margin: 2px;
   `
             : ''}
 `;

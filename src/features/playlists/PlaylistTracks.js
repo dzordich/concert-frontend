@@ -19,6 +19,7 @@ const PlaylistTracks = ({ performers, onSongPress }) => {
                             onPress={onSongPress}
                             trackIndex={idx}
                             currentTrack={currentTrack}
+                            isLastTrack={idx === performers.length - 1}
                             key={idx}
                         />
                     )

@@ -31,11 +31,11 @@ const EmptyAlbumArt = styled(View)`
     ${layout}
 `;
 
-const AlbumArt = ({ url, size = 'small' }) =>
+const AlbumArt = ({ url, size = 'small', style }) =>
     url ? (
-        <AlbumArtImage source={{ uri: url }} size={size} />
+        <AlbumArtImage source={{ uri: url }} size={size} style={style} />
     ) : (
-        <EmptyAlbumArt size={size} />
+        <EmptyAlbumArt size={size} style={style} />
     );
 
 export default AlbumArt;

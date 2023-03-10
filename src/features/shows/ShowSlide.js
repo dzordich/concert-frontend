@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components/native';
 import { Linking, View } from 'react-native';
 import ShiftRight from '../../ui/layout/ShiftRight';
 import { formatList, isNotEmpty } from '../../utils/arrays';
-import { H2, Text } from '../../ui/Text';
+import { H2, H4, Text } from '../../ui/Text';
 import { prop } from 'ramda';
 import { displayDate } from '../../utils/dates';
 import { colors } from '../../ui/theme';
@@ -115,20 +115,18 @@ const ShowSlide = ({
                     <TicketIcon
                         style={{ color: colors.primary98, marginRight: 8 }}
                     />
-                    <Text
-                        style={{ color: colors.primary98, fontWeight: '600' }}
-                    >
+                    <H4 style={{ color: colors.primary98, fontWeight: '600' }}>
                         Tickets
-                    </Text>
+                    </H4>
                 </VenueLink>
 
                 <DateContainer>
                     <CalendarIcon
                         style={{ color: colors.neutral80, marginRight: 8 }}
                     />
-                    <Text style={{ color: colors.neutral80 }}>
+                    <H4 style={{ color: colors.neutral80 }}>
                         {displayDate(start_date)}
-                    </Text>
+                    </H4>
                 </DateContainer>
                 <ShiftRight>
                     <LikeShowButton showId={id} width="28px" height="28px" />

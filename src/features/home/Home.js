@@ -16,6 +16,7 @@ import {
     PRIVACY_POLICY_URL,
     SUPPORT_EMAIL,
 } from '../../contants/externalLinks';
+import DownArrowIcon from '../../ui/icons/DownArrowIcon';
 
 const Container = styled(View)`
     height: 100%;
@@ -50,15 +51,16 @@ const Home = () => {
                                 marginTop: -36,
                             }}
                         >
-                            <PlaceIcon />
                             <H2
                                 style={{
                                     fontWeight: '700',
-                                    marginRight: 4,
+                                    marginRight: 8,
+                                    fontSize: 18,
                                 }}
                             >
                                 {`${selectedCity.name}, ${selectedCity.state}`}
                             </H2>
+                            <DownArrowIcon />
                         </Pressable>
                         <View
                             style={{

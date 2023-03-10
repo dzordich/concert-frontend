@@ -1,12 +1,12 @@
 export const colors = {
     // Indigo
-    primary98: 'hsl(227, 100%, 98%)',
-    primary90: 'hsl(227, 100%, 90%)',
-    primary80: 'hsl(227, 100%, 80%)',
-    primary60: 'hsl(227, 100%, 60%)',
-    primary40: 'hsl(227, 100%, 40%)',
-    primary20: 'hsl(227, 100%, 20%)',
-    primary10: 'hsl(227, 100%, 8%)',
+    primary98: 'hsl(240, 100%, 98%)',
+    primary90: 'hsl(240, 100%, 90%)',
+    primary80: 'hsl(240,100%, 80%)',
+    primary60: 'hsl(240, 100%, 60%)',
+    primary40: 'hsl(240, 100%, 40%)',
+    primary20: 'hsl(240, 100%, 20%)',
+    primary10: 'hsl(240, 100%, 8%)',
 
     secondary80: 'hsl(81, 97%, 80%)',
     secondary70: 'hsl(81, 97%, 70%)',
@@ -25,14 +25,14 @@ export const colors = {
     // primary20: "#34126F",
     // primary10: "#240754",
 
-    neutral98: 'hsl(0, 0%, 98%)',
-    neutral90: 'hsl(0, 0%, 90%)',
-    neutral80: 'hsl(0, 0%, 80%)',
-    neutral60: 'hsl(0, 0%, 60%)',
-    neutral40: 'hsl(0, 0%, 40%)',
-    neutral20: 'hsl(0, 0%, 20%)',
-    neutral10: 'hsl(0, 0%, 8%)',
-    neutral5: 'hsl(0, 0%, 2%)',
+    neutral98: 'hsl(252, 12%, 98%)',
+    neutral90: 'hsl(252, 12%, 90%)',
+    neutral80: 'hsl(252, 12%, 80%)',
+    neutral60: 'hsl(252, 12%, 60%)',
+    neutral40: 'hsl(252, 12%, 40%)',
+    neutral20: 'hsl(252, 12%, 20%)',
+    neutral10: 'hsl(252, 12%, 8%)',
+    neutral5: 'hsl(0, 0%, 1%)',
     neutralOpaque5: 'hsla(0, 0%, 5% ,0.7)',
 
     // Cyan

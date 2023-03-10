@@ -5,7 +5,7 @@ import SpotifyLogo from '../../ui/icons/SpotifyLogo';
 import { Linking, Pressable } from 'react-native';
 import { colors } from '../../ui/theme';
 import Button from '../../ui/inputs/Button';
-import { Text } from '../../ui/Text';
+import { H4, Text } from '../../ui/Text';
 
 const layout = css`
     background-color: ${colors.spotifyGreen};
@@ -24,9 +24,7 @@ const OpenSpotifyButton = ({ style, spotifyId }) => (
         }
     >
         <SpotifyLogo color={colors.neutral5} />
-        <Text style={{ color: colors.neutral5, marginLeft: 8 }}>
-            Open Spotify
-        </Text>
+        <H4 style={{ color: colors.neutral5, marginLeft: 8 }}>Open Spotify</H4>
     </Button>
 );
 

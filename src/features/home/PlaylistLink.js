@@ -13,8 +13,8 @@ const PlaylistLinkContainer = styled(View)`
 `;
 
 const PlaylistLinkBackground = styled.ImageBackground`
-    height: 156px;
-    width: ${getWindowWidth() - 52}px;
+    height: 160px;
+    width: ${getWindowWidth() - 32}px;
     border-radius: 4px;
     flex-direction: column;
     justify-content: flex-end;
@@ -29,8 +29,8 @@ const StyledHighlight = styled(TouchableHighlight)`
     background-color: ${colors.neutral10};
     border-radius: 4px;
     overflow: hidden;
-    height: 72px;
-    width: ${getWindowWidth() - 52}px;
+    height: 74px;
+    width: ${getWindowWidth() - 32}px;
     margin-left: 12px;
 `;
 
@@ -63,7 +63,7 @@ const PlaylistLink = ({ playlist, style }) => {
             <>
                 <Image
                     source={playlist.image}
-                    style={{ width: 120, height: 72 }}
+                    style={{ width: 120, height: 74 }}
                 />
                 <View style={{ marginHorizontal: 16 }}>
                     <H3>{playlist.displayName}</H3>

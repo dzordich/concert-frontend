@@ -5,5 +5,4 @@ const defaultApiUrl =
 
 const API_URL = `${process.env.API_URL || defaultApiUrl}/api`;
 
-console.log(API_URL);
 export const get = path => axios.get(`${API_URL}${path}`).then(res => res.data);

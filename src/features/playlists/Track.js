@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { TouchableHighlight, View } from 'react-native';
 import { any } from 'ramda';
-import { H3, Text } from '../../ui/Text';
+import { H4, Text } from '../../ui/Text';
 import { colors } from '../../ui/theme';
 import AlbumArt from './AlbumArt';
 import ShiftRight from '../../ui/layout/ShiftRight';
@@ -17,19 +17,37 @@ import FilledInHeartIcon from '../../ui/icons/FilledInHeartIcon';
 const TrackContainer = styled(View)`
     flex: 1;
     flex-direction: row;
-    align-items: center;
-    width: 100%;
+    align-items: flex-start;
     margin: 8px;
+    margin-bottom: 0;
     z-index: -1;
 `;
 
-const TrackTitle = styled(H3)`
+const MainContent = styled(View)`
+    flex: 1;
+    flex-direction: row;
+    border-bottom-color: ${colors.neutral10};
+    border-bottom-width: ${props => (props.showBorder ? '1px' : '0')};
+    border-bottom-style: solid;
+    align-items: center;
+    margin-left: 16px;
+    margin-right: 8px;
+    height: 56px;
+    padding-bottom: 4px;
+`;
+
+const TrackTitle = styled(H4)`
+    margin-top: 4px;
+    ${props => (props.currentTrack ? `color: ${colors.primary80};` : '')}
+`;
+
+const VenueName = styled(Text)`
+    color: ${colors.neutral80};
     margin-top: 4px;
     ${props => (props.currentTrack ? `color: ${colors.primary80};` : '')}
 `;
 
 const TrackText = styled(View)`
-    margin-left: 16px;
     flex: 1;
 `;
 
@@ -40,7 +58,13 @@ const TrackSubText = styled(Text)`
 
 const hasFreeShow = any(show => !!show.free);
 
-const Track = ({ performer, onPress, currentTrack, trackIndex }) => {
+const Track = ({
+    performer,
+    onPress,
+    currentTrack,
+    trackIndex,
+    isLastTrack,
+}) => {
     const { top_track: track, name, shows } = performer;
     const { isShowLiked } = useLikedShows();
 
@@ -52,51 +76,62 @@ const Track = ({ performer, onPress, currentTrack, trackIndex }) => {
         >
             <TrackContainer>
                 <AlbumArt url={track?.album_art_url} />
-                <TrackText>
-                    <TrackSubText numberOfLines={1}>{track.name}</TrackSubText>
-
-                    <TrackTitle
-                        currentTrack={track && track.id === currentTrack?.id}
-                        numberOfLines={1}
-                    >
-                        {name}
+                <MainContent showBorder={!isLastTrack}>
+                    <TrackText>
                         <TrackSubText numberOfLines={1}>
-                            {shows.length > 0
-                                ? ` — ${shows[0].venue.name}`
-                                : ''}
+                            {track.name}
                         </TrackSubText>
-                    </TrackTitle>
-                </TrackText>
-                <ShiftRight>
-                    <View
-                        style={{
-                            flex: 1,
-                            flexDirection: 'row',
-                            justifyContent: 'flex-end',
-                            alignItems: 'center',
-                            paddingLeft: 4,
-                        }}
-                    >
-                        <FestivalMarker
-                            shows={shows}
-                            style={{ marginRight: 8 }}
-                        />
-                        <FreeMarker free={hasFreeShow(shows)} />
-                        {shows.some(({ id }) => isShowLiked(id)) && (
-                            <FilledInHeartIcon
-                                width="14px"
-                                height="14px"
-                                style={{ marginHorizontal: 8 }}
-                            />
-                        )}
-                        <IconButton
-                            Icon={InfoIcon}
-                            onPress={() =>
-                                navigate(PATHS.SHOW_DETAILS, performer)
+
+                        <TrackTitle
+                            currentTrack={
+                                track && track.id === currentTrack?.id
                             }
-                        />
-                    </View>
-                </ShiftRight>
+                            numberOfLines={1}
+                        >
+                            {name}
+                            <VenueName
+                                numberOfLines={1}
+                                currentTrack={
+                                    track && track.id === currentTrack?.id
+                                }
+                            >
+                                {shows.length > 0
+                                    ? ` — ${shows[0].venue.name}`
+                                    : ''}
+                            </VenueName>
+                        </TrackTitle>
+                    </TrackText>
+                    <ShiftRight style={{ marginRight: 0, paddingLeft: 8 }}>
+                        <View
+                            style={{
+                                flex: 1,
+                                flexDirection: 'row',
+                                justifyContent: 'flex-end',
+                                alignItems: 'center',
+                                paddingLeft: 4,
+                            }}
+                        >
+                            <FestivalMarker
+                                shows={shows}
+                                style={{ marginRight: 8 }}
+                            />
+                            <FreeMarker free={hasFreeShow(shows)} />
+                            {shows.some(({ id }) => isShowLiked(id)) && (
+                                <FilledInHeartIcon
+                                    width="14px"
+                                    height="14px"
+                                    style={{ marginLeft: 8 }}
+                                />
+                            )}
+                            <IconButton
+                                Icon={InfoIcon}
+                                onPress={() =>
+                                    navigate(PATHS.SHOW_DETAILS, performer)
+                                }
+                            />
+                        </View>
+                    </ShiftRight>
+                </MainContent>
             </TrackContainer>
         </TouchableHighlight>
     );

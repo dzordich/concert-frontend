@@ -4,8 +4,8 @@ import { colors } from './theme';
 
 export const Text = styled(NativeText)`
     color: ${colors.neutral98};
-    font-family: 'Montserrat_600SemiBold';
-    font-weight: 600;
+    font-family: 'Montserrat_500Medium';
+    font-weight: 500;
 `;
 
 export const H1 = styled(Text)`
@@ -22,6 +22,11 @@ export const H2 = styled(Text)`
 
 export const H3 = styled(Text)`
     font-size: 16px;
+    font-weight: 600;
+    font-family: 'Montserrat_600SemiBold';
+`;
+
+export const H4 = styled(Text)`
     font-weight: 600;
     font-family: 'Montserrat_600SemiBold';
 `;

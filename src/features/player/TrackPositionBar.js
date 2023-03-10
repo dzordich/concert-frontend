@@ -21,8 +21,8 @@ const TrackPositionBar = props => {
             onSlidingComplete={onSlidingComplete}
             thumbStyle={{ height: 12, width: 12 }}
             renderThumbComponent={() => null}
-            thumbTintColor={colors.primary80}
-            minimumTrackTintColor={colors.primary80}
+            thumbTintColor={colors.primary60}
+            minimumTrackTintColor={colors.primary60}
             maximumTrackTintColor={colors.neutral80}
             containerStyle={{ height: 24 }}
             {...props}
