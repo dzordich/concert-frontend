@@ -67,6 +67,14 @@ const BannerPlaylists = () => {
             },
             {
                 image: {
+                    uri: 'https://concertfindermedia.s3.amazonaws.com/concert-backend/bannerBackgrounds/the-well.png',
+                },
+                title: 'The Well',
+                subHeader: 'North American Tour',
+                webLink: 'https://thewellaustin.bandcamp.com/',
+            },
+            {
+                image: {
                     uri: 'https://concertfindermedia.s3.amazonaws.com/concert-backend/bannerBackgrounds/arctic-monkeys-singer.png',
                 },
                 title: 'Arctic Monkeys',
