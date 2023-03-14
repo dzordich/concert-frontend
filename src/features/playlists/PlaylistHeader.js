@@ -36,7 +36,7 @@ const PlaylistHeader = ({ onPlayButtonPress, displayName, subHeader }) => {
                     alignItems: 'space-between',
                 }}
             >
-                <View>
+                <View style={{ marginRight: 64 }}>
                     {subHeader && <H3>{subHeader}</H3>}
                     <H1>{displayName}</H1>
                 </View>

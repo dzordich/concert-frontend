@@ -12,7 +12,8 @@ const Marker = styled.Text`
     text-align: center;
 `;
 
-export const FreeMarker = ({ free }) => (free ? <Marker>FREE</Marker> : null);
+export const FreeMarker = ({ free, style }) =>
+    free ? <Marker style={style}>FREE</Marker> : null;
 
 const getFestival = compose(
     show => show && show.festival?.name,

@@ -115,12 +115,15 @@ const Track = ({
                                 shows={shows}
                                 style={{ marginRight: 8 }}
                             />
-                            <FreeMarker free={hasFreeShow(shows)} />
+                            <FreeMarker
+                                free={hasFreeShow(shows)}
+                                style={{ marginRight: 8 }}
+                            />
                             {shows.some(({ id }) => isShowLiked(id)) && (
                                 <FilledInHeartIcon
                                     width="14px"
                                     height="14px"
-                                    style={{ marginLeft: 8 }}
+                                    style={{ marginRight: 8 }}
                                 />
                             )}
                             <IconButton

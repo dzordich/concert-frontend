@@ -55,14 +55,14 @@ const BannerPlaylists = () => {
         () => [
             {
                 image: {
-                    uri: 'https://concertfindermedia.s3.amazonaws.com/concert-backend/bannerBackgrounds/sxsw-banner-1.png',
+                    uri: 'https://concertfindermedia.s3.amazonaws.com/concert-backend/bannerBackgrounds/third_man_records.jpeg',
                 },
-                title: 'SXSW',
-                subHeader: 'Hip-Hop Lineup',
+                title: 'Third Man Records',
+                subHeader: 'SXSW Showcase',
                 onPress: () =>
                     navigate(
                         PATHS.BANNER_PLAYLIST,
-                        banners.find(banner => banner.id === 22)
+                        banners.find(banner => banner.id === 23)
                     ),
             },
             {
